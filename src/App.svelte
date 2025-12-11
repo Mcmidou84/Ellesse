@@ -3,7 +3,7 @@
 
 <header>
   <div class="left">
-    <img src="/logo.png" alt="Logo" class="logo">
+    <img src="./logo.png" alt="Logo" class="logo">
     <span class="brand">Ellessé</span>
   </div>
   

@@ -1,4 +1,13 @@
 <script>
+  let menuOpen = $state(false);
+  
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+  }
+  
+  function closeMenu() {
+    menuOpen = false;
+  }
 </script>
 
 <header>
@@ -7,16 +16,26 @@
     <span class="brand">Ellessé</span>
   </div>
   
-  <nav>
-    <a href="/">Accueil</a>
-    <a href="/galerie">Galerie</a>
-    <a href="/a-propos">À propos</a>
-    <a href="/contact">Contact</a>
-    <a href="/boutique">Boutique</a>
+  <nav class:open={menuOpen}>
+    <a href="/" onclick={closeMenu}>Accueil</a>
+    <a href="/galerie" onclick={closeMenu}>Galerie</a>
+    <a href="/a-propos" onclick={closeMenu}>À propos</a>
+    <a href="/contact" onclick={closeMenu}>Contact</a>
+    <a href="/boutique" onclick={closeMenu}>Boutique</a>
   </nav>
+
+  <button class="burger" class:open={menuOpen} onclick={toggleMenu} aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
   <div class="spacer"></div>
 </header>
+
+{#if menuOpen}
+  <div class="overlay" onclick={closeMenu}></div>
+{/if}
 
 <main>
   <section class="hero">
@@ -46,6 +65,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    z-index: 100;
   }
 
   .left {
@@ -81,10 +102,58 @@
     color: rgb(102, 74, 50);
     font-weight: 700;
     font-size: 16px;
+    transition: color 0.3s;
   }
 
   nav a:hover {
     color: rgb(38, 25, 17);
+  }
+
+  /* Bouton burger - caché par défaut */
+  .burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 110;
+  }
+
+  .burger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: rgb(38, 25, 17);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* Animation du burger en X */
+  .burger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  .burger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* Overlay sombre */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 90;
   }
 
   main {
@@ -119,5 +188,76 @@
     max-width: 1200px;
     line-height: 1.2;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* ========== RESPONSIVE MOBILE ========== */
+  @media (max-width: 768px) {
+    header {
+      padding: 15px 20px;
+    }
+
+    .spacer {
+      display: none;
+    }
+
+    .burger {
+      display: flex;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      max-width: 300px;
+      height: 100vh;
+      background-color: rgb(249, 246, 239);
+      flex-direction: column;
+      padding: 80px 30px 30px;
+      gap: 0;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+      transition: right 0.3s ease;
+      z-index: 105;
+    }
+
+    nav.open {
+      right: 0;
+    }
+
+    nav a {
+      padding: 15px 0;
+      font-size: 18px;
+      border-bottom: 1px solid rgba(102, 74, 50, 0.2);
+    }
+
+    nav a:last-child {
+      border-bottom: none;
+    }
+
+    .title {
+      font-size: 40px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+    }
+
+    .brand {
+      font-size: 22px;
+    }
+
+    .logo {
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title {
+      font-size: 32px;
+    }
+
+    .hero {
+      min-height: 50vh;
+    }
   }
 </style>

@@ -1,44 +1,45 @@
 <script>
-  import { onMount } from 'svelte';
-  import { link } from 'svelte-spa-router';
-  
-  let menuOpen = $state(false);
-  let calLoaded = $state(false);
+  import { onMount } from "svelte";
+  import { link } from "svelte-spa-router";
 
+  let menuOpen = false;
+  let calLoaded = false;
+
+  // Injection et initialisation de Cal.com
   onMount(() => {
-    // Charger le script Cal.com
-    const script = document.createElement('script');
-    script.src = 'https://cal.com/embed.js';
-    script.async = true;
-    script.onload = () => {
+    if (window.Cal) {
       initCal();
-    };
-    document.head.appendChild(script);
-    
-    return () => {
-      // Cleanup si nécessaire
-    };
+    } else if (!document.getElementById("cal-script")) {
+      const script = document.createElement("script");
+      script.id = "cal-script";
+      script.src = "https://app.cal.eu/embed/embed.js"; // version EU
+      script.async = true;
+      script.onload = () => initCal();
+      document.head.appendChild(script);
+    }
   });
 
   function initCal() {
-    if (typeof Cal !== 'undefined') {
-      // @ts-ignore
-      Cal("init", { origin: "https://cal.com" });
-      // @ts-ignore
-      Cal("inline", {
-        elementOrSelector: "#cal-embed",
-        calLink: "ton-username/consultation", // ⚠️ Remplace par ton lien Cal.com
-        config: {
-          theme: "light",
-          hideEventTypeDetails: false
-        }
-      });
-      calLoaded = true;
-    } else {
+    if (!window.Cal || !document.getElementById("cal-embed")) {
       setTimeout(initCal, 100);
+      return;
     }
+
+    Cal("init", { origin: "https://cal.com" });
+
+    Cal("inline", {
+      elementOrSelector: "#cal-embed",
+      calLink: "ellesse/15min",
+      config: {
+        theme: "light",
+        hideEventTypeDetails: false,
+      },
+    });
+
+    calLoaded = true;
   }
 
+  // Menu responsive
   function toggleMenu() {
     menuOpen = !menuOpen;
   }
@@ -50,31 +51,34 @@
 
 <svelte:head>
   <title>Rendez-vous | Ellessé - Cabinet d'esthétique à la russe</title>
-  <meta name="description" content="Prenez rendez-vous en ligne au cabinet d'esthétique Ellessé." />
+  <meta
+    name="description"
+    content="Prenez rendez-vous en ligne au cabinet d'esthétique Ellessé."
+  />
 </svelte:head>
 
 <div class="page-wrapper">
   <header>
     <div class="left">
       <a href="/" use:link aria-label="Accueil Ellessé">
-        <img src="./logo.png" alt="Logo Ellessé" class="logo" width="50" height="50" />
+        <img src="./logo.png" alt="Logo Ellessé" class="logo" width="50" height="50"/>
       </a>
       <span class="brand">Ellessé</span>
     </div>
-    
+
     <nav class:open={menuOpen}>
-      <a href="/" use:link onclick={closeMenu}>Accueil</a>
-      <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
-      <a href="/a-propos" use:link onclick={closeMenu}>À propos</a>
-      <a href="/contact" use:link onclick={closeMenu}>Contact</a>
-      <a href="/rendez-vous" use:link class="active" onclick={closeMenu}>Rendez-vous</a>
-      <a href="/boutique" use:link onclick={closeMenu}>Boutique</a>
+      <a href="/" use:link on:click={closeMenu}>Accueil</a>
+      <a href="/galerie" use:link on:click={closeMenu}>Galerie</a>
+      <a href="/a-propos" use:link on:click={closeMenu}>À propos</a>
+      <a href="/contact" use:link on:click={closeMenu}>Contact</a>
+      <a href="/rendez-vous" use:link class="active" on:click={closeMenu}>Rendez-vous</a>
+      <a href="/boutique" use:link on:click={closeMenu}>Boutique</a>
     </nav>
-    
+
     <button
       class="burger"
       class:open={menuOpen}
-      onclick={toggleMenu}
+      on:click={toggleMenu}
       aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
       aria-expanded={menuOpen}
     >
@@ -86,7 +90,7 @@
   </header>
 
   {#if menuOpen}
-    <div class="overlay" onclick={closeMenu} role="presentation"></div>
+    <div class="overlay" on:click={closeMenu} role="presentation"></div>
   {/if}
 
   <main>
@@ -95,11 +99,11 @@
         <p class="subtitle">Réservation en ligne</p>
         <h1 class="title">Prendre rendez-vous</h1>
         <p class="description">
-          Choisissez votre soin et le créneau qui vous convient. 
-          Vous recevrez une confirmation par email.
+          Choisissez votre soin et le créneau qui vous convient. Vous recevrez
+          une confirmation par email.
         </p>
       </div>
-      
+
       <div class="calendar-container">
         {#if !calLoaded}
           <div class="loading">
@@ -109,7 +113,7 @@
         {/if}
         <div id="cal-embed"></div>
       </div>
-      
+
       <div class="booking-info">
         <div class="info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -131,8 +135,8 @@
         </div>
         <div class="info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
           <div>
             <h3>Adresse</h3>
@@ -149,6 +153,8 @@
     </div>
   </footer>
 </div>
+
+
 
 <style>
   @font-face {
@@ -361,7 +367,9 @@
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .loading p {

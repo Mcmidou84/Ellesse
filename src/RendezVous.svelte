@@ -42,15 +42,17 @@
 
     Cal("inline", {
       elementOrSelector: "#cal-embed",
-      calLink: "ellesse/30min",
+      calLink: "ellesse/rendez-vous",
       config: {
         theme: "light",
         hideEventTypeDetails: false,
+        layout: "month_view",
+        language: "fr",
       },
     });
-  Cal("ui", {
-    styles: { branding: { brandColor: "#664a32" } },
-  });
+    Cal("ui", {
+      styles: { branding: { brandColor: "#664a32" } },
+    });
     calLoaded = true;
   });
 
@@ -165,7 +167,7 @@
           </svg>
           <div>
             <h3>Contact</h3>
-            <p>+33 0 00 00 00 00</p>
+            <p>+33 6 38 93 66 48</p>
           </div>
         </div>
         <div class="info-item">
@@ -182,7 +184,7 @@
           </svg>
           <div>
             <h3>Adresse</h3>
-            <p>Votre adresse, Ville</p>
+            <p>73 Bd Silvio Trentin, 31200 Toulouse</p>
           </div>
         </div>
       </div>

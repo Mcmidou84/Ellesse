@@ -294,7 +294,7 @@
 
   /* ===== FOOTER ===== */
   footer {
-    background-color: rgb(38, 25, 17);
+    background-color: rgb(249, 246, 239);
     padding: 60px 30px 30px;
     margin-top: auto;
   }
@@ -319,13 +319,13 @@
   .value-icon {
     width: 70px;
     height: 70px;
-    color: rgb(200, 180, 160);
+    color: rgb(102, 74, 50);
     margin-bottom: 20px;
     transition: color 0.3s ease;
   }
 
   .value-item:hover .value-icon {
-    color: rgb(249, 246, 239);
+    color: rgb(38, 25, 17);
   }
 
   .value-title {
@@ -333,7 +333,7 @@
     text-transform: uppercase;
     font-size: 16px;
     font-weight: 300;
-    color: rgb(249, 246, 239);
+    color: rgb(38, 25, 17);
     margin: 0 0 10px 0;
     letter-spacing: 2px;
   }
@@ -341,7 +341,7 @@
   .value-text {
     font-family: 'Priamos', serif;
     font-size: 14px;
-    color: rgb(200, 180, 160);
+    color: rgb(102, 74, 50);
     margin: 0;
     line-height: 1.6;
   }
@@ -349,14 +349,14 @@
   .footer-bottom {
     margin-top: 50px;
     padding-top: 20px;
-    border-top: 1px solid rgba(200, 180, 160, 0.3);
+    border-top: 1px solid rgba(102, 74, 50, 0.3);
     text-align: center;
   }
 
   .footer-bottom p {
     font-family: 'Priamos', serif;
     font-size: 13px;
-    color: rgb(150, 130, 110);
+    color: rgb(102, 74, 50);
     margin: 0;
   }
 

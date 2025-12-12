@@ -1,5 +1,22 @@
 <script>
+  import { onMount } from 'svelte';
+  
   let menuOpen = $state(false);
+  let currentImage = $state(0);
+  
+  const images = [
+    './public/accueil_01.jpg',
+    './public/accueil_02.jpg',
+    './public/accueil_03.jpg'
+  ];
+  
+  onMount(() => {
+    const interval = setInterval(() => {
+      currentImage = (currentImage + 1) % images.length;
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  });
   
   function toggleMenu() {
     menuOpen = !menuOpen;
@@ -9,6 +26,16 @@
     menuOpen = false;
   }
 </script>
+
+<div class="background-slideshow">
+  {#each images as image, index}
+    <div 
+      class="background-slide" 
+      class:active={currentImage === index}
+      style="background-image: url('{image}')"
+    ></div>
+  {/each}
+</div>
 
 <div class="page-wrapper">
   <header>
@@ -41,7 +68,10 @@
   <main>
     <section class="hero">
       <p class="subtitle">Cabinet d'esthétique</p>
-      <h1 class="title">L'art de la beauté à la russe</h1>
+      <h1 class="title">
+        <span>L'art de la beauté</span>
+        <span>à la russe</span>
+      </h1>
       <a href="/contact" class="cta-button">Prendre rendez-vous</a>
     </section>
     
@@ -49,77 +79,73 @@
   </main>
 
   <footer>
-  <div class="values-container">
-    <div class="value-item">
-      <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
-        <!-- Élégance - Plume stylisée -->
-        <path d="M40 10 C30 25, 25 40, 40 70" />
-        <path d="M40 10 C50 25, 55 40, 40 70" />
-        <path d="M40 20 C35 30, 33 40, 40 55" />
-        <path d="M40 20 C45 30, 47 40, 40 55" />
-        <path d="M30 35 Q40 32, 50 35" />
-        <path d="M32 45 Q40 42, 48 45" />
-        <circle cx="40" cy="10" r="3" />
-      </svg>
-      <h3 class="value-title">Élégance</h3>
-      <p class="value-text">La grâce et le raffinement inspirés de l'esthétique impériale russe</p>
-    </div>
+    <div class="values-container">
+      <div class="value-item">
+        <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M40 10 C30 25, 25 40, 40 70" />
+          <path d="M40 10 C50 25, 55 40, 40 70" />
+          <path d="M40 20 C35 30, 33 40, 40 55" />
+          <path d="M40 20 C45 30, 47 40, 40 55" />
+          <path d="M30 35 Q40 32, 50 35" />
+          <path d="M32 45 Q40 42, 48 45" />
+          <circle cx="40" cy="10" r="3" />
+        </svg>
+        <h3 class="value-title">Élégance</h3>
+        <p class="value-text">La grâce et le raffinement inspirés de l'esthétique impériale russe</p>
+      </div>
 
-    <div class="value-item">
-      <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
-        <!-- Tradition - Matriochka stylisée -->
-        <ellipse cx="40" cy="55" rx="18" ry="22" />
-        <circle cx="40" cy="28" r="14" />
-        <circle cx="40" cy="28" r="9" />
-        <ellipse cx="40" cy="50" rx="10" ry="8" />
-        <path d="M32 24 Q40 20, 48 24" />
-        <circle cx="36" cy="26" r="1.5" />
-        <circle cx="44" cy="26" r="1.5" />
-        <path d="M37 31 Q40 33, 43 31" />
-      </svg>
-      <h3 class="value-title">Tradition</h3>
-      <p class="value-text">Un savoir-faire ancestral transmis de génération en génération</p>
-    </div>
+      <div class="value-item">
+        <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+          <ellipse cx="40" cy="55" rx="18" ry="22" />
+          <circle cx="40" cy="28" r="14" />
+          <circle cx="40" cy="28" r="9" />
+          <ellipse cx="40" cy="50" rx="10" ry="8" />
+          <path d="M32 24 Q40 20, 48 24" />
+          <circle cx="36" cy="26" r="1.5" />
+          <circle cx="44" cy="26" r="1.5" />
+          <path d="M37 31 Q40 33, 43 31" />
+        </svg>
+        <h3 class="value-title">Tradition</h3>
+        <p class="value-text">Un savoir-faire ancestral transmis de génération en génération</p>
+      </div>
 
-    <div class="value-item">
-      <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
-        <!-- Excellence - Diamant/Cristal -->
-        <path d="M40 8 L55 25 L40 72 L25 25 Z" />
-        <path d="M25 25 L40 35 L55 25" />
-        <path d="M40 35 L40 72" />
-        <path d="M30 16 L40 8 L50 16" />
-        <path d="M25 25 L30 16 L40 25 L50 16 L55 25" />
-        <path d="M32 25 L40 50" />
-        <path d="M48 25 L40 50" />
-      </svg>
-      <h3 class="value-title">Excellence</h3>
-      <p class="value-text">La quête de la perfection dans chaque geste et chaque soin</p>
-    </div>
+      <div class="value-item">
+        <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M40 8 L55 25 L40 72 L25 25 Z" />
+          <path d="M25 25 L40 35 L55 25" />
+          <path d="M40 35 L40 72" />
+          <path d="M30 16 L40 8 L50 16" />
+          <path d="M25 25 L30 16 L40 25 L50 16 L55 25" />
+          <path d="M32 25 L40 50" />
+          <path d="M48 25 L40 50" />
+        </svg>
+        <h3 class="value-title">Excellence</h3>
+        <p class="value-text">La quête de la perfection dans chaque geste et chaque soin</p>
+      </div>
 
-    <div class="value-item">
-      <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
-        <!-- Pureté - Fleur de bouleau/nature -->
-        <circle cx="40" cy="30" r="12" />
-        <circle cx="40" cy="30" r="6" />
-        <path d="M40 42 L40 70" />
-        <path d="M40 50 Q30 45, 25 50" />
-        <path d="M40 50 Q50 45, 55 50" />
-        <path d="M40 58 Q32 54, 28 58" />
-        <path d="M40 58 Q48 54, 52 58" />
-        <path d="M28 30 Q20 25, 22 18" />
-        <path d="M52 30 Q60 25, 58 18" />
-        <path d="M35 20 Q30 12, 35 8" />
-        <path d="M45 20 Q50 12, 45 8" />
-      </svg>
-      <h3 class="value-title">Pureté</h3>
-      <p class="value-text">Des soins naturels inspirés des secrets de beauté sibériens</p>
+      <div class="value-item">
+        <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="40" cy="30" r="12" />
+          <circle cx="40" cy="30" r="6" />
+          <path d="M40 42 L40 70" />
+          <path d="M40 50 Q30 45, 25 50" />
+          <path d="M40 50 Q50 45, 55 50" />
+          <path d="M40 58 Q32 54, 28 58" />
+          <path d="M40 58 Q48 54, 52 58" />
+          <path d="M28 30 Q20 25, 22 18" />
+          <path d="M52 30 Q60 25, 58 18" />
+          <path d="M35 20 Q30 12, 35 8" />
+          <path d="M45 20 Q50 12, 45 8" />
+        </svg>
+        <h3 class="value-title">Pureté</h3>
+        <p class="value-text">Des soins naturels inspirés des secrets de beauté sibériens</p>
+      </div>
     </div>
-  </div>
-  
-  <div class="footer-bottom">
-    <p>© 2025 Ellessé — Cabinet d'esthétique</p>
-  </div>
-</footer>
+    
+    <div class="footer-bottom">
+      <p>© 2025 Ellessé — Cabinet d'esthétique</p>
+    </div>
+  </footer>
 </div>
 
 <style>
@@ -146,11 +172,32 @@
   :global(body) {
     margin: 0;
     min-height: 100%;
-    background-image: url('/fond.jpg');
+  }
+
+  .background-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .background-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+  }
+
+  .background-slide.active {
+    opacity: 1;
   }
 
   .page-wrapper {
@@ -159,7 +206,7 @@
     min-height: 100vh;
   }
 
-  /* ===== HEADER INVERSÉ ===== */
+  /* ===== HEADER ===== */
   header {
     background-color: rgb(38, 25, 17);
     padding: 20px 30px;
@@ -293,6 +340,10 @@
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   }
 
+  .title span {
+    display: block;
+  }
+
   .cta-button {
     margin-top: 40px;
     padding: 16px 40px;
@@ -381,6 +432,15 @@
   }
 
   /* ===== RESPONSIVE ===== */
+  @media (max-width: 1035px) and (min-width: 769px) {
+    .values-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 50px;
+      justify-items: center;
+    }
+  }
+
   @media (max-width: 768px) {
     header {
       padding: 15px 20px;
@@ -446,7 +506,6 @@
       height: 40px;
     }
 
-    /* Footer responsive */
     footer {
       padding: 25px 15px 15px;
     }
@@ -496,11 +555,13 @@
     }
 
     .values-container {
-      gap: 12px 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px 20px;
     }
 
     .value-item {
-      max-width: 45%;
+      max-width: 100%;
     }
 
     .value-icon {

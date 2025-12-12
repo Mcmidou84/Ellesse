@@ -42,6 +42,7 @@
     <section class="hero">
       <p class="subtitle">Cabinet d'esthétique</p>
       <h1 class="title">L'art de la beauté à la russe</h1>
+      <a href="/contact" class="cta-button">Prendre rendez-vous</a>
     </section>
     
     <slot />
@@ -292,6 +293,25 @@
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   }
 
+  .cta-button {
+    margin-top: 40px;
+    padding: 16px 40px;
+    font-family: 'Priamos', serif;
+    font-size: 16px;
+    color: rgb(38, 25, 17);
+    background-color: rgb(249, 246, 239);
+    border: none;
+    text-decoration: none;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background-color: rgb(38, 25, 17);
+    color: rgb(249, 246, 239);
+  }
+
   /* ===== FOOTER ===== */
   footer {
     background-color: rgb(249, 246, 239);
@@ -408,6 +428,12 @@
       font-size: 40px;
     }
 
+    .cta-button {
+      margin-top: 25px;
+      padding: 12px 30px;
+      font-size: 14px;
+    }
+
     .subtitle {
       font-size: 14px;
     }
@@ -421,17 +447,40 @@
     }
 
     /* Footer responsive */
+    footer {
+      padding: 25px 15px 15px;
+    }
+
     .values-container {
-      gap: 40px;
+      gap: 15px 25px;
     }
 
     .value-item {
-      max-width: 45%;
+      max-width: 40%;
     }
 
     .value-icon {
-      width: 55px;
-      height: 55px;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 8px;
+    }
+
+    .value-title {
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .value-text {
+      display: none;
+    }
+
+    .footer-bottom {
+      margin-top: 20px;
+      padding-top: 15px;
+    }
+
+    .footer-bottom p {
+      font-size: 11px;
     }
   }
 
@@ -440,23 +489,37 @@
       font-size: 32px;
     }
 
+    .cta-button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 13px;
+    }
+
     .values-container {
-      flex-direction: column;
-      align-items: center;
-      gap: 35px;
+      gap: 12px 20px;
     }
 
     .value-item {
-      max-width: 250px;
+      max-width: 45%;
     }
 
     .value-icon {
-      width: 60px;
-      height: 60px;
+      width: 35px;
+      height: 35px;
+      margin-bottom: 6px;
+    }
+
+    .value-title {
+      font-size: 10px;
     }
 
     footer {
-      padding: 40px 20px 25px;
+      padding: 20px 10px 12px;
+    }
+
+    .footer-bottom {
+      margin-top: 15px;
+      padding-top: 10px;
     }
   }
 </style>

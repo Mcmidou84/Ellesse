@@ -47,7 +47,7 @@
         theme: "light",
         hideEventTypeDetails: false,
         layout: "month_view",
-        language: "fr",
+        locale: "fr",
       },
     });
     Cal("ui", {
@@ -67,11 +67,75 @@
 </script>
 
 <svelte:head>
-  <title>Rendez-vous | Ellessé - Cabinet d'esthétique à la russe</title>
-  <meta
-    name="description"
-    content="Prenez rendez-vous en ligne au cabinet d'esthétique Ellessé."
-  />
+  <!-- SEO de base -->
+  <title>Rendez-vous en ligne | Ellessé - Cabinet d'esthétique à Toulouse</title>
+  <meta name="description" content="Prenez rendez-vous en ligne au cabinet d'esthétique Ellessé à Toulouse. Réservez votre soin de beauté à la russe en quelques clics. Disponible 24h/24." />
+  <meta name="keywords" content="rendez-vous esthétique Toulouse, réservation soin beauté, prendre rdv institut beauté, cabinet esthétique 31200, booking beauté russe" />
+  <link rel="canonical" href="https://ellesse-beaute.fr/rendez-vous" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ellesse-beaute.fr/rendez-vous" />
+  <meta property="og:title" content="Prendre rendez-vous | Ellessé - Cabinet d'esthétique à Toulouse" />
+  <meta property="og:description" content="Réservez votre soin de beauté à la russe en ligne. Confirmation immédiate par email." />
+  <meta property="og:image" content="https://ellesse-beaute.fr/Ellesse/accueil_01.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Ellessé" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Prendre rendez-vous | Ellessé - Esthétique à Toulouse" />
+  <meta name="twitter:description" content="Réservez votre soin de beauté à la russe en ligne." />
+  <meta name="twitter:image" content="https://ellesse-beaute.fr/Ellesse/accueil_01.webp" />
+  
+  <!-- Schema.org page réservation -->
+  {@html `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://ellesse-beaute.fr/rendez-vous#webpage",
+    "url": "https://ellesse-beaute.fr/rendez-vous",
+    "name": "Prendre rendez-vous - Ellessé Cabinet d'esthétique",
+    "description": "Réservez votre soin de beauté en ligne au cabinet Ellessé à Toulouse",
+    "isPartOf": {
+      "@id": "https://ellesse-beaute.fr/#organization"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://ellesse-beaute.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Rendez-vous",
+          "item": "https://ellesse-beaute.fr/rendez-vous"
+        }
+      ]
+    },
+    "potentialAction": {
+      "@type": "ReserveAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://ellesse-beaute.fr/rendez-vous",
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform"
+        ]
+      },
+      "result": {
+        "@type": "Reservation",
+        "name": "Réservation soin esthétique"
+      }
+    }
+  }
+  </script>`}
 </svelte:head>
 
 <div class="page-wrapper">

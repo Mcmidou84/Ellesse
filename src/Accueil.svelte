@@ -1,12 +1,12 @@
 <script>
   import { onMount } from "svelte";
-  import { link, location } from 'svelte-spa-router';
+  import { link } from 'svelte-spa-router';
 
   let menuOpen = $state(false);
   let currentImage = $state(0);
 
   const images = [
-    { src: "/Ellesse/accueil_01.webp", alt: "Soin esthétique visage au cabinet Ellessé" },
+    { src: "/Ellesse/accueil_01.webp", alt: "Soin esthétique visage au cabinet Ellessé à Toulouse" },
     { src: "/Ellesse/accueil_02.webp", alt: "Ambiance luxueuse du salon de beauté Ellessé" },
     { src: "/Ellesse/accueil_03.webp", alt: "Soins de beauté inspirés des traditions russes" },
   ];
@@ -29,8 +29,58 @@
 </script>
 
 <svelte:head>
-  <title>Ellessé | Cabinet d'esthétique à la russe - Soins de beauté</title>
-  <meta name="description" content="Ellessé, cabinet d'esthétique spécialisé dans l'art de la beauté à la russe. Découvrez nos soins inspirés des traditions impériales et des secrets de beauté sibériens." />
+  <!-- SEO de base -->
+  <title>Ellessé | Cabinet d'esthétique à la russe à Toulouse - Soins de beauté</title>
+  <meta name="description" content="Ellessé, cabinet d'esthétique à Toulouse spécialisé dans l'art de la beauté à la russe. Découvrez nos soins inspirés des traditions impériales et des secrets de beauté sibériens." />
+  <meta name="keywords" content="esthétique, beauté russe, soins visage, institut beauté Toulouse, manucure russe, soins naturels, beauté sibérienne, cabinet esthétique 31200" />
+  <link rel="canonical" href="https://ellesse-beaute.fr/" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ellesse-beaute.fr/" />
+  <meta property="og:title" content="Ellessé | Cabinet d'esthétique à la russe à Toulouse" />
+  <meta property="og:description" content="L'art de la beauté à la russe. Soins inspirés des traditions impériales et des secrets de beauté sibériens." />
+  <meta property="og:image" content="https://ellesse-beaute.fr/Ellesse/accueil_01.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Ellessé" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ellessé | Cabinet d'esthétique à la russe à Toulouse" />
+  <meta name="twitter:description" content="L'art de la beauté à la russe. Soins inspirés des traditions impériales." />
+  <meta name="twitter:image" content="https://ellesse-beaute.fr/Ellesse/accueil_01.webp" />
+  
+  <!-- Schema.org page spécifique -->
+  {@html `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://ellesse-beaute.fr/#webpage",
+    "url": "https://ellesse-beaute.fr/",
+    "name": "Ellessé - Cabinet d'esthétique à la russe à Toulouse",
+    "description": "Cabinet d'esthétique spécialisé dans l'art de la beauté à la russe",
+    "isPartOf": {
+      "@id": "https://ellesse-beaute.fr/#organization"
+    },
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": "https://ellesse-beaute.fr/Ellesse/accueil_01.webp"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://ellesse-beaute.fr/"
+        }
+      ]
+    }
+  }
+  </script>`}
 </svelte:head>
 
 <div class="background-slideshow" role="img" aria-label="Diaporama présentant le cabinet d'esthétique Ellessé">
@@ -48,7 +98,7 @@
   <header>
     <div class="left">
       <a href="/" use:link aria-label="Accueil Ellessé">
-        <img src="./logo.png" alt="Logo Ellessé - Cabinet d'esthétique" class="logo" width="50" height="50" />
+        <img src="./logo.png" alt="Logo Ellessé - Cabinet d'esthétique à Toulouse" class="logo" width="50" height="50" />
       </a>
       <span class="brand">Ellessé</span>
     </div>
@@ -83,13 +133,12 @@
   {/if}
 
   <main id="main-content">
-    <article class="hero" itemscope itemtype="https://schema.org/BeautySalon">
+    <article class="hero">
       <p class="subtitle">Cabinet d'esthétique</p>
-      <h1 class="title" itemprop="name">
+      <h1 class="title">
         <span>L'art de la beauté</span>
         <span>à la russe</span>
       </h1>
-      <meta itemprop="description" content="Cabinet d'esthétique spécialisé dans les soins de beauté à la russe" />
       <a href="/rendez-vous" use:link class="cta-button" aria-label="Prendre rendez-vous pour un soin esthétique">Prendre rendez-vous</a>
     </article>
   </main>
@@ -195,7 +244,7 @@
     </section>
 
     <div class="footer-bottom">
-      <p>© 2025 Ellessé — Cabinet d'esthétique</p>
+      <p>© 2025 Ellessé — Cabinet d'esthétique à Toulouse</p>
     </div>
   </footer>
 </div>

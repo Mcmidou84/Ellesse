@@ -7,37 +7,52 @@
 
   // Injection et initialisation de Cal.com
   onMount(() => {
-    if (window.Cal) {
-      initCal();
-    } else if (!document.getElementById("cal-script")) {
-      const script = document.createElement("script");
-      script.id = "cal-script";
-      script.src = "https://app.cal.eu/embed/embed.js"; // version EU
-      script.async = true;
-      script.onload = () => initCal();
-      document.head.appendChild(script);
-    }
-  });
+    (function (C, A, L) {
+      let p = function (a, ar) {
+        a.q.push(ar);
+      };
+      let d = C.document;
+      C.Cal =
+        C.Cal ||
+        function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () {
+              p(api, arguments);
+            };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            typeof namespace === "string"
+              ? (cal.ns[namespace] = api) && p(api, ar)
+              : p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+    })(window, "https://app.cal.eu/embed/embed.js", "init");
 
-  function initCal() {
-    if (!window.Cal || !document.getElementById("cal-embed")) {
-      setTimeout(initCal, 100);
-      return;
-    }
-
-    Cal("init", { origin: "https://cal.com" });
+    Cal("init", { origin: "https://app.cal.eu" });
 
     Cal("inline", {
       elementOrSelector: "#cal-embed",
-      calLink: "ellesse/15min",
+      calLink: "ellesse/30min",
       config: {
         theme: "light",
         hideEventTypeDetails: false,
       },
     });
-
+  Cal("ui", {
+    styles: { branding: { brandColor: "#664a32" } },
+  });
     calLoaded = true;
-  }
+  });
 
   // Menu responsive
   function toggleMenu() {
@@ -61,7 +76,13 @@
   <header>
     <div class="left">
       <a href="/" use:link aria-label="Accueil Ellessé">
-        <img src="./logo.png" alt="Logo Ellessé" class="logo" width="50" height="50"/>
+        <img
+          src="./logo.png"
+          alt="Logo Ellessé"
+          class="logo"
+          width="50"
+          height="50"
+        />
       </a>
       <span class="brand">Ellessé</span>
     </div>
@@ -71,7 +92,9 @@
       <a href="/galerie" use:link on:click={closeMenu}>Galerie</a>
       <a href="/a-propos" use:link on:click={closeMenu}>À propos</a>
       <a href="/contact" use:link on:click={closeMenu}>Contact</a>
-      <a href="/rendez-vous" use:link class="active" on:click={closeMenu}>Rendez-vous</a>
+      <a href="/rendez-vous" use:link class="active" on:click={closeMenu}
+        >Rendez-vous</a
+      >
       <a href="/boutique" use:link on:click={closeMenu}>Boutique</a>
     </nav>
 
@@ -116,7 +139,12 @@
 
       <div class="booking-info">
         <div class="info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
             <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <div>
@@ -125,8 +153,15 @@
           </div>
         </div>
         <div class="info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+            />
           </svg>
           <div>
             <h3>Contact</h3>
@@ -134,9 +169,16 @@
           </div>
         </div>
         <div class="info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+            />
+            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
           <div>
             <h3>Adresse</h3>
@@ -153,8 +195,6 @@
     </div>
   </footer>
 </div>
-
-
 
 <style>
   @font-face {

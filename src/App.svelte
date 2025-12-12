@@ -1,14 +1,14 @@
 <script>
-  import Router from 'svelte-spa-router';
-  import Accueil from './Accueil.svelte';
-  import RendezVous from './RendezVous.svelte';
-  import Prestations from './Prestations.svelte';
+  import Router from "svelte-spa-router";
+  import Accueil from "./Accueil.svelte";
+  import RendezVous from "./RendezVous.svelte";
+  import Prestations from "./Prestations.svelte";
 
   // Définition des routes
   const routes = {
-    '/': Accueil,
-    '/rendez-vous': RendezVous,
-    '/prestations': Prestations,
+    "/": Accueil,
+    "/rendez-vous": RendezVous,
+    "/prestations": Prestations,
     // Ajoute tes autres pages ici :
     // '/galerie': Galerie,
     // '/contact': Contact,
@@ -20,17 +20,17 @@
   <!-- Meta globales -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="author" content="Ellessé" />
+  <meta name="Mehdi Cherki" content="Ellessé" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#261911" />
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="apple-touch-icon" href="/logo.png" />
-  
+
   <!-- Preconnect pour performances -->
   <link rel="preconnect" href="https://app.cal.eu" />
-  
+
   <!-- Schema.org global - Organisation -->
   {@html `<script type="application/ld+json">
   {
@@ -114,8 +114,7 @@
       ]
     },
     "sameAs": [
-      "https://www.instagram.com/ellesse_beaute",
-      "https://www.facebook.com/ellessebeaute"
+      "https://www.instagram.com/ellesse.institut",
     ]
   }
   </script>`}

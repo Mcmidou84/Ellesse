@@ -1,3 +1,61 @@
+<svelte:head>
+  <title>Ellessé | Cabinet d'esthétique à la russe - Soins de beauté</title>
+  <meta name="description" content="Ellessé, cabinet d'esthétique spécialisé dans l'art de la beauté à la russe. Découvrez nos soins inspirés des traditions impériales et des secrets de beauté sibériens." />
+  <meta name="keywords" content="esthétique, beauté russe, soins visage, institut beauté, manucure russe, soins naturels, beauté sibérienne" />
+  <meta name="author" content="Ellessé" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://votre-domaine.com/" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://votre-domaine.com/" />
+  <meta property="og:title" content="Ellessé | Cabinet d'esthétique à la russe" />
+  <meta property="og:description" content="L'art de la beauté à la russe. Soins inspirés des traditions impériales et des secrets de beauté sibériens." />
+  <meta property="og:image" content="https://votre-domaine.com/Ellesse/accueil_01.webp" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Ellessé" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ellessé | Cabinet d'esthétique à la russe" />
+  <meta name="twitter:description" content="L'art de la beauté à la russe. Soins inspirés des traditions impériales." />
+  <meta name="twitter:image" content="https://votre-domaine.com/Ellesse/accueil_01.webp" />
+  
+  <!-- Données structurées Schema.org -->
+  {@html `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    "name": "Ellessé",
+    "description": "Cabinet d'esthétique spécialisé dans l'art de la beauté à la russe",
+    "url": "https://votre-domaine.com",
+    "logo": "https://votre-domaine.com/logo.png",
+    "image": "https://votre-domaine.com/Ellesse/accueil_01.webp",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Votre adresse",
+      "addressLocality": "Votre ville",
+      "postalCode": "00000",
+      "addressCountry": "FR"
+    },
+    "telephone": "+33000000000",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      }
+    ],
+    "priceRange": "€€",
+    "sameAs": [
+      "https://www.facebook.com/votre-page",
+      "https://www.instagram.com/votre-compte"
+    ]
+  }
+  </script>`}
+</svelte:head>
+
 <script>
   import { onMount } from "svelte";
 
@@ -6,9 +64,9 @@
   let currentPath = $state("");
 
   const images = [
-    "/Ellesse/accueil_01.webp",
-    "/Ellesse/accueil_02.webp",
-    "/Ellesse/accueil_03.webp",
+    { src: "/Ellesse/accueil_01.webp", alt: "Soin esthétique visage au cabinet Ellessé" },
+    { src: "/Ellesse/accueil_02.webp", alt: "Ambiance luxueuse du salon de beauté Ellessé" },
+    { src: "/Ellesse/accueil_03.webp", alt: "Soins de beauté inspirés des traditions russes" },
   ];
 
   onMount(() => {
@@ -30,12 +88,13 @@
   }
 </script>
 
-<div class="background-slideshow">
+<div class="background-slideshow" role="img" aria-label="Diaporama présentant le cabinet d'esthétique Ellessé">
   {#each images as image, index}
     <div
       class="background-slide"
       class:active={currentImage === index}
-      style="background-image: url('{image}')"
+      style="background-image: url('{image.src}')"
+      aria-hidden={currentImage !== index}
     ></div>
   {/each}
 </div>
@@ -43,45 +102,54 @@
 <div class="page-wrapper">
   <header>
     <div class="left">
-      <img src="./logo.png" alt="Logo" class="logo" />
+      <a href="/" aria-label="Accueil Ellessé">
+        <img src="./logo.png" alt="Logo Ellessé - Cabinet d'esthétique" class="logo" width="50" height="50" />
+      </a>
       <span class="brand">Ellessé</span>
     </div>
 
-    <nav class:open={menuOpen}>
+    <nav class:open={menuOpen} aria-label="Navigation principale">
       <a
         href="/"
         class:active={currentPath === "/" ||
           currentPath === "/Ellesse/" ||
           currentPath === "/Ellesse/index.html"}
-        onclick={closeMenu}>Accueil</a
-      >
+        onclick={closeMenu}
+        aria-current={currentPath === "/" || currentPath === "/Ellesse/" || currentPath === "/Ellesse/index.html" ? "page" : undefined}
+      >Accueil</a>
       <a
         href="/galerie"
         class:active={currentPath.includes("/galerie")}
-        onclick={closeMenu}>Galerie</a
-      >
+        onclick={closeMenu}
+        aria-current={currentPath.includes("/galerie") ? "page" : undefined}
+      >Galerie</a>
       <a
         href="/a-propos"
         class:active={currentPath.includes("/a-propos")}
-        onclick={closeMenu}>À propos</a
-      >
+        onclick={closeMenu}
+        aria-current={currentPath.includes("/a-propos") ? "page" : undefined}
+      >À propos</a>
       <a
         href="/contact"
         class:active={currentPath.includes("/contact")}
-        onclick={closeMenu}>Contact</a
-      >
+        onclick={closeMenu}
+        aria-current={currentPath.includes("/contact") ? "page" : undefined}
+      >Contact</a>
       <a
         href="/boutique"
         class:active={currentPath.includes("/boutique")}
-        onclick={closeMenu}>Boutique</a
-      >
+        onclick={closeMenu}
+        aria-current={currentPath.includes("/boutique") ? "page" : undefined}
+      >Boutique</a>
     </nav>
 
     <button
       class="burger"
       class:open={menuOpen}
       onclick={toggleMenu}
-      aria-label="Menu"
+      aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+      aria-expanded={menuOpen}
+      aria-controls="mobile-menu"
     >
       <span></span>
       <span></span>
@@ -92,29 +160,32 @@
   </header>
 
   {#if menuOpen}
-    <div class="overlay" onclick={closeMenu}></div>
+    <div class="overlay" onclick={closeMenu} role="presentation"></div>
   {/if}
 
-  <main>
-    <section class="hero">
+  <main id="main-content">
+    <article class="hero" itemscope itemtype="https://schema.org/BeautySalon">
       <p class="subtitle">Cabinet d'esthétique</p>
-      <h1 class="title">
+      <h1 class="title" itemprop="name">
         <span>L'art de la beauté</span>
         <span>à la russe</span>
       </h1>
-      <a href="/contact" class="cta-button">Prendre rendez-vous</a>
-    </section>
+      <meta itemprop="description" content="Cabinet d'esthétique spécialisé dans les soins de beauté à la russe" />
+      <a href="/contact" class="cta-button" aria-label="Prendre rendez-vous pour un soin esthétique">Prendre rendez-vous</a>
+    </article>
   </main>
 
   <footer>
-    <div class="values-container">
-      <div class="value-item">
+    <section class="values-container" aria-label="Nos valeurs">
+      <article class="value-item">
         <svg
           class="value-icon"
           viewBox="0 0 80 80"
           fill="none"
           stroke="currentColor"
           stroke-width="1.5"
+          aria-hidden="true"
+          role="img"
         >
           <path d="M40 10 C30 25, 25 40, 40 70" />
           <path d="M40 10 C50 25, 55 40, 40 70" />
@@ -124,19 +195,21 @@
           <path d="M32 45 Q40 42, 48 45" />
           <circle cx="40" cy="10" r="3" />
         </svg>
-        <h3 class="value-title">Élégance</h3>
+        <h2 class="value-title">Élégance</h2>
         <p class="value-text">
           La grâce et le raffinement inspirés de l'esthétique impériale russe
         </p>
-      </div>
+      </article>
 
-      <div class="value-item">
+      <article class="value-item">
         <svg
           class="value-icon"
           viewBox="0 0 80 80"
           fill="none"
           stroke="currentColor"
           stroke-width="1.5"
+          aria-hidden="true"
+          role="img"
         >
           <ellipse cx="40" cy="55" rx="18" ry="22" />
           <circle cx="40" cy="28" r="14" />
@@ -147,19 +220,21 @@
           <circle cx="44" cy="26" r="1.5" />
           <path d="M37 31 Q40 33, 43 31" />
         </svg>
-        <h3 class="value-title">Tradition</h3>
+        <h2 class="value-title">Tradition</h2>
         <p class="value-text">
           Un savoir-faire ancestral transmis de génération en génération
         </p>
-      </div>
+      </article>
 
-      <div class="value-item">
+      <article class="value-item">
         <svg
           class="value-icon"
           viewBox="0 0 80 80"
           fill="none"
           stroke="currentColor"
           stroke-width="1.5"
+          aria-hidden="true"
+          role="img"
         >
           <path d="M40 8 L55 25 L40 72 L25 25 Z" />
           <path d="M25 25 L40 35 L55 25" />
@@ -169,19 +244,21 @@
           <path d="M32 25 L40 50" />
           <path d="M48 25 L40 50" />
         </svg>
-        <h3 class="value-title">Excellence</h3>
+        <h2 class="value-title">Excellence</h2>
         <p class="value-text">
           La quête de la perfection dans chaque geste et chaque soin
         </p>
-      </div>
+      </article>
 
-      <div class="value-item">
+      <article class="value-item">
         <svg
           class="value-icon"
           viewBox="0 0 80 80"
           fill="none"
           stroke="currentColor"
           stroke-width="1.5"
+          aria-hidden="true"
+          role="img"
         >
           <circle cx="40" cy="30" r="12" />
           <circle cx="40" cy="30" r="6" />
@@ -195,12 +272,12 @@
           <path d="M35 20 Q30 12, 35 8" />
           <path d="M45 20 Q50 12, 45 8" />
         </svg>
-        <h3 class="value-title">Pureté</h3>
+        <h2 class="value-title">Pureté</h2>
         <p class="value-text">
           Des soins naturels inspirés des secrets de beauté sibériens
         </p>
-      </div>
-    </div>
+      </article>
+    </section>
 
     <div class="footer-bottom">
       <p>© 2025 Ellessé — Cabinet d'esthétique</p>
@@ -284,12 +361,18 @@
     flex: 1;
   }
 
+  .left a {
+    display: flex;
+    align-items: center;
+  }
+
   .spacer {
     flex: 1;
   }
 
   .logo {
     height: 50px;
+    width: auto;
     filter: brightness(0) invert(1);
   }
 
@@ -316,7 +399,8 @@
     transition: color 0.3s;
   }
 
-  nav a:hover {
+  nav a:hover,
+  nav a:focus {
     color: rgb(249, 246, 239);
   }
 
@@ -423,9 +507,12 @@
     transition: all 0.3s ease;
   }
 
-  .cta-button:hover {
+  .cta-button:hover,
+  .cta-button:focus {
     background-color: rgb(38, 25, 17);
     color: rgb(249, 246, 239);
+    outline: 2px solid rgb(249, 246, 239);
+    outline-offset: 2px;
   }
 
   /* ===== FOOTER ===== */

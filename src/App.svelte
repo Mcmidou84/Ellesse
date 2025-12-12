@@ -49,7 +49,7 @@
 <style>
   @font-face {
     font-family: 'LittleMicroSans';
-    src: url('public/little-micro-sans-font-family/LittleMicroSansTrial-li.otf') format('opentype');
+    src: url('public/LittleMicroSansTrial-li.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -57,7 +57,7 @@
 
   @font-face {
     font-family: 'Priamos';
-    src: url('public/priamos-regular/Priamos Regular.ttf') format('truetype');
+    src: url('./Priamos Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;

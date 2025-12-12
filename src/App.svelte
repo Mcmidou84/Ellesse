@@ -201,7 +201,73 @@
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   }
 
-  @media (max-width: 768px) {
-    /* ... reste inchangé ... */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
   }
+
+  .spacer {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: rgb(249, 246, 239);
+    flex-direction: column;
+    padding: 80px 30px 30px;
+    gap: 0;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease;
+    z-index: 105;
+  }
+
+  nav.open {
+    right: 0;
+  }
+
+  nav a {
+    padding: 15px 0;
+    font-size: 18px;
+    border-bottom: 1px solid rgba(102, 74, 50, 0.2);
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .brand {
+    font-size: 22px;
+  }
+
+  .logo {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .hero {
+    min-height: 50vh;
+  }
+}
 </style>

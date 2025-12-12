@@ -3,14 +3,17 @@
 
   let menuOpen = $state(false);
   let currentImage = $state(0);
+  let currentPath = $state("");
 
   const images = [
-    "/Ellesse/accueil_01.jpg",
-    "/Ellesse/accueil_02.jpg",
-    "/Ellesse/accueil_03.jpg",
+    "/Ellesse/accueil_01.webp",
+    "/Ellesse/accueil_02.webp",
+    "/Ellesse/accueil_03.webp",
   ];
 
   onMount(() => {
+    currentPath = window.location.pathname;
+
     const interval = setInterval(() => {
       currentImage = (currentImage + 1) % images.length;
     }, 5000);
@@ -45,11 +48,33 @@
     </div>
 
     <nav class:open={menuOpen}>
-      <a href="/" onclick={closeMenu}>Accueil</a>
-      <a href="/galerie" onclick={closeMenu}>Galerie</a>
-      <a href="/a-propos" onclick={closeMenu}>À propos</a>
-      <a href="/contact" onclick={closeMenu}>Contact</a>
-      <a href="/boutique" onclick={closeMenu}>Boutique</a>
+      <a
+        href="/"
+        class:active={currentPath === "/" ||
+          currentPath === "/Ellesse/" ||
+          currentPath === "/Ellesse/index.html"}
+        onclick={closeMenu}>Accueil</a
+      >
+      <a
+        href="/galerie"
+        class:active={currentPath.includes("/galerie")}
+        onclick={closeMenu}>Galerie</a
+      >
+      <a
+        href="/a-propos"
+        class:active={currentPath.includes("/a-propos")}
+        onclick={closeMenu}>À propos</a
+      >
+      <a
+        href="/contact"
+        class:active={currentPath.includes("/contact")}
+        onclick={closeMenu}>Contact</a
+      >
+      <a
+        href="/boutique"
+        class:active={currentPath.includes("/boutique")}
+        onclick={closeMenu}>Boutique</a
+      >
     </nav>
 
     <button
@@ -79,8 +104,6 @@
       </h1>
       <a href="/contact" class="cta-button">Prendre rendez-vous</a>
     </section>
-
-    <slot />
   </main>
 
   <footer>
@@ -280,7 +303,7 @@
 
   nav {
     display: flex;
-    gap: 30px;
+    gap: 50px;
   }
 
   nav a {
@@ -289,10 +312,15 @@
     color: rgb(200, 180, 160);
     font-weight: 300;
     font-size: 16px;
+    letter-spacing: 1px;
     transition: color 0.3s;
   }
 
   nav a:hover {
+    color: rgb(249, 246, 239);
+  }
+
+  nav a.active {
     color: rgb(249, 246, 239);
   }
 

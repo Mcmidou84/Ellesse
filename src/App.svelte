@@ -2,14 +2,15 @@
   import Router from 'svelte-spa-router';
   import Accueil from './Accueil.svelte';
   import RendezVous from './RendezVous.svelte';
+  import Prestations from './Prestations.svelte';
 
   // Définition des routes
   const routes = {
     '/': Accueil,
     '/rendez-vous': RendezVous,
+    '/prestations': Prestations,
     // Ajoute tes autres pages ici :
     // '/galerie': Galerie,
-    // '/a-propos': APropos,
     // '/contact': Contact,
     // '/boutique': Boutique,
   };
@@ -37,7 +38,7 @@
     "@type": "BeautySalon",
     "@id": "https://ellesse-beaute.fr/#organization",
     "name": "Ellessé",
-    "description": "Cabinet d'esthétique spécialisé dans l'art de la beauté à la russe. Soins inspirés des traditions impériales et des secrets de beauté sibériens.",
+    "description": "Cabinet d'esthétique à Toulouse spécialisé dans l'art de la beauté à la russe. Maquillage semi permanent sourcils, microblading, candy lips, extension de cils volume russe, manucure russe, pose de gel.",
     "url": "https://ellesse-beaute.fr",
     "logo": "https://ellesse-beaute.fr/logo.png",
     "image": "https://ellesse-beaute.fr/Ellesse/accueil_01.webp",
@@ -69,6 +70,48 @@
     "areaServed": {
       "@type": "City",
       "name": "Toulouse"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Prestations esthétiques",
+      "itemListElement": [
+        {
+          "@type": "OfferCatalog",
+          "name": "Maquillage semi permanent sourcils",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Microblading Toulouse"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Microshading Toulouse"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Brow shading Toulouse"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Powder brows Toulouse"}}
+          ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Maquillage semi permanent lèvres",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Candy Lips Toulouse"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Blush Lips Toulouse"}}
+          ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Extension de cils",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Volume russe Toulouse"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pose cil à cil Toulouse"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Lash botox Toulouse"}}
+          ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Soins ongles",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Manucure russe Toulouse"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pose de gel Toulouse"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Nail art Toulouse"}}
+          ]
+        }
+      ]
     },
     "sameAs": [
       "https://www.instagram.com/ellesse_beaute",

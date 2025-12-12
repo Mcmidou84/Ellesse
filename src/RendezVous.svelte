@@ -98,7 +98,7 @@
     "@id": "https://ellesse-beaute.fr/rendez-vous#webpage",
     "url": "https://ellesse-beaute.fr/rendez-vous",
     "name": "Prendre rendez-vous - Ellessé Cabinet d'esthétique",
-    "description": "Réservez votre soin de beauté en ligne au cabinet Ellessé à Toulouse",
+    "description": "Réservez votre soin de beauté en ligne au cabinet Ellessé à Toulouse. Soins visage, manucure russe, beauté sibérienne au 73 Bd Silvio Trentin, 31200 Toulouse.",
     "isPartOf": {
       "@id": "https://ellesse-beaute.fr/#organization"
     },
@@ -156,7 +156,7 @@
     <nav class:open={menuOpen}>
       <a href="/" use:link on:click={closeMenu}>Accueil</a>
       <a href="/galerie" use:link on:click={closeMenu}>Galerie</a>
-      <a href="/a-propos" use:link on:click={closeMenu}>À propos</a>
+      <a href="/prestations" use:link on:click={closeMenu}>Prestations</a>
       <a href="/contact" use:link on:click={closeMenu}>Contact</a>
       <a href="/rendez-vous" use:link class="active" on:click={closeMenu}
         >Rendez-vous</a
@@ -248,7 +248,7 @@
           </svg>
           <div>
             <h3>Adresse</h3>
-            <p>73 Bd Silvio Trentin, 31200 Toulouse</p>
+            <p>73 Bd Silvio Trentin<br />31200 Toulouse</p>
           </div>
         </div>
       </div>
@@ -522,6 +522,7 @@
     font-size: 14px;
     color: rgb(102, 74, 50);
     margin: 0;
+    line-height: 1.4;
   }
 
   /* ===== FOOTER ===== */
@@ -606,6 +607,17 @@
       flex-direction: column;
       gap: 25px;
       align-items: center;
+    }
+
+    .info-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .info-item svg {
+      margin-top: 0;
     }
 
     .calendar-container,

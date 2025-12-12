@@ -60,7 +60,7 @@
     "@id": "https://ellesse-beaute.fr/#webpage",
     "url": "https://ellesse-beaute.fr/",
     "name": "Ellessé - Cabinet d'esthétique à la russe à Toulouse",
-    "description": "Cabinet d'esthétique spécialisé dans l'art de la beauté à la russe",
+    "description": "Cabinet d'esthétique à Toulouse spécialisé dans l'art de la beauté à la russe. Soins visage, manucure russe, secrets de beauté sibériens au 73 Bd Silvio Trentin, 31200 Toulouse.",
     "isPartOf": {
       "@id": "https://ellesse-beaute.fr/#organization"
     },
@@ -106,7 +106,7 @@
     <nav class:open={menuOpen} aria-label="Navigation principale">
       <a href="/" use:link class="active" onclick={closeMenu}>Accueil</a>
       <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
-      <a href="/a-propos" use:link onclick={closeMenu}>À propos</a>
+      <a href="/prestations" use:link onclick={closeMenu}>Prestations</a>
       <a href="/contact" use:link onclick={closeMenu}>Contact</a>
       <a href="/rendez-vous" use:link onclick={closeMenu}>Rendez-vous</a>
       <a href="/boutique" use:link onclick={closeMenu}>Boutique</a>
@@ -487,12 +487,11 @@
   }
 
   .values-container {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
-    flex-wrap: wrap;
   }
 
   .value-item {
@@ -500,7 +499,6 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 200px;
   }
 
   .value-icon {
@@ -550,10 +548,22 @@
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1035px) and (min-width: 769px) {
     .values-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px 50px;
-      justify-items: center;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .value-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 12px;
+    }
+
+    .value-title {
+      font-size: 12px;
+    }
+
+    .value-text {
+      font-size: 12px;
     }
   }
 
@@ -627,21 +637,18 @@
     }
 
     .values-container {
-      gap: 15px 25px;
-    }
-
-    .value-item {
-      max-width: 40%;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
     }
 
     .value-icon {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       margin-bottom: 8px;
     }
 
     .value-title {
-      font-size: 12px;
+      font-size: 9px;
       letter-spacing: 1px;
     }
 
@@ -671,23 +678,23 @@
     }
 
     .values-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px 20px;
-    }
-
-    .value-item {
-      max-width: 100%;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
     }
 
     .value-icon {
-      width: 35px;
-      height: 35px;
-      margin-bottom: 6px;
+      width: 28px;
+      height: 28px;
+      margin-bottom: 5px;
     }
 
     .value-title {
-      font-size: 10px;
+      font-size: 7px;
+      letter-spacing: 0.5px;
+    }
+
+    .value-text {
+      display: none;
     }
 
     footer {

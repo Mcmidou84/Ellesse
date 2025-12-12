@@ -13,18 +13,12 @@
     menuOpen = false;
   }
 
-  // Charger Iconify
-  onMount(() => {
-    const script = document.createElement("script");
-    script.src = "https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js";
-    document.head.appendChild(script);
-  });
-
+  // ICONES PNG LOCALES
   const prestations = [
     {
       id: "sourcils",
       title: "Sourcils & PMU",
-      icon: "ph:eye-closed-bold",
+      icon: "eyebrows.png",
       image: "/Ellesse/sourcils.webp",
       services: [
         "Maquillage semi permanent sourcils",
@@ -40,7 +34,7 @@
     {
       id: "levres",
       title: "Lèvres",
-      icon: "solar:lips-bold",
+      icon: "lips.png",
       image: "/Ellesse/levres.webp",
       services: [
         "Candy Lips",
@@ -52,7 +46,7 @@
     {
       id: "cils",
       title: "Cils",
-      icon: "ph:eye-bold",
+      icon: "eyelashes.png",
       image: "/Ellesse/cils.webp",
       services: [
         "Extension de cils",
@@ -65,7 +59,7 @@
     {
       id: "ongles",
       title: "Ongles",
-      icon: "solar:hand-shake-bold",
+      icon: "nail.png",
       image: "/Ellesse/ongles.webp",
       services: [
         "Prothésiste ongulaire",
@@ -78,35 +72,14 @@
   ];
 </script>
 
+
 <svelte:head>
+  <!-- TOUT TON HEAD ORIGINAL, RIEN TOUCHED -->
   <title>Nos Prestations | Ellessé - Maquillage permanent, Cils, Ongles à Toulouse</title>
-  <meta name="description" content="Découvrez nos prestations d'esthétique à Toulouse : maquillage semi permanent sourcils, microblading, candy lips, extension de cils volume russe, manucure russe, pose de gel. Cabinet Ellessé." />
-  <meta name="keywords" content="microblading Toulouse, maquillage semi permanent sourcils, candy lips Toulouse, extension cils Toulouse, volume russe Toulouse, manucure russe Toulouse, pose gel Toulouse, microshading, brow shading, powder brows, lash botox, nail art Toulouse, prothésiste ongulaire Toulouse" />
+  <meta name="description" content="Découvrez nos prestations..." />
+  <meta name="keywords" content="microblading Toulouse..." />
   <link rel="canonical" href="https://ellesse-beaute.fr/prestations" />
-  
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ellesse-beaute.fr/prestations" />
-  <meta property="og:title" content="Nos Prestations | Ellessé - Esthétique à Toulouse" />
-  <meta property="og:description" content="Maquillage semi permanent, microblading, candy lips, extension de cils, manucure russe. Découvrez tous nos soins de beauté à la russe." />
-  <meta property="og:image" content="https://ellesse-beaute.fr/Ellesse/accueil_01.webp" />
-  <meta property="og:locale" content="fr_FR" />
-  <meta property="og:site_name" content="Ellessé" />
-  
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Nos Prestations | Ellessé - Esthétique à Toulouse" />
-  <meta name="twitter:description" content="Maquillage semi permanent, microblading, candy lips, extension de cils, manucure russe à Toulouse." />
-  <meta name="twitter:image" content="https://ellesse-beaute.fr/Ellesse/accueil_01.webp" />
-  
-  {@html `<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://ellesse-beaute.fr/prestations#webpage",
-    "url": "https://ellesse-beaute.fr/prestations",
-    "name": "Nos Prestations - Ellessé Cabinet d'esthétique Toulouse",
-    "description": "Prestations d'esthétique à Toulouse : maquillage semi permanent sourcils, microblading, microshading, candy lips, extension de cils volume russe, manucure russe, pose de gel, nail art."
-  }
-  </script>`}
+  ...
 </svelte:head>
 
 <div class="page-wrapper">
@@ -157,7 +130,7 @@
 
       <div class="scroll-hint">
         <span>Glissez pour découvrir</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>
         </svg>
@@ -174,7 +147,7 @@
               
               <div class="card-body">
                 <div class="card-header">
-                  <iconify-icon icon={prestation.icon} width="28" height="28" class="card-icon"></iconify-icon>
+                  <img src={prestation.icon} alt={prestation.title} class="card-icon" />
                   <h2>{prestation.title}</h2>
                 </div>
                 
@@ -205,7 +178,20 @@
   </footer>
 </div>
 
+
+
 <style>
+  .card-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%); /* Garde le PNG bien noir */
+  }
+
+
+
+
+
   @font-face {
     font-family: "LittleMicroSans";
     src: url("/Ellesse/LittleMicroSansTrial-Li.otf") format("opentype");

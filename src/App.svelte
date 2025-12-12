@@ -1,27 +1,27 @@
 <script>
-  import { onMount } from 'svelte';
-  
+  import { onMount } from "svelte";
+
   let menuOpen = $state(false);
   let currentImage = $state(0);
-  
+
   const images = [
-    './public/accueil_01.jpg',
-    './public/accueil_02.jpg',
-    './public/accueil_03.jpg'
+    "/Ellesse/accueil_01.jpg",
+    "/Ellesse/accueil_02.jpg",
+    "/Ellesse/accueil_03.jpg",
   ];
-  
+
   onMount(() => {
     const interval = setInterval(() => {
       currentImage = (currentImage + 1) % images.length;
     }, 5000);
-    
+
     return () => clearInterval(interval);
   });
-  
+
   function toggleMenu() {
     menuOpen = !menuOpen;
   }
-  
+
   function closeMenu() {
     menuOpen = false;
   }
@@ -29,8 +29,8 @@
 
 <div class="background-slideshow">
   {#each images as image, index}
-    <div 
-      class="background-slide" 
+    <div
+      class="background-slide"
       class:active={currentImage === index}
       style="background-image: url('{image}')"
     ></div>
@@ -40,10 +40,10 @@
 <div class="page-wrapper">
   <header>
     <div class="left">
-      <img src="./logo.png" alt="Logo" class="logo">
+      <img src="./logo.png" alt="Logo" class="logo" />
       <span class="brand">Ellessé</span>
     </div>
-    
+
     <nav class:open={menuOpen}>
       <a href="/" onclick={closeMenu}>Accueil</a>
       <a href="/galerie" onclick={closeMenu}>Galerie</a>
@@ -52,7 +52,12 @@
       <a href="/boutique" onclick={closeMenu}>Boutique</a>
     </nav>
 
-    <button class="burger" class:open={menuOpen} onclick={toggleMenu} aria-label="Menu">
+    <button
+      class="burger"
+      class:open={menuOpen}
+      onclick={toggleMenu}
+      aria-label="Menu"
+    >
       <span></span>
       <span></span>
       <span></span>
@@ -74,14 +79,20 @@
       </h1>
       <a href="/contact" class="cta-button">Prendre rendez-vous</a>
     </section>
-    
+
     <slot />
   </main>
 
   <footer>
     <div class="values-container">
       <div class="value-item">
-        <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+        <svg
+          class="value-icon"
+          viewBox="0 0 80 80"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
           <path d="M40 10 C30 25, 25 40, 40 70" />
           <path d="M40 10 C50 25, 55 40, 40 70" />
           <path d="M40 20 C35 30, 33 40, 40 55" />
@@ -91,11 +102,19 @@
           <circle cx="40" cy="10" r="3" />
         </svg>
         <h3 class="value-title">Élégance</h3>
-        <p class="value-text">La grâce et le raffinement inspirés de l'esthétique impériale russe</p>
+        <p class="value-text">
+          La grâce et le raffinement inspirés de l'esthétique impériale russe
+        </p>
       </div>
 
       <div class="value-item">
-        <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+        <svg
+          class="value-icon"
+          viewBox="0 0 80 80"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
           <ellipse cx="40" cy="55" rx="18" ry="22" />
           <circle cx="40" cy="28" r="14" />
           <circle cx="40" cy="28" r="9" />
@@ -106,11 +125,19 @@
           <path d="M37 31 Q40 33, 43 31" />
         </svg>
         <h3 class="value-title">Tradition</h3>
-        <p class="value-text">Un savoir-faire ancestral transmis de génération en génération</p>
+        <p class="value-text">
+          Un savoir-faire ancestral transmis de génération en génération
+        </p>
       </div>
 
       <div class="value-item">
-        <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+        <svg
+          class="value-icon"
+          viewBox="0 0 80 80"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
           <path d="M40 8 L55 25 L40 72 L25 25 Z" />
           <path d="M25 25 L40 35 L55 25" />
           <path d="M40 35 L40 72" />
@@ -120,11 +147,19 @@
           <path d="M48 25 L40 50" />
         </svg>
         <h3 class="value-title">Excellence</h3>
-        <p class="value-text">La quête de la perfection dans chaque geste et chaque soin</p>
+        <p class="value-text">
+          La quête de la perfection dans chaque geste et chaque soin
+        </p>
       </div>
 
       <div class="value-item">
-        <svg class="value-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+        <svg
+          class="value-icon"
+          viewBox="0 0 80 80"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
           <circle cx="40" cy="30" r="12" />
           <circle cx="40" cy="30" r="6" />
           <path d="M40 42 L40 70" />
@@ -138,10 +173,12 @@
           <path d="M45 20 Q50 12, 45 8" />
         </svg>
         <h3 class="value-title">Pureté</h3>
-        <p class="value-text">Des soins naturels inspirés des secrets de beauté sibériens</p>
+        <p class="value-text">
+          Des soins naturels inspirés des secrets de beauté sibériens
+        </p>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
       <p>© 2025 Ellessé — Cabinet d'esthétique</p>
     </div>
@@ -150,16 +187,16 @@
 
 <style>
   @font-face {
-    font-family: 'LittleMicroSans';
-    src: url('/Ellesse/LittleMicroSansTrial-Li.otf') format('opentype');
+    font-family: "LittleMicroSans";
+    src: url("/Ellesse/LittleMicroSansTrial-Li.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'Priamos';
-    src: url('/Ellesse/Priamos-Regular.ttf') format('truetype');
+    font-family: "Priamos";
+    src: url("/Ellesse/Priamos-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -234,7 +271,7 @@
   }
 
   .brand {
-    font-family: 'LittleMicroSans', sans-serif;
+    font-family: "LittleMicroSans", sans-serif;
     text-transform: uppercase;
     font-size: 28px;
     font-weight: 300;
@@ -247,7 +284,7 @@
   }
 
   nav a {
-    font-family: 'Priamos', serif;
+    font-family: "Priamos", serif;
     text-decoration: none;
     color: rgb(200, 180, 160);
     font-weight: 300;
@@ -321,7 +358,7 @@
   }
 
   .subtitle {
-    font-family: 'Priamos', serif;
+    font-family: "Priamos", serif;
     font-size: 18px;
     color: rgb(249, 246, 239);
     margin: 0 0 15px 0;
@@ -329,7 +366,7 @@
   }
 
   .title {
-    font-family: 'LittleMicroSans', sans-serif;
+    font-family: "LittleMicroSans", sans-serif;
     font-size: 90px;
     font-weight: 100;
     text-transform: uppercase;
@@ -347,7 +384,7 @@
   .cta-button {
     margin-top: 40px;
     padding: 16px 40px;
-    font-family: 'Priamos', serif;
+    font-family: "Priamos", serif;
     font-size: 16px;
     color: rgb(38, 25, 17);
     background-color: rgb(249, 246, 239);
@@ -400,7 +437,7 @@
   }
 
   .value-title {
-    font-family: 'LittleMicroSans', sans-serif;
+    font-family: "LittleMicroSans", sans-serif;
     text-transform: uppercase;
     font-size: 16px;
     font-weight: 300;
@@ -410,7 +447,7 @@
   }
 
   .value-text {
-    font-family: 'Priamos', serif;
+    font-family: "Priamos", serif;
     font-size: 14px;
     color: rgb(102, 74, 50);
     margin: 0;
@@ -425,7 +462,7 @@
   }
 
   .footer-bottom p {
-    font-family: 'Priamos', serif;
+    font-family: "Priamos", serif;
     font-size: 13px;
     color: rgb(102, 74, 50);
     margin: 0;

@@ -17,18 +17,17 @@
   const prestations = [
     {
       id: "sourcils",
-      title: "Sourcils & PMU",
+      title: "Semi Permanent Sourcils",
       icon: "eyebrows.png",
       image: "/Ellesse/sourcils.webp",
       services: [
-        "Maquillage semi permanent sourcils",
         "Microblading",
-        "Microshading",
-        "Brow shading",
-        "Sourcils poudre (powder brows)",
-        "Pigmentation sourcils",
-        "Freckles semi permanent",
-        "Retouche sourcils"
+        "Retouche fixatrice microblading",
+        "Shading",
+        "Retouche fixatrice microshading",
+        "Entretiens",
+        "Retouche annuelle microshading",
+        "Retouche microblading/shading nouveau client",
       ]
     },
     {
@@ -181,6 +180,8 @@
 
 
 <style>
+
+    
   .card-icon {
     width: 28px;
     height: 28px;

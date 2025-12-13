@@ -35,6 +35,13 @@
         { name: "Pose Vernis Semi-permanent", duration: "30min", price: "25€" },
         { name: "Vernis semi permanent + Manucure russe", duration: "1h20", price: "40€" },
         { name: "Forfait pose et dépose semi-permanent", duration: "45min", price: "40€" },
+        { name: "Dépose semi-permanent", duration: "15min", price: "15€" },
+        { name: "Renforcement (gel) + manucure russe", duration: "1h30", price: "50€" },
+        { name: "Remplissage Gel + manucure russe", duration: "1h30", price: "45€" },
+        { name: "Remplissage gel d'un autre institut", duration: "1h30", price: "50€" },
+        { name: "Rallongement (extension) + manucure russe", duration: "2h", price: "65€" },
+        { name: "Supplément French", duration: "30min", price: "10€" },
+        { name: "Dépose gel ou résine", duration: "30min", price: "20€" },
       ]
     },
     {
@@ -175,19 +182,6 @@
         { name: "Lipocavitation cuisses", duration: "1h", price: "99€" },
         { name: "Drainage lymphatique corps entier", duration: "1h30", price: "100€" },
         { name: "Cure 3 séances drainage", duration: "1h30", price: "240€" },
-      ]
-    },
-    {
-      id: "lifting",
-      title: "Lifting Colombien",
-      icon: "nail.png",
-      image: "/Ellesse/ongles.webp",
-      services: [
-        { name: "Lifting visage", duration: "30min", price: "30€" },
-        { name: "Lifting poitrine", duration: "30min", price: "55€" },
-        { name: "Rehaussement fessier", duration: "30min", price: "60€" },
-        { name: "Forfait fessier 6 séances", duration: "45min", price: "250€" },
-        { name: "Forfait fessier 10 séances", duration: "1h", price: "484€" },
       ]
     },
     {
@@ -584,8 +578,25 @@
     display: flex;
     gap: 25px;
     padding: 10px 40px 30px 40px;
-    justify-content: center;
     flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(102, 74, 50, 0.3) transparent;
+  }
+
+  .slider::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .slider::-webkit-scrollbar-track {
+    background: rgba(102, 74, 50, 0.1);
+    border-radius: 4px;
+  }
+
+  .slider::-webkit-scrollbar-thumb {
+    background: rgba(102, 74, 50, 0.3);
+    border-radius: 4px;
   }
 
   /* ===== CARD ===== */
@@ -810,28 +821,6 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1400px) {
-    .slider {
-      justify-content: flex-start;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(102, 74, 50, 0.3) transparent;
-    }
-
-    .slider::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .slider::-webkit-scrollbar-track {
-      background: rgba(102, 74, 50, 0.1);
-      border-radius: 10px;
-    }
-
-    .slider::-webkit-scrollbar-thumb {
-      background: rgba(102, 74, 50, 0.3);
-      border-radius: 10px;
-    }
-
     .scroll-hint {
       display: flex;
     }

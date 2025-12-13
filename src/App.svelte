@@ -43,7 +43,7 @@
     "logo": "https://ellesse-beaute.fr/logo.png",
     "image": "https://ellesse-beaute.fr/Ellesse/accueil_01.webp",
     "telephone": "+33638936648",
-    "email": "contact@ellesse-beaute.fr",
+    "email": "ellesse.institut@gmail.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "73 Bd Silvio Trentin",

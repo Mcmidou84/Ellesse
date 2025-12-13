@@ -56,7 +56,7 @@
       "@type": "BeautySalon",
       "name": "Ellessé",
       "telephone": "+33638936648",
-      "email": "contact@ellesse-beaute.fr",
+      "email": "ellesse.institut@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "73 Bd Silvio Trentin",
@@ -158,7 +158,7 @@
             <img src="email.png" alt="Email" class="info-icon" />
             <div class="info-details">
               <h3>Email</h3>
-              <a href="/cdn-cgi/l/email-protection#50333f3e2431332410353c3c352323357d3235312524357e3622"><span class="__cf_email__" data-cfemail="bdded2d3c9dcdec9fdd8d1d1d8ceced890dfd8dcc8c9d893dbcf">[email&#160;protected]</span></a>
+              <a href="mailto:ellesse.institut@gmail.com">ellesse.institut@gmail.com</a>
             </div>
           </div>
 
@@ -166,8 +166,8 @@
             <img src="clock.png" alt="Horaires" class="info-icon" />
             <div class="info-details">
               <h3>Horaires</h3>
-              <p>Lundi - Vendredi : 9h - 19h</p>
-              <p>Samedi : Sur rendez-vous</p>
+              <p>Lundi - Samedi : 9h30 - 21h</p>
+              <p>Dimanche : Fermé</p>
               <p>Dimanche : Fermé</p>
             </div>
           </div>

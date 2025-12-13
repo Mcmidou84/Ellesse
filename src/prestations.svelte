@@ -342,8 +342,6 @@
                     </li>
                   {/each}
                 </ul>
-                
-                <a href="/rendez-vous" use:link class="card-cta">Voir tous les créneaux</a>
               </div>
             </article>
           {/each}
@@ -351,8 +349,8 @@
       </div>
 
       <div class="cta-section">
-        <p>Envie d'un soin sur mesure ?</p>
-        <a href="/rendez-vous" use:link class="main-cta">Prendre rendez-vous</a>
+        <p>Une question sur nos prestations ?</p>
+        <a href="/contact" use:link class="main-cta">Nous contacter</a>
       </div>
     </section>
   </main>
@@ -756,25 +754,6 @@
     font-weight: 500;
   }
 
-  /* Card CTA */
-  .card-cta {
-    display: block;
-    text-align: center;
-    font-family: "Priamos", serif;
-    font-size: 14px;
-    color: rgb(249, 246, 239);
-    background: rgb(38, 25, 17);
-    text-decoration: none;
-    padding: 13px 24px;
-    border-radius: 10px;
-    letter-spacing: 1px;
-    margin-top: auto;
-  }
-
-  .card-cta:hover {
-    background: rgb(60, 45, 35);
-  }
-
   /* ===== CTA SECTION ===== */
   .cta-section {
     text-align: center;
@@ -1038,12 +1017,6 @@
     .service-book-btn svg {
       width: 12px;
       height: 12px;
-    }
-
-    .card-cta {
-      padding: 11px 20px;
-      font-size: 13px;
-      border-radius: 8px;
     }
 
     .cta-section p {

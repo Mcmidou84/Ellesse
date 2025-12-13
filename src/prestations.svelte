@@ -28,40 +28,40 @@
   const prestations = [
     {
       id: "ongles-mains",
-      title: "Beauté des Ongles Mains",
+      title: "Beauté des ongles mains",
       icon: "nail.png",
       image: "/Ellesse/ongles.webp",
       services: [
         { name: "Manucure russe seule", duration: "30min", price: "15€" },
         { name: "Manucure russe<br>+ Soins", duration: "1h", price: "35€" },
-        { name: "Pose Vernis Semi-permanent", duration: "30min", price: "25€" },
-        { name: "Vernis semi permanent<br>+ Manucure russe", duration: "1h20", price: "40€" },
-        { name: "Forfait pose et dépose<br>semi-permanent", duration: "45min", price: "40€" },
+        { name: "Pose vernis semi-permanent", duration: "30min", price: "25€" },
+        { name: "Vernis semi-permanent<br>+ Manucure russe", duration: "1h20", price: "40€" },
+        { name: "Forfait pose et dépose<br>Semi-permanent", duration: "45min", price: "40€" },
         { name: "Dépose semi-permanent", duration: "15min", price: "15€" },
-        { name: "Renforcement (gel)<br>+ Manucure russe", duration: "1h30", price: "50€" },
-        { name: "Remplissage Gel<br>+ Manucure russe", duration: "1h30", price: "45€" },
-        { name: "Remplissage gel<br>d'un autre institut", duration: "1h30", price: "50€" },
-        { name: "Rallongement (extension)<br>+ Manucure russe", duration: "2h", price: "65€" },
-        { name: "Supplément French", duration: "30min", price: "10€" },
+        { name: "Renforcement gel<br>+ Manucure russe", duration: "1h30", price: "50€" },
+        { name: "Remplissage gel<br>+ Manucure russe", duration: "1h30", price: "45€" },
+        { name: "Remplissage gel<br>D'un autre institut", duration: "1h30", price: "50€" },
+        { name: "Rallongement extension<br>+ Manucure russe", duration: "2h", price: "65€" },
+        { name: "Supplément french", duration: "30min", price: "10€" },
         { name: "Dépose gel ou résine", duration: "30min", price: "20€" },
       ]
     },
     {
       id: "pieds",
-      title: "Beauté des Pieds",
+      title: "Beauté des pieds",
       icon: "nail.png",
       image: "/Ellesse/ongles.webp",
       services: [
-        { name: "Vernis Semi-permanent<br>+ Cuticules", duration: "30min", price: "29€" },
-        { name: "Vernis Semi-permanent", duration: "20min", price: "20€" },
+        { name: "Vernis semi-permanent<br>+ Cuticules", duration: "30min", price: "29€" },
+        { name: "Vernis semi-permanent", duration: "20min", price: "20€" },
         { name: "Technique russe<br>+ Dépose & pose VSP", duration: "1h", price: "47€" },
         { name: "Technique russe<br>+ Pose VSP", duration: "45min", price: "38€" },
-        { name: "Supplément French", duration: "15min", price: "5€" },
+        { name: "Supplément french", duration: "15min", price: "5€" },
       ]
     },
     {
       id: "cils",
-      title: "Extensions de Cils",
+      title: "Extensions de cils",
       icon: "eyelashes.png",
       image: "/Ellesse/cils.webp",
       services: [
@@ -69,8 +69,8 @@
         { name: "Cil à cil naturel<br>Remplissage", duration: "45min", price: "40€" },
         { name: "Cil à cil volumineux<br>Pose complète", duration: "1h30", price: "70€" },
         { name: "Cil à cil volumineux<br>Remplissage", duration: "1h", price: "45€" },
-        { name: "Extensions Mixte<br>Pose complète", duration: "1h30", price: "90€" },
-        { name: "Extensions Mixte<br>Remplissage", duration: "1h15", price: "55€" },
+        { name: "Extensions mixte<br>Pose complète", duration: "1h30", price: "90€" },
+        { name: "Extensions mixte<br>Remplissage", duration: "1h15", price: "55€" },
         { name: "Volume russe<br>Pose complète", duration: "2h", price: "100€" },
         { name: "Volume russe<br>Remplissage", duration: "1h30", price: "80€" },
         { name: "Dépose extensions", duration: "20min", price: "10€" },
@@ -78,38 +78,38 @@
     },
     {
       id: "rehaussement",
-      title: "Rehaussement de Cils",
+      title: "Rehaussement de cils",
       icon: "eyelashes.png",
       image: "/Ellesse/cils.webp",
       services: [
         { name: "Rehaussement<br>+ Teinture", duration: "1h", price: "55€" },
-        { name: "Rehaussement<br>sans teinture", duration: "45min", price: "50€" },
+        { name: "Rehaussement<br>Sans teinture", duration: "45min", price: "50€" },
         { name: "Teinture cils haut", duration: "15min", price: "10€" },
         { name: "Teinture cils<br>Haut + bas", duration: "15min", price: "15€" },
       ]
     },
     {
       id: "levres",
-      title: "Semi Permanent Lèvres",
+      title: "Semi-permanent lèvres",
       icon: "lips.png",
       image: "/Ellesse/levres.webp",
       services: [
-        { name: "Candy Lips<br>Remplissage complet", duration: "3h", price: "200€" },
+        { name: "Candy lips<br>Remplissage complet", duration: "3h", price: "200€" },
         { name: "Contour des lèvres<br>Retouche incluse", duration: "1h", price: "150€" },
         { name: "Retouche fixatrice", duration: "3h", price: "50€" },
-        { name: "Candy Lips<br>Retouche annuelle", duration: "2h", price: "110€" },
+        { name: "Candy lips<br>Retouche annuelle", duration: "2h", price: "110€" },
         { name: "Contour des lèvres<br>Retouche annuelle", duration: "1h", price: "80€" },
       ]
     },
     {
       id: "sourcils",
-      title: "Semi Permanent Sourcils",
+      title: "Semi-permanent sourcils",
       icon: "eyebrows.png",
       image: "/Ellesse/sourcils.webp",
       services: [
         { name: "Microblading<br>Pose complète", duration: "2h", price: "190€" },
         { name: "Microblading<br>Retouche fixatrice", duration: "1h", price: "50€" },
-        { name: "Microshading / MIXT<br>Pose complète", duration: "3h", price: "200€" },
+        { name: "Microshading / Mixt<br>Pose complète", duration: "3h", price: "200€" },
         { name: "Microshading<br>Retouche fixatrice", duration: "2h", price: "50€" },
         { name: "Entretien 3-6 mois", duration: "45min", price: "70€" },
         { name: "Retouche annuelle", duration: "1h30", price: "100€" },
@@ -118,7 +118,7 @@
     },
     {
       id: "yeux",
-      title: "Semi Permanent Yeux",
+      title: "Semi-permanent yeux",
       icon: "eyelashes.png",
       image: "/Ellesse/cils.webp",
       services: [
@@ -126,37 +126,37 @@
         { name: "Ras de cils simple<br>Retouche annuelle", duration: "30min", price: "80€" },
         { name: "Ras de cils double<br>Retouche incluse", duration: "1h30", price: "210€" },
         { name: "Ras de cils double<br>Retouche annuelle", duration: "1h", price: "130€" },
-        { name: "Eye Liner", duration: "30min", price: "230€" },
+        { name: "Eye liner", duration: "30min", price: "230€" },
       ]
     },
     {
       id: "entretien-sourcils",
-      title: "Entretien Sourcils",
+      title: "Entretien sourcils",
       icon: "eyebrows.png",
       image: "/Ellesse/sourcils.webp",
       services: [
         { name: "Épilation simple sourcils", duration: "15min", price: "10€" },
-        { name: "Teinture Sourcils", duration: "30min", price: "25€" },
+        { name: "Teinture sourcils", duration: "30min", price: "25€" },
         { name: "Restructuration sourcils", duration: "30min", price: "25€" },
         { name: "Restructuration<br>+ Teinture", duration: "45min", price: "45€" },
-        { name: "Airbrush Sourcils", duration: "45min", price: "40€" },
+        { name: "Airbrush sourcils", duration: "45min", price: "40€" },
         { name: "Browlift", duration: "30min", price: "40€" },
         { name: "Browlift<br>+ Teinture", duration: "45min", price: "45€" },
-        { name: "Browlift + Teinture<br>+ Restructuration", duration: "45min", price: "60€" },
+        { name: "Browlift + teinture<br>+ Restructuration", duration: "45min", price: "60€" },
       ]
     },
     {
       id: "visage",
-      title: "Soins Visage",
+      title: "Soins visage",
       icon: "nail.png",
       image: "/Ellesse/sourcils.webp",
       services: [
         { name: "Soin visage hydratant", duration: "1h", price: "50€" },
-        { name: "Gommage<br>et dermaplaning", duration: "30min", price: "65€" },
+        { name: "Gommage<br>Et dermaplaning", duration: "30min", price: "65€" },
         { name: "Microneedling", duration: "1h", price: "80€" },
         { name: "Microneedling<br>Forfait 4 séances", duration: "45min", price: "290€" },
-        { name: "BB Glow", duration: "30min", price: "80€" },
-        { name: "BB Glow<br>Forfait 4 séances", duration: "30min", price: "290€" },
+        { name: "BB glow", duration: "30min", price: "80€" },
+        { name: "BB glow<br>Forfait 4 séances", duration: "30min", price: "290€" },
         { name: "Microglow", duration: "1h", price: "110€" },
         { name: "Hydrafacial", duration: "1h", price: "90€" },
         { name: "Hydraneedling", duration: "1h20", price: "150€" },
@@ -165,7 +165,7 @@
     },
     {
       id: "radiofrequence",
-      title: "Radiofréquence Visage",
+      title: "Radiofréquence visage",
       icon: "nail.png",
       image: "/Ellesse/sourcils.webp",
       services: [
@@ -176,7 +176,7 @@
     },
     {
       id: "corps",
-      title: "Soins Corps",
+      title: "Soins corps",
       icon: "nail.png",
       image: "/Ellesse/ongles.webp",
       services: [
@@ -188,25 +188,25 @@
     },
     {
       id: "bronzage",
-      title: "Bronzage Sans UV",
+      title: "Bronzage sans UV",
       icon: "nail.png",
       image: "/Ellesse/ongles.webp",
       services: [
         { name: "Visage et décolleté", duration: "10min", price: "15€" },
-        { name: "Visage + Buste<br>+ Bras", duration: "15min", price: "25€" },
+        { name: "Visage + buste<br>+ Bras", duration: "15min", price: "25€" },
         { name: "Jambes", duration: "15min", price: "25€" },
-        { name: "Corps entier<br>visage inclus", duration: "30min", price: "40€" },
+        { name: "Corps entier<br>Visage inclus", duration: "30min", price: "40€" },
       ]
     },
     {
       id: "autres",
-      title: "Autres Prestations",
+      title: "Autres prestations",
       icon: "nail.png",
       image: "/Ellesse/sourcils.webp",
       services: [
         { name: "Blanchiment dentaire", duration: "1h", price: "180€" },
-        { name: "Grain de Beauté<br>Retouche incluse", duration: "15min", price: "50€" },
-        { name: "Taches de Rousseur", duration: "1h", price: "120€" },
+        { name: "Grain de beauté<br>Retouche incluse", duration: "15min", price: "50€" },
+        { name: "Taches de rousseur", duration: "1h", price: "120€" },
       ]
     }
   ];

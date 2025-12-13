@@ -3,6 +3,7 @@
 
   let menuOpen = $state(false);
   let formStatus = $state("");
+  let isSubmitting = $state(false);
 
   function toggleMenu() {
     menuOpen = !menuOpen;
@@ -12,11 +13,32 @@
     menuOpen = false;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // Ici tu peux ajouter la logique d'envoi du formulaire
-    formStatus = "Message envoyé ! Nous vous répondrons rapidement.";
-    e.target.reset();
+    isSubmitting = true;
+    
+    const formData = new FormData(e.target);
+    
+    try {
+      const response = await fetch("https://formspree.io/f/xwpgyaqj", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json"
+        }
+      });
+      
+      if (response.ok) {
+        formStatus = "Message envoyé ! Nous vous répondrons rapidement.";
+        e.target.reset();
+      } else {
+        formStatus = "Erreur lors de l'envoi. Veuillez réessayer.";
+      }
+    } catch (error) {
+      formStatus = "Erreur lors de l'envoi. Veuillez réessayer.";
+    }
+    
+    isSubmitting = false;
     setTimeout(() => formStatus = "", 5000);
   }
 </script>
@@ -56,7 +78,7 @@
       "@type": "BeautySalon",
       "name": "Ellessé",
       "telephone": "+33638936648",
-      "email": "ellesse.institut@gmail.com",
+      "email": "ellesse.contact@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "73 Bd Silvio Trentin",
@@ -158,7 +180,7 @@
             <img src="email.png" alt="Email" class="info-icon" />
             <div class="info-details">
               <h3>Email</h3>
-              <a href="mailto:ellesse.institut@gmail.com">ellesse.institut@gmail.com</a>
+              <a href="mailto:ellesse.contact@gmail.com">ellesse.contact@gmail.com</a>
             </div>
           </div>
 
@@ -209,7 +231,9 @@
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="5" required placeholder="Votre message..."></textarea>
           </div>
-          <button type="submit" class="submit-btn">Envoyer</button>
+          <button type="submit" class="submit-btn" disabled={isSubmitting}>
+            {isSubmitting ? "Envoi en cours..." : "Envoyer"}
+          </button>
           {#if formStatus}
             <p class="form-success">{formStatus}</p>
           {/if}
@@ -626,8 +650,13 @@
     transition: all 0.3s ease;
   }
 
-  .submit-btn:hover {
+  .submit-btn:hover:not(:disabled) {
     background: rgb(60, 45, 35);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 
   .form-success {

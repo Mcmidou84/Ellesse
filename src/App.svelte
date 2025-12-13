@@ -29,7 +29,7 @@
   <link rel="apple-touch-icon" href="/logo.png" />
 
   <!-- Preconnect pour performances -->
-  <link rel="preconnect" href="https://app.cal.eu" />
+  <link rel="preconnect" href="https://cal.com" />
 
   <!-- Schema.org global - Organisation -->
   {@html `<script type="application/ld+json">
@@ -59,9 +59,9 @@
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "19:00"
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "09:30",
+        "closes": "21:00"
       }
     ],
     "priceRange": "€€",

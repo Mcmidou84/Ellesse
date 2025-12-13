@@ -13,6 +13,15 @@
     menuOpen = false;
   }
 
+  // Generate booking URL with service info
+  function getBookingUrl(service) {
+    const params = new URLSearchParams();
+    params.set('service', service.name);
+    if (service.duration) params.set('duration', service.duration);
+    if (service.price) params.set('price', service.price);
+    return `/rendez-vous?${params.toString()}`;
+  }
+
   // ICONES PNG LOCALES
   const prestations = [
     {
@@ -258,7 +267,6 @@
       <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
       <a href="/prestations" use:link class="active" onclick={closeMenu}>Prestations</a>
       <a href="/contact" use:link onclick={closeMenu}>Contact</a>
-      <a href="/rendez-vous" use:link onclick={closeMenu}>Rendez-vous</a>
     </nav>
 
     <button
@@ -315,18 +323,27 @@
                 <ul class="services-list">
                   {#each prestation.services as service}
                     <li>
-                      <span class="service-name">{service.name}</span>
+                      <div class="service-info">
+                        <span class="service-name">{service.name}</span>
+                        {#if service.price}
+                          <span class="service-details">
+                            {#if service.duration}<span class="service-duration">{service.duration}</span>{/if}
+                            <span class="service-price">{service.price}</span>
+                          </span>
+                        {/if}
+                      </div>
                       {#if service.price}
-                        <span class="service-details">
-                          {#if service.duration}<span class="service-duration">{service.duration}</span>{/if}
-                          <span class="service-price">{service.price}</span>
-                        </span>
+                        <a href={getBookingUrl(service)} use:link class="service-book-btn" aria-label="Réserver {service.name}">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </a>
                       {/if}
                     </li>
                   {/each}
                 </ul>
                 
-                <a href="/rendez-vous" use:link class="card-cta">Réserver</a>
+                <a href="/rendez-vous" use:link class="card-cta">Voir tous les créneaux</a>
               </div>
             </article>
           {/each}
@@ -657,14 +674,14 @@
     font-family: "Priamos", serif;
     font-size: 13px;
     color: rgb(102, 74, 50);
-    padding: 8px 0;
+    padding: 10px 0;
     border-bottom: 1px solid rgba(102, 74, 50, 0.08);
     padding-left: 14px;
     position: relative;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 8px;
+    align-items: center;
+    gap: 10px;
   }
 
   .services-list li:last-child {
@@ -675,16 +692,27 @@
     content: "";
     position: absolute;
     left: 0;
-    top: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 4px;
     height: 4px;
     background: rgb(180, 160, 140);
     border-radius: 50%;
   }
 
+  .service-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
   .service-name {
     flex: 1;
     line-height: 1.3;
+    min-width: 0;
   }
 
   .service-details {
@@ -698,6 +726,29 @@
   .service-duration {
     color: rgb(150, 130, 110);
     font-size: 11px;
+  }
+
+  .service-book-btn {
+    width: 32px;
+    height: 32px;
+    background: rgb(38, 25, 17);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .service-book-btn:hover {
+    background: rgb(60, 45, 35);
+    transform: scale(1.05);
+  }
+
+  .service-book-btn svg {
+    width: 16px;
+    height: 16px;
+    color: rgb(249, 246, 239);
   }
 
   .service-price {
@@ -897,7 +948,7 @@
 
     .services-list li {
       font-size: 12px;
-      padding: 6px 0 6px 12px;
+      padding: 8px 0 8px 12px;
     }
 
     .service-details {
@@ -906,6 +957,17 @@
 
     .service-duration {
       font-size: 10px;
+    }
+
+    .service-book-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    .service-book-btn svg {
+      width: 14px;
+      height: 14px;
     }
 
     .cta-section {
@@ -957,7 +1019,7 @@
 
     .services-list li {
       font-size: 11px;
-      padding: 5px 0 5px 10px;
+      padding: 7px 0 7px 10px;
     }
 
     .service-details {
@@ -966,6 +1028,16 @@
 
     .service-duration {
       font-size: 9px;
+    }
+
+    .service-book-btn {
+      width: 26px;
+      height: 26px;
+    }
+
+    .service-book-btn svg {
+      width: 12px;
+      height: 12px;
     }
 
     .card-cta {

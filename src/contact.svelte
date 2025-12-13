@@ -83,7 +83,6 @@
       <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
       <a href="/prestations" use:link onclick={closeMenu}>Prestations</a>
       <a href="/contact" use:link class="active" onclick={closeMenu}>Contact</a>
-      <a href="/rendez-vous" use:link onclick={closeMenu}>Rendez-vous</a>
     </nav>
 
     <button
@@ -159,7 +158,7 @@
             <img src="email.png" alt="Email" class="info-icon" />
             <div class="info-details">
               <h3>Email</h3>
-              <a href="mailto:contact@ellesse-beaute.fr">contact@ellesse-beaute.fr</a>
+              <a href="/cdn-cgi/l/email-protection#50333f3e2431332410353c3c352323357d3235312524357e3622"><span class="__cf_email__" data-cfemail="bdded2d3c9dcdec9fdd8d1d1d8ceced890dfd8dcc8c9d893dbcf">[email&#160;protected]</span></a>
             </div>
           </div>
 
@@ -220,7 +219,7 @@
       <!-- CTA -->
       <div class="cta-section">
         <p>Prêt(e) pour votre soin ?</p>
-        <a href="/rendez-vous" use:link class="main-cta">Prendre rendez-vous</a>
+        <a href="/prestations" use:link class="main-cta">Prendre rendez-vous</a>
       </div>
     </section>
   </main>
@@ -826,15 +825,6 @@
 
     .cta-section {
       padding: 40px 20px;
-    }
-
-    .cta-section p {
-      font-size: 16px;
-    }
-
-    .main-cta {
-      font-size: 14px;
-      padding: 14px 30px;
     }
   }
 </style>

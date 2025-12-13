@@ -1,12 +1,103 @@
 <script>
   import { onMount } from "svelte";
-  import { link } from "svelte-spa-router";
+  import { link, querystring, push } from "svelte-spa-router";
 
   let menuOpen = $state(false);
   let calLoaded = $state(false);
+  let selectedService = $state(null);
+  let calLink = $state("salon-ellesse/rendez-vous");
+
+  // Map duration strings to Cal.com event type slugs
+  function getCalLinkFromDuration(duration) {
+    if (!duration) return "salon-ellesse/rendez-vous";
+    
+    // Normalize duration string
+    const normalized = duration.toLowerCase().trim();
+    
+    // Map of duration strings to cal.com slugs
+    const durationMap = {
+      "10min": "salon-ellesse/10min",
+      "15min": "salon-ellesse/15min",
+      "20min": "salon-ellesse/20min",
+      "30min": "salon-ellesse/30min",
+      "45min": "salon-ellesse/45min",
+      "1h": "salon-ellesse/1h",
+      "1h15": "salon-ellesse/1h15",
+      "1h20": "salon-ellesse/1h20",
+      "1h30": "salon-ellesse/1h30",
+      "2h": "salon-ellesse/2h",
+      "2h30": "salon-ellesse/2h30",
+      "3h": "salon-ellesse/3h",
+    };
+    
+    return durationMap[normalized] || "salon-ellesse/rendez-vous";
+  }
+
+  // Parse query string to get service info
+  $effect(() => {
+    if ($querystring) {
+      const params = new URLSearchParams($querystring);
+      const serviceName = params.get('service');
+      const duration = params.get('duration');
+      const price = params.get('price');
+      if (serviceName) {
+        selectedService = {
+          name: decodeURIComponent(serviceName),
+          duration: duration ? decodeURIComponent(duration) : null,
+          price: price ? decodeURIComponent(price) : null
+        };
+        // Update calLink based on duration
+        calLink = getCalLinkFromDuration(duration ? decodeURIComponent(duration) : null);
+      }
+    }
+  });
+
+  // Clear selected service and go back to prestations
+  function clearSelection() {
+    push('/prestations');
+  }
+
+  // Function to reload Cal.com embed with new event type
+  function reloadCalendar(newCalLink) {
+    const calEmbed = document.getElementById('cal-embed');
+    if (calEmbed) {
+      calEmbed.innerHTML = '';
+    }
+    
+    if (window.Cal) {
+      Cal("inline", {
+        elementOrSelector: "#cal-embed",
+        calLink: newCalLink,
+        config: {
+          theme: "light",
+          hideEventTypeDetails: false,
+          layout: "month_view",
+          locale: "fr",
+        },
+      });
+    }
+  }
 
   // Injection et initialisation de Cal.com
   onMount(() => {
+    // Check if service is selected, otherwise redirect to prestations
+    const hasService = window.location.hash.includes('service=');
+    if (!hasService) {
+      push('/prestations');
+      return;
+    }
+
+    // Parse query params first to get the right calLink
+    let initialCalLink = "salon-ellesse/rendez-vous";
+    if (window.location.hash.includes('?')) {
+      const queryStr = window.location.hash.split('?')[1];
+      const params = new URLSearchParams(queryStr);
+      const duration = params.get('duration');
+      if (duration) {
+        initialCalLink = getCalLinkFromDuration(decodeURIComponent(duration));
+      }
+    }
+
     (function (C, A, L) {
       let p = function (a, ar) {
         a.q.push(ar);
@@ -36,13 +127,13 @@
           }
           p(cal, ar);
         };
-    })(window, "https://app.cal.eu/embed/embed.js", "init");
+    })(window, "https://app.cal.com/embed/embed.js", "init");
 
-    Cal("init", { origin: "https://app.cal.eu" });
+    Cal("init", { origin: "https://cal.com" });
 
     Cal("inline", {
       elementOrSelector: "#cal-embed",
-      calLink: "ellesse/rendez-vous",
+      calLink: initialCalLink,
       config: {
         theme: "light",
         hideEventTypeDetails: false,
@@ -51,7 +142,7 @@
       },
     });
     Cal("ui", {
-      styles: { branding: { brandColor: "#664a32" } },
+      styles: { branding: { brandColor: "#261911" } },
     });
     calLoaded = true;
   });
@@ -156,9 +247,8 @@
     <nav class:open={menuOpen}>
       <a href="/" use:link onclick={closeMenu}>Accueil</a>
       <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
-      <a href="/prestations" use:link onclick={closeMenu}>Prestations</a>
+      <a href="/prestations" use:link class="active" onclick={closeMenu}>Prestations</a>
       <a href="/contact" use:link onclick={closeMenu}>Contact</a>
-      <a href="/rendez-vous" use:link class="active" onclick={closeMenu}>Rendez-vous</a>
     </nav>
 
     <button
@@ -190,6 +280,49 @@
         </p>
       </div>
 
+      {#if selectedService}
+        <div class="selected-service">
+          <div class="selected-service-content">
+            <div class="selected-service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="selected-service-info">
+              <span class="selected-label">Prestation sélectionnée</span>
+              <h3>{selectedService.name}</h3>
+              <div class="selected-details">
+                {#if selectedService.duration}
+                  <span class="detail-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {selectedService.duration}
+                  </span>
+                {/if}
+                {#if selectedService.price}
+                  <span class="detail-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M14.121 15.536c-1.171 1.952-3.07 1.952-4.242 0-1.172-1.953-1.172-5.119 0-7.072 1.171-1.952 3.07-1.952 4.242 0M8 10.5h4m-4 3h4m9-1.5a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {selectedService.price}
+                  </span>
+                {/if}
+              </div>
+            </div>
+            <button class="clear-selection" onclick={clearSelection} aria-label="Retirer la sélection">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="selected-hint-row">
+            <p class="selected-hint">Le calendrier affiche les créneaux disponibles pour cette prestation.</p>
+            <a href="/prestations" use:link class="change-service-link">Changer de prestation</a>
+          </div>
+        </div>
+      {/if}
+
       <div class="calendar-container">
         {#if !calLoaded}
           <div class="loading">
@@ -212,7 +345,7 @@
           </svg>
           <div>
             <h3>Horaires</h3>
-            <p>Lundi - Vendredi : 9h - 19h</p>
+            <p>Lundi - Samedi : 9h30 - 21h</p>
           </div>
         </div>
         <div class="info-item">
@@ -436,6 +569,133 @@
     line-height: 1.6;
   }
 
+  /* ===== SELECTED SERVICE ===== */
+  .selected-service {
+    background: linear-gradient(135deg, rgb(38, 25, 17) 0%, rgb(60, 45, 35) 100%);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 30px;
+    color: rgb(249, 246, 239);
+  }
+
+  .selected-service-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .selected-service-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(249, 246, 239, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .selected-service-icon svg {
+    width: 28px;
+    height: 28px;
+    color: rgb(200, 180, 160);
+  }
+
+  .selected-service-info {
+    flex: 1;
+  }
+
+  .selected-label {
+    font-family: "Priamos", serif;
+    font-size: 12px;
+    color: rgb(200, 180, 160);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .selected-service-info h3 {
+    font-family: "LittleMicroSans", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    margin: 5px 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .selected-details {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Priamos", serif;
+    font-size: 14px;
+    color: rgb(200, 180, 160);
+  }
+
+  .detail-item svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .clear-selection {
+    width: 36px;
+    height: 36px;
+    background: rgba(249, 246, 239, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+
+  .clear-selection:hover {
+    background: rgba(249, 246, 239, 0.2);
+  }
+
+  .clear-selection svg {
+    width: 18px;
+    height: 18px;
+    color: rgb(200, 180, 160);
+  }
+
+  .selected-hint-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(249, 246, 239, 0.1);
+    flex-wrap: wrap;
+  }
+
+  .selected-hint {
+    font-family: "Priamos", serif;
+    font-size: 13px;
+    color: rgb(180, 160, 140);
+    margin: 0;
+  }
+
+  .change-service-link {
+    font-family: "Priamos", serif;
+    font-size: 13px;
+    color: rgb(200, 180, 160);
+    text-decoration: underline;
+    transition: color 0.3s;
+  }
+
+  .change-service-link:hover {
+    color: rgb(249, 246, 239);
+  }
+
   /* ===== CALENDAR ===== */
   .calendar-container {
     background: white;
@@ -600,6 +860,42 @@
       font-size: 32px;
     }
 
+    .selected-service {
+      padding: 20px;
+    }
+
+    .selected-service-content {
+      flex-wrap: wrap;
+    }
+
+    .selected-service-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .selected-service-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .selected-service-info h3 {
+      font-size: 16px;
+    }
+
+    .selected-details {
+      gap: 12px;
+    }
+
+    .detail-item {
+      font-size: 13px;
+    }
+
+    .selected-hint-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
     .booking-info {
       flex-direction: column;
       gap: 25px;
@@ -631,6 +927,18 @@
     .subtitle,
     .description {
       font-size: 14px;
+    }
+
+    .selected-service-info h3 {
+      font-size: 14px;
+    }
+
+    .selected-hint {
+      font-size: 12px;
+    }
+
+    .change-service-link {
+      font-size: 12px;
     }
   }
 </style>

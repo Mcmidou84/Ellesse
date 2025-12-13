@@ -376,7 +376,6 @@
       <a href="/galerie" use:link class="active" onclick={closeMenu}>Galerie</a>
       <a href="/prestations" use:link onclick={closeMenu}>Prestations</a>
       <a href="/contact" use:link onclick={closeMenu}>Contact</a>
-      <a href="/rendez-vous" use:link onclick={closeMenu}>Rendez-vous</a>
     </nav>
 
     <button
@@ -610,7 +609,7 @@
       <div class="cta-content">
         <h2>Prête pour votre transformation ?</h2>
         <p>Rejoignez nos 850+ clientes satisfaites</p>
-        <a href="/rendez-vous" use:link class="cta-button">Prendre rendez-vous</a>
+        <a href="/prestations" use:link class="cta-button">Prendre rendez-vous</a>
         <div class="cta-contact">
           <span><img src="location.png" alt="" class="cta-icon" /> 73 Bd Silvio Trentin, Toulouse</span>
           <span><img src="phone.png" alt="" class="cta-icon" /> 06 38 93 66 48</span>
@@ -644,7 +643,7 @@
           <span class="lightbox-rating">{renderStars(lightboxImage.rating)}</span>
           <span>— {lightboxImage.client}</span>
         </div>
-        <a href="/rendez-vous" use:link class="lightbox-cta">Réserver ce soin</a>
+        <a href="/prestations" use:link class="lightbox-cta">Réserver ce soin</a>
       </div>
     </div>
   </div>

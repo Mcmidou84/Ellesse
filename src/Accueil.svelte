@@ -153,7 +153,6 @@
       <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
       <a href="/prestations" use:link onclick={closeMenu}>Prestations</a>
       <a href="/contact" use:link onclick={closeMenu}>Contact</a>
-      <a href="/rendez-vous" use:link onclick={closeMenu}>Rendez-vous</a>
     </nav>
 
     <button
@@ -184,10 +183,10 @@
         <span>à la russe</span>
       </h1>
       <a
-        href="/rendez-vous"
+        href="/prestations"
         use:link
         class="cta-button"
-        aria-label="Prendre rendez-vous pour un soin esthétique"
+        aria-label="Découvrir nos prestations et prendre rendez-vous"
         >Prendre rendez-vous</a
       >
     </article>

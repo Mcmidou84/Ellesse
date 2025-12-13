@@ -16,56 +16,192 @@
   // ICONES PNG LOCALES
   const prestations = [
     {
+      id: "ongles-mains",
+      title: "Beauté des Ongles Mains",
+      icon: "nail.png",
+      image: "/Ellesse/ongles.webp",
+      services: [
+        { name: "Manucure russe seule", duration: "30min", price: "15€" },
+        { name: "Manucure russe + soins", duration: "1h", price: "35€" },
+        { name: "Pose Vernis Semi-permanent", duration: "30min", price: "25€" },
+        { name: "Vernis semi permanent + Manucure russe", duration: "1h20", price: "40€" },
+        { name: "Forfait pose et dépose semi-permanent", duration: "45min", price: "40€" },
+      ]
+    },
+    {
+      id: "pieds",
+      title: "Beauté des Pieds",
+      icon: "nail.png",
+      image: "/Ellesse/ongles.webp",
+      services: [
+        { name: "Vernis Semi-permanent PIEDS + cuticules", duration: "30min", price: "29€" },
+        { name: "Vernis Semi-permanent PIEDS", duration: "20min", price: "20€" },
+        { name: "Technique russe + dépose & pose VSP", duration: "1h", price: "47€" },
+        { name: "Technique russe + pose VSP", duration: "45min", price: "38€" },
+        { name: "Supplément French", duration: "15min", price: "5€" },
+      ]
+    },
+    {
+      id: "cils",
+      title: "Extensions de Cils",
+      icon: "eyelashes.png",
+      image: "/Ellesse/cils.webp",
+      services: [
+        { name: "Cil à cil naturel", duration: "1h", price: "60€" },
+        { name: "Remplissage cil à cil naturel", duration: "45min", price: "40€" },
+        { name: "Cil à cil volumineux", duration: "1h30", price: "70€" },
+        { name: "Remplissage cil à cil volumineux", duration: "1h", price: "45€" },
+        { name: "Extensions Mixte", duration: "1h30", price: "90€" },
+        { name: "Remplissage Mixte", duration: "1h15", price: "55€" },
+        { name: "Volume russe", duration: "2h", price: "100€" },
+        { name: "Remplissage volume russe", duration: "1h30", price: "80€" },
+        { name: "Dépose extensions", duration: "20min", price: "10€" },
+      ]
+    },
+    {
+      id: "rehaussement",
+      title: "Rehaussement de Cils",
+      icon: "eyelashes.png",
+      image: "/Ellesse/cils.webp",
+      services: [
+        { name: "Rehaussement + teinture", duration: "1h", price: "55€" },
+        { name: "Rehaussement sans teinture", duration: "45min", price: "50€" },
+        { name: "Teinture cils haut", duration: "15min", price: "10€" },
+        { name: "Teinture cils haut + bas", duration: "15min", price: "15€" },
+      ]
+    },
+    {
+      id: "levres",
+      title: "Semi Permanent Lèvres",
+      icon: "lips.png",
+      image: "/Ellesse/levres.webp",
+      services: [
+        { name: "Candy Lips (remplissage complet)", duration: "3h", price: "200€" },
+        { name: "Contour des lèvres (retouche incluse)", duration: "1h", price: "150€" },
+        { name: "Retouche fixatrice", duration: "3h", price: "50€" },
+        { name: "Retouche annuelle candy lips", duration: "2h", price: "110€" },
+        { name: "Retouche annuelle contour", duration: "1h", price: "80€" },
+      ]
+    },
+    {
       id: "sourcils",
       title: "Semi Permanent Sourcils",
       icon: "eyebrows.png",
       image: "/Ellesse/sourcils.webp",
       services: [
-        "Microblading",
-        "Retouche fixatrice microblading",
-        "Shading",
-        "Retouche fixatrice microshading",
-        "Entretiens",
-        "Retouche annuelle microshading",
-        "Retouche microblading/shading nouveau client",
+        { name: "Microblading", duration: "2h", price: "190€" },
+        { name: "Retouche fixatrice microblading", duration: "1h", price: "50€" },
+        { name: "Microshading / MIXT", duration: "3h", price: "200€" },
+        { name: "Retouche fixatrice microshading", duration: "2h", price: "50€" },
+        { name: "Entretien 3-6 mois", duration: "45min", price: "70€" },
+        { name: "Retouche annuelle", duration: "1h30", price: "100€" },
+        { name: "Retouche nouveau client", duration: "1h", price: "140€" },
       ]
     },
     {
-      id: "levres",
-      title: "Lèvres",
-      icon: "lips.png",
-      image: "/Ellesse/levres.webp",
-      services: [
-        "Candy Lips",
-        "Contour des lèvres semi permanent",
-        "Blush Lips",
-        "Retouche lèvres semi-permanent"
-      ]
-    },
-    {
-      id: "cils",
-      title: "Cils",
+      id: "yeux",
+      title: "Semi Permanent Yeux",
       icon: "eyelashes.png",
       image: "/Ellesse/cils.webp",
       services: [
-        "Extension de cils",
-        "Pose cil à cil",
-        "Volume russe",
-        "Rehaussement de cils",
-        "Lash botox"
+        { name: "Ras de cils simple (retouche incluse)", duration: "1h", price: "180€" },
+        { name: "Retouche annuelle ras de cils simple", duration: "30min", price: "80€" },
+        { name: "Ras de cils double (retouche incluse)", duration: "1h30", price: "210€" },
+        { name: "Retouche annuelle ras de cils double", duration: "1h", price: "130€" },
+        { name: "Eye Liner", duration: "30min", price: "230€" },
       ]
     },
     {
-      id: "ongles",
-      title: "Ongles",
+      id: "entretien-sourcils",
+      title: "Entretien Sourcils",
+      icon: "eyebrows.png",
+      image: "/Ellesse/sourcils.webp",
+      services: [
+        { name: "Épilation simple sourcils", duration: "15min", price: "10€" },
+        { name: "Teinture Sourcils", duration: "30min", price: "25€" },
+        { name: "Restructuration sourcils", duration: "30min", price: "25€" },
+        { name: "Restructuration + teinture", duration: "45min", price: "45€" },
+        { name: "Airbrush Sourcils", duration: "45min", price: "40€" },
+        { name: "Browlift", duration: "30min", price: "40€" },
+        { name: "Browlift + teinture", duration: "45min", price: "45€" },
+        { name: "Browlift + teinture + restructuration", duration: "45min", price: "60€" },
+      ]
+    },
+    {
+      id: "visage",
+      title: "Soins Visage",
+      icon: "nail.png",
+      image: "/Ellesse/sourcils.webp",
+      services: [
+        { name: "Soin visage hydratant", duration: "1h", price: "50€" },
+        { name: "Gommage et dermaplaning", duration: "30min", price: "65€" },
+        { name: "Microneedling", duration: "1h", price: "80€" },
+        { name: "Microneedling forfait 4 séances", duration: "45min", price: "290€" },
+        { name: "BB Glow", duration: "30min", price: "80€" },
+        { name: "BB Glow Forfait 4 séances", duration: "30min", price: "290€" },
+        { name: "Microglow", duration: "1h", price: "110€" },
+        { name: "Hydrafacial", duration: "1h", price: "90€" },
+        { name: "Hydraneedling", duration: "1h20", price: "150€" },
+        { name: "Hydraglow", duration: "1h20", price: "150€" },
+      ]
+    },
+    {
+      id: "radiofrequence",
+      title: "Radiofréquence Visage",
+      icon: "nail.png",
+      image: "/Ellesse/sourcils.webp",
+      services: [
+        { name: "Radiofréquence visage - 1 séance", duration: "30min", price: "60€" },
+        { name: "Radiofréquence visage - Forfait 6", duration: "30min", price: "250€" },
+        { name: "Radiofréquence visage - Forfait 10", duration: "30min", price: "450€" },
+      ]
+    },
+    {
+      id: "corps",
+      title: "Soins Corps",
       icon: "nail.png",
       image: "/Ellesse/ongles.webp",
       services: [
-        "Prothésiste ongulaire",
-        "Manucure russe",
-        "Pose de gel",
-        "Vernis semi permanent",
-        "Nail art"
+        { name: "Lipocavitation ventre et taille", duration: "1h30", price: "120€" },
+        { name: "Lipocavitation cuisses", duration: "1h", price: "99€" },
+        { name: "Drainage lymphatique corps entier", duration: "1h30", price: "100€" },
+        { name: "Cure 3 séances drainage", duration: "1h30", price: "240€" },
+      ]
+    },
+    {
+      id: "lifting",
+      title: "Lifting Colombien",
+      icon: "nail.png",
+      image: "/Ellesse/ongles.webp",
+      services: [
+        { name: "Lifting visage", duration: "30min", price: "30€" },
+        { name: "Lifting poitrine", duration: "30min", price: "55€" },
+        { name: "Rehaussement fessier", duration: "30min", price: "60€" },
+        { name: "Forfait fessier 6 séances", duration: "45min", price: "250€" },
+        { name: "Forfait fessier 10 séances", duration: "1h", price: "484€" },
+      ]
+    },
+    {
+      id: "bronzage",
+      title: "Bronzage Sans UV",
+      icon: "nail.png",
+      image: "/Ellesse/ongles.webp",
+      services: [
+        { name: "Visage et décolleté", duration: "10min", price: "15€" },
+        { name: "Visage + Buste + Bras", duration: "15min", price: "25€" },
+        { name: "Jambes", duration: "15min", price: "25€" },
+        { name: "Corps entier visage inclus", duration: "30min", price: "40€" },
+      ]
+    },
+    {
+      id: "autres",
+      title: "Autres Prestations",
+      icon: "nail.png",
+      image: "/Ellesse/sourcils.webp",
+      services: [
+        { name: "Blanchiment dentaire", duration: "1h", price: "180€" },
+        { name: "Grain de Beauté (retouche incluse)", duration: "15min", price: "50€" },
+        { name: "Taches de Rousseur", duration: "1h", price: "120€" },
       ]
     }
   ];
@@ -178,7 +314,15 @@
                 
                 <ul class="services-list">
                   {#each prestation.services as service}
-                    <li>{service}</li>
+                    <li>
+                      <span class="service-name">{service.name}</span>
+                      {#if service.price}
+                        <span class="service-details">
+                          {#if service.duration}<span class="service-duration">{service.duration}</span>{/if}
+                          <span class="service-price">{service.price}</span>
+                        </span>
+                      {/if}
+                    </li>
                   {/each}
                 </ul>
                 
@@ -432,7 +576,7 @@
   /* ===== CARD ===== */
   .prestation-card {
     flex-shrink: 0;
-    width: 300px;
+    width: 320px;
     background: white;
     border-radius: 20px;
     overflow: hidden;
@@ -513,10 +657,14 @@
     font-family: "Priamos", serif;
     font-size: 13px;
     color: rgb(102, 74, 50);
-    padding: 6px 0;
+    padding: 8px 0;
     border-bottom: 1px solid rgba(102, 74, 50, 0.08);
     padding-left: 14px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   .services-list li:last-child {
@@ -527,12 +675,34 @@
     content: "";
     position: absolute;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 12px;
     width: 4px;
     height: 4px;
     background: rgb(180, 160, 140);
     border-radius: 50%;
+  }
+
+  .service-name {
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  .service-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .service-duration {
+    color: rgb(150, 130, 110);
+    font-size: 11px;
+  }
+
+  .service-price {
+    color: rgb(38, 25, 17);
+    font-weight: 500;
   }
 
   /* Card CTA */
@@ -710,7 +880,7 @@
     }
 
     .prestation-card {
-      width: 270px;
+      width: 290px;
     }
 
     .card-image-wrapper {
@@ -727,7 +897,15 @@
 
     .services-list li {
       font-size: 12px;
-      padding: 5px 0 5px 12px;
+      padding: 6px 0 6px 12px;
+    }
+
+    .service-details {
+      font-size: 11px;
+    }
+
+    .service-duration {
+      font-size: 10px;
     }
 
     .cta-section {
@@ -748,7 +926,7 @@
     }
 
     .prestation-card {
-      width: 255px;
+      width: 280px;
     }
 
     .card-image-wrapper {
@@ -779,7 +957,15 @@
 
     .services-list li {
       font-size: 11px;
-      padding: 4px 0 4px 10px;
+      padding: 5px 0 5px 10px;
+    }
+
+    .service-details {
+      font-size: 10px;
+    }
+
+    .service-duration {
+      font-size: 9px;
     }
 
     .card-cta {

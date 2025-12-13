@@ -2,8 +2,8 @@
   import { onMount } from "svelte";
   import { link } from "svelte-spa-router";
 
-  let menuOpen = false;
-  let calLoaded = false;
+  let menuOpen = $state(false);
+  let calLoaded = $state(false);
 
   // Injection et initialisation de Cal.com
   onMount(() => {
@@ -154,20 +154,17 @@
     </div>
 
     <nav class:open={menuOpen}>
-      <a href="/" use:link on:click={closeMenu}>Accueil</a>
-      <a href="/galerie" use:link on:click={closeMenu}>Galerie</a>
-      <a href="/prestations" use:link on:click={closeMenu}>Prestations</a>
-      <a href="/contact" use:link on:click={closeMenu}>Contact</a>
-      <a href="/rendez-vous" use:link class="active" on:click={closeMenu}
-        >Rendez-vous</a
-      >
-      <a href="/boutique" use:link on:click={closeMenu}>Boutique</a>
+      <a href="/" use:link onclick={closeMenu}>Accueil</a>
+      <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
+      <a href="/prestations" use:link onclick={closeMenu}>Prestations</a>
+      <a href="/contact" use:link onclick={closeMenu}>Contact</a>
+      <a href="/rendez-vous" use:link class="active" onclick={closeMenu}>Rendez-vous</a>
     </nav>
 
     <button
       class="burger"
       class:open={menuOpen}
-      on:click={toggleMenu}
+      onclick={toggleMenu}
       aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
       aria-expanded={menuOpen}
     >
@@ -179,7 +176,7 @@
   </header>
 
   {#if menuOpen}
-    <div class="overlay" on:click={closeMenu} role="presentation"></div>
+    <div class="overlay" onclick={closeMenu} role="presentation"></div>
   {/if}
 
   <main>

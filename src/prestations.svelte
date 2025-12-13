@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { link } from "svelte-spa-router";
 
-  let menuOpen = false;
+  let menuOpen = $state(false);
   let sliderEl;
 
   function toggleMenu() {
@@ -73,12 +73,39 @@
 
 
 <svelte:head>
-  <!-- TOUT TON HEAD ORIGINAL, RIEN TOUCHED -->
   <title>Nos Prestations | Ellessé - Maquillage permanent, Cils, Ongles à Toulouse</title>
-  <meta name="description" content="Découvrez nos prestations..." />
-  <meta name="keywords" content="microblading Toulouse..." />
+  <meta name="description" content="Découvrez nos prestations : microblading, candy lips, extension de cils volume russe, manucure russe, pose de gel. Cabinet d'esthétique à Toulouse." />
+  <meta name="keywords" content="microblading Toulouse, candy lips, extension cils volume russe, manucure russe Toulouse, pose gel, maquillage semi permanent" />
   <link rel="canonical" href="https://ellesse-beaute.fr/prestations" />
-  ...
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ellesse-beaute.fr/prestations" />
+  <meta property="og:title" content="Nos Prestations | Ellessé - Maquillage permanent, Cils, Ongles à Toulouse" />
+  <meta property="og:description" content="Découvrez nos prestations : microblading, candy lips, extension de cils, manucure russe." />
+  <meta property="og:image" content="https://ellesse-beaute.fr/Ellesse/sourcils.webp" />
+
+  <!-- Schema.org -->
+  {@html `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://ellesse-beaute.fr/prestations#webpage",
+    "url": "https://ellesse-beaute.fr/prestations",
+    "name": "Nos Prestations - Ellessé Cabinet d'esthétique",
+    "description": "Découvrez nos prestations esthétiques : maquillage semi permanent sourcils et lèvres, extension de cils, manucure russe.",
+    "isPartOf": {
+      "@id": "https://ellesse-beaute.fr/#organization"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://ellesse-beaute.fr/"},
+        {"@type": "ListItem", "position": 2, "name": "Prestations", "item": "https://ellesse-beaute.fr/prestations"}
+      ]
+    }
+  }
+  </script>`}
 </svelte:head>
 
 <div class="page-wrapper">
@@ -91,18 +118,17 @@
     </div>
 
     <nav class:open={menuOpen}>
-      <a href="/" use:link on:click={closeMenu}>Accueil</a>
-      <a href="/galerie" use:link on:click={closeMenu}>Galerie</a>
-      <a href="/prestations" use:link class="active" on:click={closeMenu}>Prestations</a>
-      <a href="/contact" use:link on:click={closeMenu}>Contact</a>
-      <a href="/rendez-vous" use:link on:click={closeMenu}>Rendez-vous</a>
-      <a href="/boutique" use:link on:click={closeMenu}>Boutique</a>
+      <a href="/" use:link onclick={closeMenu}>Accueil</a>
+      <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
+      <a href="/prestations" use:link class="active" onclick={closeMenu}>Prestations</a>
+      <a href="/contact" use:link onclick={closeMenu}>Contact</a>
+      <a href="/rendez-vous" use:link onclick={closeMenu}>Rendez-vous</a>
     </nav>
 
     <button
       class="burger"
       class:open={menuOpen}
-      on:click={toggleMenu}
+      onclick={toggleMenu}
       aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
       aria-expanded={menuOpen}
     >
@@ -114,7 +140,7 @@
   </header>
 
   {#if menuOpen}
-    <div class="overlay" on:click={closeMenu} role="presentation"></div>
+    <div class="overlay" onclick={closeMenu} role="presentation"></div>
   {/if}
 
   <main>
@@ -186,9 +212,8 @@
     width: 28px;
     height: 28px;
     object-fit: contain;
-    filter: brightness(0) saturate(100%); /* Garde le PNG bien noir */
+    filter: brightness(0) saturate(100%);
   }
-
 
 
 
@@ -379,15 +404,11 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 0 20px 15px;
-    opacity: 0.5;
-  }
-
-  .scroll-hint span {
     font-family: "Priamos", serif;
-    font-size: 13px;
+    font-size: 14px;
     color: rgb(102, 74, 50);
-    letter-spacing: 1px;
+    margin-bottom: 15px;
+    padding: 0 20px;
   }
 
   .scroll-hint svg {
@@ -397,8 +418,7 @@
   /* ===== SLIDER ===== */
   .slider-container {
     width: 100%;
-    display: flex;
-    justify-content: center;
+    overflow: hidden;
   }
 
   .slider {
@@ -469,12 +489,6 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 16px;
-  }
-
-  .card-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .card-header h2 {
@@ -754,9 +768,9 @@
       font-size: 14px;
     }
 
-    :global(.card-icon) {
-      width: 24px !important;
-      height: 24px !important;
+    .card-icon {
+      width: 24px;
+      height: 24px;
     }
 
     .services-list {

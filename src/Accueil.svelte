@@ -154,7 +154,6 @@
       <a href="/prestations" use:link onclick={closeMenu}>Prestations</a>
       <a href="/contact" use:link onclick={closeMenu}>Contact</a>
       <a href="/rendez-vous" use:link onclick={closeMenu}>Rendez-vous</a>
-      <a href="/boutique" use:link onclick={closeMenu}>Boutique</a>
     </nav>
 
     <button

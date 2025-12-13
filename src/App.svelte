@@ -3,16 +3,16 @@
   import Accueil from "./Accueil.svelte";
   import RendezVous from "./RendezVous.svelte";
   import Prestations from "./Prestations.svelte";
+  import Contact from "./Contact.svelte";
+  import Galerie from "./Galerie.svelte";
 
   // Définition des routes
   const routes = {
     "/": Accueil,
     "/rendez-vous": RendezVous,
     "/prestations": Prestations,
-    // Ajoute tes autres pages ici :
-    // '/galerie': Galerie,
-    // '/contact': Contact,
-    // '/boutique': Boutique,
+    "/contact": Contact,
+    "/galerie": Galerie,
   };
 </script>
 
@@ -115,6 +115,7 @@
     },
     "sameAs": [
       "https://www.instagram.com/ellesse.institut",
+      "https://www.facebook.com/ellesse.institut"
     ]
   }
   </script>`}

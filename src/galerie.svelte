@@ -612,8 +612,8 @@
         <p>Rejoignez nos 850+ clientes satisfaites</p>
         <a href="/rendez-vous" use:link class="cta-button">Prendre rendez-vous</a>
         <div class="cta-contact">
-          <span>📍 73 Bd Silvio Trentin, Toulouse</span>
-          <span>📞 06 38 93 66 48</span>
+          <span><img src="location.png" alt="" class="cta-icon" /> 73 Bd Silvio Trentin, Toulouse</span>
+          <span><img src="phone.png" alt="" class="cta-icon" /> 06 38 93 66 48</span>
         </div>
       </div>
     </section>
@@ -1474,6 +1474,16 @@
     font-family: "Priamos", serif;
     font-size: 15px;
     color: rgb(200, 180, 160);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cta-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: brightness(0) invert(0.8);
   }
 
   /* ===== FOOTER ===== */

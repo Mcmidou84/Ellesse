@@ -35,7 +35,7 @@
   ];
 
   // Images galerie avec témoignages
-  const galleryItems = [
+  let galleryItems = $state([
     {
       id: 1,
       category: "sourcils",
@@ -144,7 +144,7 @@
       client: "Sarah N.",
       rating: 5,
     },
-  ];
+  ]);
 
   // Avant/Après data
   const beforeAfter = [
@@ -233,7 +233,20 @@
       : galleryItems.filter((item) => item.category === activeCategory)
   );
 
+  // Fonction de mélange (Fisher-Yates)
+  function shuffle(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
   onMount(() => {
+    // Mélanger les photos de la galerie
+    galleryItems = shuffle(galleryItems);
+
     // Observer pour les compteurs
     const observer = new IntersectionObserver(
       (entries) => {
@@ -424,6 +437,31 @@
       </div>
     </section>
 
+    <!-- GALERIE MASONRY -->
+    <section class="gallery-section">
+      <div class="section-header">
+        <p class="section-subtitle">Portfolio</p>
+        <h2 class="section-title">Nos réalisations</h2>
+      </div>
+
+      <div class="masonry-grid">
+        {#each filteredGallery as item (item.id)}
+          <button
+            class="masonry-item"
+            onclick={() => openLightbox(item)}
+          >
+            <img src={item.image} alt={item.title} loading="lazy" />
+            <div class="item-overlay">
+              <span class="item-category">{item.category}</span>
+              <h4 class="item-title">{item.title}</h4>
+              <p class="item-testimonial">"{item.testimonial}"</p>
+              <span class="item-client">— {item.client}</span>
+            </div>
+          </button>
+        {/each}
+      </div>
+    </section>
+
     <!-- AVANT/APRÈS -->
     <section class="before-after-section">
       <div class="section-header">
@@ -448,7 +486,10 @@
               ontouchend={endSlider}
               onmouseleave={endSlider}
               role="slider"
-              aria-label="Comparateur avant après"
+              aria-label="Comparateur avant après {item.title}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow={sliderPositions[item.id]}
               tabindex="0"
             >
               <div class="compare-before">
@@ -487,32 +528,6 @@
               </div>
             </div>
           </div>
-        {/each}
-      </div>
-    </section>
-
-    <!-- GALERIE MASONRY -->
-    <section class="gallery-section">
-      <div class="section-header">
-        <p class="section-subtitle">Portfolio</p>
-        <h2 class="section-title">Nos réalisations</h2>
-      </div>
-
-      <div class="masonry-grid">
-        {#each filteredGallery as item, index (item.id)}
-          <button
-            class="masonry-item"
-            class:tall={index % 5 === 0}
-            onclick={() => openLightbox(item)}
-          >
-            <img src={item.image} alt={item.title} loading="lazy" />
-            <div class="item-overlay">
-              <span class="item-category">{item.category}</span>
-              <h4 class="item-title">{item.title}</h4>
-              <p class="item-testimonial">"{item.testimonial}"</p>
-              <span class="item-client">— {item.client}</span>
-            </div>
-          </button>
         {/each}
       </div>
     </section>
@@ -644,7 +659,15 @@
 
 <!-- LIGHTBOX -->
 {#if lightboxOpen && lightboxImage}
-  <div class="lightbox" onclick={closeLightbox} role="dialog" aria-modal="true">
+  <div
+    class="lightbox"
+    onclick={(e) => e.target === e.currentTarget && closeLightbox()}
+    onkeydown={(e) => e.key === "Escape" && closeLightbox()}
+    role="dialog"
+    aria-modal="true"
+    aria-label="Visualisation de l'image {lightboxImage.title}"
+    tabindex="-1"
+  >
     <button class="lightbox-close" onclick={closeLightbox} aria-label="Fermer">
       <svg
         viewBox="0 0 24 24"
@@ -656,7 +679,7 @@
         <line x1="6" y1="6" x2="18" y2="18"></line>
       </svg>
     </button>
-    <div class="lightbox-content" onclick={(e) => e.stopPropagation()}>
+    <div class="lightbox-content">
       <img src={lightboxImage.image} alt={lightboxImage.title} />
       <div class="lightbox-info">
         <h3>{lightboxImage.title}</h3>
@@ -794,13 +817,14 @@
 
   /* ===== CATEGORIES ===== */
   .categories-section {
-    padding: 40px 20px;
+    padding: 60px 20px 40px;
     background: var(--color-cream, rgb(249, 246, 239));
   }
 
   .categories-wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 30px;
     flex-wrap: wrap;
   }
@@ -1022,15 +1046,14 @@
   }
 
   .masonry-grid {
-    columns: 4;
-    column-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
     max-width: 1400px;
     margin: 0 auto;
   }
 
   .masonry-item {
-    break-inside: avoid;
-    margin-bottom: 20px;
     position: relative;
     border-radius: var(--radius-medium, 10px);
     overflow: hidden;
@@ -1039,10 +1062,13 @@
     padding: 0;
     background: none;
     width: 100%;
+    aspect-ratio: 3 / 4;
   }
 
   .masonry-item img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
     transition: transform 0.5s;
   }
@@ -1345,7 +1371,7 @@
   .lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -1447,7 +1473,7 @@
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1200px) {
     .masonry-grid {
-      columns: 3;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
   }
 
@@ -1457,7 +1483,7 @@
       max-width: 500px;
     }
     .masonry-grid {
-      columns: 2;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
     .counters-section {
       gap: 30px;
@@ -1512,11 +1538,8 @@
       height: 250px;
     }
     .masonry-grid {
-      columns: 2;
-      column-gap: 12px;
-    }
-    .masonry-item {
-      margin-bottom: 12px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
     .testimonials-carousel {
       flex-direction: column;
@@ -1558,7 +1581,7 @@
       font-size: 26px;
     }
     .masonry-grid {
-      columns: 1;
+      grid-template-columns: 1fr;
     }
     .cta-section {
       padding: 60px 20px;

@@ -1,17 +1,10 @@
 <script>
   import { link } from "svelte-spa-router";
+  import Header from "./lib/Header.svelte";
+  import Footer from "./lib/Footer.svelte";
 
-  let menuOpen = $state(false);
   let formStatus = $state("");
   let isSubmitting = $state(false);
-
-  function toggleMenu() {
-    menuOpen = !menuOpen;
-  }
-
-  function closeMenu() {
-    menuOpen = false;
-  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -92,38 +85,7 @@
 </svelte:head>
 
 <div class="page-wrapper">
-  <header>
-    <div class="left">
-      <a href="/" use:link aria-label="Accueil Ellessé">
-        <img src="./logo.png" alt="Logo Ellessé" class="logo" width="50" height="50" />
-      </a>
-      <span class="brand">Ellessé</span>
-    </div>
-
-    <nav class:open={menuOpen}>
-      <a href="/" use:link onclick={closeMenu}>Accueil</a>
-      <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
-      <a href="/prestations" use:link onclick={closeMenu}>Prestations</a>
-      <a href="/contact" use:link class="active" onclick={closeMenu}>Contact</a>
-    </nav>
-
-    <button
-      class="burger"
-      class:open={menuOpen}
-      onclick={toggleMenu}
-      aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-      aria-expanded={menuOpen}
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div class="spacer"></div>
-  </header>
-
-  {#if menuOpen}
-    <div class="overlay" onclick={closeMenu} role="presentation"></div>
-  {/if}
+  <Header activePage="contact" />
 
   <main>
     <section class="contact-section">
@@ -190,7 +152,6 @@
               <h3>Horaires</h3>
               <p>Lundi - Samedi : 9h30 - 21h</p>
               <p>Dimanche : Fermé</p>
-              <p>Dimanche : Fermé</p>
             </div>
           </div>
         </div>
@@ -235,7 +196,9 @@
             {isSubmitting ? "Envoi en cours..." : "Envoyer"}
           </button>
           {#if formStatus}
-            <p class="form-success">{formStatus}</p>
+            <p class="form-status" class:success={formStatus.includes("envoyé")} class:error={formStatus.includes("Erreur")}>
+              {formStatus}
+            </p>
           {/if}
         </form>
       </div>
@@ -248,156 +211,24 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-bottom">
-      <p>© 2025 Ellessé — Cabinet d'esthétique</p>
-    </div>
-  </footer>
+  <Footer variant="dark" />
 </div>
 
 <style>
-  @font-face {
-    font-family: "LittleMicroSans";
-    src: url("/Ellesse/LittleMicroSansTrial-Li.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Priamos";
-    src: url("/Ellesse/Priamos-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  :global(body) {
-    margin: 0;
-    min-height: 100%;
-    background-color: rgb(249, 246, 239);
-  }
-
   .page-wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--color-cream, rgb(249, 246, 239));
   }
 
-  /* ===== HEADER ===== */
-  header {
-    background-color: rgb(38, 25, 17);
-    padding: 20px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 100;
-  }
-
-  .left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex: 1;
-  }
-
-  .left a {
-    display: flex;
-    align-items: center;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .logo {
-    height: 50px;
-    width: auto;
-    filter: brightness(0) invert(1);
-  }
-
-  .brand {
-    font-family: "LittleMicroSans", sans-serif;
-    text-transform: uppercase;
-    font-size: 28px;
-    font-weight: 300;
-    color: rgb(249, 246, 239);
-  }
-
-  nav {
-    display: flex;
-    gap: 50px;
-  }
-
-  nav a {
-    font-family: "Priamos", serif;
-    text-decoration: none;
-    color: rgb(200, 180, 160);
-    font-weight: 300;
-    font-size: 16px;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-  }
-
-  nav a:hover,
-  nav a:focus,
-  nav a.active {
-    color: rgb(249, 246, 239);
-  }
-
-  .burger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 22px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 110;
-  }
-
-  .burger span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: rgb(249, 246, 239);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-
-  .burger.open span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-  }
-
-  .burger.open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .burger.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-  }
-
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 90;
-  }
-
-  /* ===== MAIN ===== */
   main {
+    padding: 50px 20px;
     flex: 1;
-    padding: 40px 20px;
   }
 
   .contact-section {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
@@ -407,37 +238,39 @@
   }
 
   .subtitle {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 16px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     margin: 0 0 10px 0;
     letter-spacing: 2px;
   }
 
   .title {
-    font-family: "LittleMicroSans", sans-serif;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
     font-size: 48px;
-    font-weight: 100;
+    font-weight: 300;
     text-transform: uppercase;
-    color: rgb(38, 25, 17);
-    margin: 0 0 20px 0;
+    color: var(--color-dark, rgb(38, 25, 17));
+    margin: 0 0 15px 0;
     letter-spacing: 3px;
   }
 
   .description {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 16px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     margin: 0;
+    max-width: 500px;
+    margin: 0 auto;
     line-height: 1.6;
   }
 
   .section-title {
-    font-family: "LittleMicroSans", sans-serif;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
     font-size: 24px;
-    font-weight: 100;
+    font-weight: 300;
     text-transform: uppercase;
-    color: rgb(38, 25, 17);
+    color: var(--color-dark, rgb(38, 25, 17));
     text-align: center;
     margin: 0 0 30px 0;
     letter-spacing: 2px;
@@ -451,26 +284,26 @@
   .social-links {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 25px;
     flex-wrap: wrap;
   }
 
   .social-card {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 25px 40px;
+    gap: 18px;
     background: white;
-    border-radius: 16px;
+    padding: 25px 35px;
+    border-radius: var(--radius-large, 16px);
     text-decoration: none;
-    box-shadow: 0 4px 20px rgba(38, 25, 17, 0.08);
+    box-shadow: var(--shadow-soft, 0 4px 20px rgba(38, 25, 17, 0.08));
     transition: all 0.3s ease;
-    min-width: 280px;
+    min-width: 260px;
   }
 
   .social-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(38, 25, 17, 0.15);
+    box-shadow: var(--shadow-medium, 0 8px 30px rgba(38, 25, 17, 0.12));
   }
 
   .social-icon {
@@ -482,27 +315,27 @@
   .social-info {
     display: flex;
     flex-direction: column;
+    gap: 4px;
   }
 
   .social-name {
-    font-family: "LittleMicroSans", sans-serif;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
     font-size: 18px;
     text-transform: uppercase;
-    color: rgb(38, 25, 17);
+    color: var(--color-dark, rgb(38, 25, 17));
     letter-spacing: 1px;
   }
 
   .social-handle {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 14px;
-    color: rgb(102, 74, 50);
-    margin-top: 4px;
+    color: var(--color-brown, rgb(102, 74, 50));
   }
 
   /* ===== CONTACT CONTENT ===== */
   .contact-content {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 40px;
     margin-bottom: 60px;
   }
@@ -517,10 +350,10 @@
     display: flex;
     align-items: flex-start;
     gap: 20px;
-    padding: 25px;
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(38, 25, 17, 0.08);
+    padding: 25px;
+    border-radius: var(--radius-large, 16px);
+    box-shadow: var(--shadow-soft, 0 4px 20px rgba(38, 25, 17, 0.08));
   }
 
   .info-icon {
@@ -528,42 +361,41 @@
     height: 32px;
     object-fit: contain;
     flex-shrink: 0;
-    margin-top: 5px;
   }
 
   .info-details h3 {
-    font-family: "LittleMicroSans", sans-serif;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
     font-size: 14px;
     text-transform: uppercase;
-    color: rgb(38, 25, 17);
+    color: var(--color-dark, rgb(38, 25, 17));
     margin: 0 0 10px 0;
     letter-spacing: 1px;
   }
 
   .info-details p {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 15px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     margin: 0;
     line-height: 1.6;
   }
 
   .info-details a {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 15px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     text-decoration: none;
     transition: color 0.3s;
   }
 
   .info-details a:hover {
-    color: rgb(38, 25, 17);
+    color: var(--color-dark, rgb(38, 25, 17));
   }
 
   .map-section {
-    border-radius: 16px;
+    border-radius: var(--radius-large, 16px);
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(38, 25, 17, 0.08);
+    box-shadow: var(--shadow-soft, 0 4px 20px rgba(38, 25, 17, 0.08));
     min-height: 400px;
   }
 
@@ -575,8 +407,8 @@
   .form-section {
     background: white;
     padding: 50px;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(38, 25, 17, 0.08);
+    border-radius: var(--radius-xl, 20px);
+    box-shadow: var(--shadow-soft, 0 4px 20px rgba(38, 25, 17, 0.08));
     margin-bottom: 60px;
   }
 
@@ -597,10 +429,10 @@
 
   .form-group label {
     display: block;
-    font-family: "LittleMicroSans", sans-serif;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
     font-size: 12px;
     text-transform: uppercase;
-    color: rgb(38, 25, 17);
+    color: var(--color-dark, rgb(38, 25, 17));
     margin-bottom: 8px;
     letter-spacing: 1px;
   }
@@ -609,12 +441,12 @@
   .form-group textarea {
     width: 100%;
     padding: 15px 20px;
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 15px;
-    color: rgb(38, 25, 17);
-    background: rgb(249, 246, 239);
+    color: var(--color-dark, rgb(38, 25, 17));
+    background: var(--color-cream, rgb(249, 246, 239));
     border: 2px solid transparent;
-    border-radius: 10px;
+    border-radius: var(--radius-medium, 10px);
     transition: all 0.3s ease;
     box-sizing: border-box;
   }
@@ -622,12 +454,12 @@
   .form-group input:focus,
   .form-group textarea:focus {
     outline: none;
-    border-color: rgb(102, 74, 50);
+    border-color: var(--color-brown, rgb(102, 74, 50));
   }
 
   .form-group input::placeholder,
   .form-group textarea::placeholder {
-    color: rgb(180, 160, 140);
+    color: var(--color-light-tan, rgb(180, 160, 140));
   }
 
   .form-group textarea {
@@ -639,12 +471,12 @@
     display: block;
     width: 100%;
     padding: 16px;
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 16px;
-    color: rgb(249, 246, 239);
-    background: rgb(38, 25, 17);
+    color: var(--color-cream, rgb(249, 246, 239));
+    background: var(--color-dark, rgb(38, 25, 17));
     border: none;
-    border-radius: 10px;
+    border-radius: var(--radius-medium, 10px);
     cursor: pointer;
     letter-spacing: 1px;
     transition: all 0.3s ease;
@@ -659,63 +491,52 @@
     cursor: not-allowed;
   }
 
-  .form-success {
-    font-family: "Priamos", serif;
+  .form-status {
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 15px;
-    color: rgb(34, 139, 34);
     text-align: center;
     margin-top: 20px;
+  }
+
+  .form-status.success {
+    color: rgb(34, 139, 34);
+  }
+
+  .form-status.error {
+    color: rgb(220, 53, 69);
   }
 
   /* ===== CTA SECTION ===== */
   .cta-section {
     text-align: center;
     padding: 50px 30px;
-    background: rgb(38, 25, 17);
-    border-radius: 20px;
+    background: var(--color-dark, rgb(38, 25, 17));
+    border-radius: var(--radius-xl, 20px);
   }
 
   .cta-section p {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 18px;
-    color: rgb(200, 180, 160);
+    color: var(--color-tan, rgb(200, 180, 160));
     margin: 0 0 25px 0;
     letter-spacing: 1px;
   }
 
   .main-cta {
     display: inline-block;
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 16px;
-    color: rgb(38, 25, 17);
-    background-color: rgb(249, 246, 239);
+    color: var(--color-dark, rgb(38, 25, 17));
+    background-color: var(--color-cream, rgb(249, 246, 239));
     text-decoration: none;
     padding: 16px 40px;
-    border-radius: 10px;
+    border-radius: var(--radius-medium, 10px);
     letter-spacing: 1px;
     transition: all 0.3s ease;
   }
 
   .main-cta:hover {
     background-color: rgb(220, 210, 200);
-  }
-
-  /* ===== FOOTER ===== */
-  footer {
-    background-color: rgb(38, 25, 17);
-    padding: 25px 30px;
-    margin-top: auto;
-  }
-
-  .footer-bottom {
-    text-align: center;
-  }
-
-  .footer-bottom p {
-    font-family: "Priamos", serif;
-    font-size: 13px;
-    color: rgb(200, 180, 160);
-    margin: 0;
   }
 
   /* ===== RESPONSIVE ===== */
@@ -730,56 +551,6 @@
   }
 
   @media (max-width: 768px) {
-    header {
-      padding: 15px 20px;
-    }
-
-    .spacer {
-      display: none;
-    }
-
-    .burger {
-      display: flex;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 70%;
-      max-width: 300px;
-      height: 100vh;
-      background-color: rgb(38, 25, 17);
-      flex-direction: column;
-      padding: 80px 30px 30px;
-      gap: 0;
-      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.4);
-      transition: right 0.3s ease;
-      z-index: 105;
-    }
-
-    nav.open {
-      right: 0;
-    }
-
-    nav a {
-      padding: 15px 0;
-      font-size: 18px;
-      border-bottom: 1px solid rgba(200, 180, 160, 0.2);
-    }
-
-    nav a:last-child {
-      border-bottom: none;
-    }
-
-    .brand {
-      font-size: 22px;
-    }
-
-    .logo {
-      height: 40px;
-    }
-
     main {
       padding: 30px 15px;
     }
@@ -846,14 +617,6 @@
     .info-icon {
       width: 28px;
       height: 28px;
-    }
-
-    .map-section {
-      min-height: 280px;
-    }
-
-    .cta-section {
-      padding: 40px 20px;
     }
   }
 </style>

@@ -1,8 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import { link, querystring, push } from "svelte-spa-router";
+  import Header from "./lib/Header.svelte";
+  import Footer from "./lib/Footer.svelte";
 
-  let menuOpen = $state(false);
   let calLoaded = $state(false);
   let selectedService = $state(null);
   let calLink = $state("salon-ellesse/rendez-vous");
@@ -11,10 +12,8 @@
   function getCalLinkFromDuration(duration) {
     if (!duration) return "salon-ellesse/rendez-vous";
     
-    // Normalize duration string
     const normalized = duration.toLowerCase().trim();
     
-    // Map of duration strings to cal.com slugs
     const durationMap = {
       "10min": "salon-ellesse/10min",
       "15min": "salon-ellesse/15min",
@@ -46,7 +45,6 @@
           duration: duration ? decodeURIComponent(duration) : null,
           price: price ? decodeURIComponent(price) : null
         };
-        // Update calLink based on duration
         calLink = getCalLinkFromDuration(duration ? decodeURIComponent(duration) : null);
       }
     }
@@ -55,27 +53,6 @@
   // Clear selected service and go back to prestations
   function clearSelection() {
     push('/prestations');
-  }
-
-  // Function to reload Cal.com embed with new event type
-  function reloadCalendar(newCalLink) {
-    const calEmbed = document.getElementById('cal-embed');
-    if (calEmbed) {
-      calEmbed.innerHTML = '';
-    }
-    
-    if (window.Cal) {
-      Cal("inline", {
-        elementOrSelector: "#cal-embed",
-        calLink: newCalLink,
-        config: {
-          theme: "light",
-          hideEventTypeDetails: false,
-          layout: "month_view",
-          locale: "fr",
-        },
-      });
-    }
   }
 
   // Injection et initialisation de Cal.com
@@ -146,19 +123,9 @@
     });
     calLoaded = true;
   });
-
-  // Menu responsive
-  function toggleMenu() {
-    menuOpen = !menuOpen;
-  }
-
-  function closeMenu() {
-    menuOpen = false;
-  }
 </script>
 
 <svelte:head>
-  <!-- SEO de base -->
   <title>Rendez-vous en ligne | Ellessé - Cabinet d'esthétique à Toulouse</title>
   <meta name="description" content="Prenez rendez-vous en ligne au cabinet d'esthétique Ellessé à Toulouse. Réservez votre soin de beauté à la russe en quelques clics. Disponible 24h/24." />
   <meta name="keywords" content="rendez-vous esthétique Toulouse, réservation soin beauté, prendre rdv institut beauté, cabinet esthétique 31200, booking beauté russe" />
@@ -189,25 +156,16 @@
     "@id": "https://ellesse-beaute.fr/rendez-vous#webpage",
     "url": "https://ellesse-beaute.fr/rendez-vous",
     "name": "Prendre rendez-vous - Ellessé Cabinet d'esthétique",
-    "description": "Réservez votre soin de beauté en ligne au cabinet Ellessé à Toulouse. Soins visage, manucure russe, beauté sibérienne au 73 Bd Silvio Trentin, 31200 Toulouse.",
+    "description": "Réservez votre soin de beauté en ligne au cabinet Ellessé à Toulouse.",
     "isPartOf": {
       "@id": "https://ellesse-beaute.fr/#organization"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Accueil",
-          "item": "https://ellesse-beaute.fr/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Rendez-vous",
-          "item": "https://ellesse-beaute.fr/rendez-vous"
-        }
+        {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://ellesse-beaute.fr/"},
+        {"@type": "ListItem", "position": 2, "name": "Prestations", "item": "https://ellesse-beaute.fr/prestations"},
+        {"@type": "ListItem", "position": 3, "name": "Rendez-vous", "item": "https://ellesse-beaute.fr/rendez-vous"}
       ]
     },
     "potentialAction": {
@@ -215,10 +173,7 @@
       "target": {
         "@type": "EntryPoint",
         "urlTemplate": "https://ellesse-beaute.fr/rendez-vous",
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform"
-        ]
+        "actionPlatform": ["http://schema.org/DesktopWebPlatform", "http://schema.org/MobileWebPlatform"]
       },
       "result": {
         "@type": "Reservation",
@@ -230,44 +185,7 @@
 </svelte:head>
 
 <div class="page-wrapper">
-  <header>
-    <div class="left">
-      <a href="/" use:link aria-label="Accueil Ellessé">
-        <img
-          src="./logo.png"
-          alt="Logo Ellessé"
-          class="logo"
-          width="50"
-          height="50"
-        />
-      </a>
-      <span class="brand">Ellessé</span>
-    </div>
-
-    <nav class:open={menuOpen}>
-      <a href="/" use:link onclick={closeMenu}>Accueil</a>
-      <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
-      <a href="/prestations" use:link class="active" onclick={closeMenu}>Prestations</a>
-      <a href="/contact" use:link onclick={closeMenu}>Contact</a>
-    </nav>
-
-    <button
-      class="burger"
-      class:open={menuOpen}
-      onclick={toggleMenu}
-      aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-      aria-expanded={menuOpen}
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div class="spacer"></div>
-  </header>
-
-  {#if menuOpen}
-    <div class="overlay" onclick={closeMenu} role="presentation"></div>
-  {/if}
+  <Header activePage="prestations" />
 
   <main>
     <section class="booking-section">
@@ -275,8 +193,7 @@
         <p class="subtitle">Réservation en ligne</p>
         <h1 class="title">Prendre rendez-vous</h1>
         <p class="description">
-          Choisissez votre soin et le créneau qui vous convient. Vous recevrez
-          une confirmation par email.
+          Choisissez votre soin et le créneau qui vous convient. Vous recevrez une confirmation par email.
         </p>
       </div>
 
@@ -303,21 +220,21 @@
                 {#if selectedService.price}
                   <span class="detail-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <path d="M14.121 15.536c-1.171 1.952-3.07 1.952-4.242 0-1.172-1.953-1.172-5.119 0-7.072 1.171-1.952 3.07-1.952 4.242 0M8 10.5h4m-4 3h4m9-1.5a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     {selectedService.price}
                   </span>
                 {/if}
               </div>
             </div>
-            <button class="clear-selection" onclick={clearSelection} aria-label="Retirer la sélection">
+            <button class="clear-selection" onclick={clearSelection} aria-label="Changer de prestation">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
           <div class="selected-hint-row">
-            <p class="selected-hint">Le calendrier affiche les créneaux disponibles pour cette prestation.</p>
+            <p class="selected-hint">Sélectionnez un créneau disponible ci-dessous</p>
             <a href="/prestations" use:link class="change-service-link">Changer de prestation</a>
           </div>
         </div>
@@ -335,206 +252,55 @@
 
       <div class="booking-info">
         <div class="info-item">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <div>
+            <h3>Confirmation</h3>
+            <p>Par email immédiatement</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <div>
-            <h3>Horaires</h3>
-            <p>Lundi - Samedi : 9h30 - 21h</p>
+            <h3>Annulation</h3>
+            <p>Gratuite 24h avant</p>
           </div>
         </div>
         <div class="info-item">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          >
-            <path
-              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-            />
-          </svg>
-          <div>
-            <h3>Contact</h3>
-            <p>+33 6 38 93 66 48</p>
-          </div>
-        </div>
-        <div class="info-item">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          >
-            <path
-              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-            />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
             <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
           <div>
             <h3>Adresse</h3>
-            <p>73 Bd Silvio Trentin<br />31200 Toulouse</p>
+            <p>73 Bd Silvio Trentin, 31200 Toulouse</p>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-bottom">
-      <p>© 2025 Ellessé — Cabinet d'esthétique</p>
-    </div>
-  </footer>
+  <Footer variant="dark" />
 </div>
 
 <style>
-  @font-face {
-    font-family: "LittleMicroSans";
-    src: url("/Ellesse/LittleMicroSansTrial-Li.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Priamos";
-    src: url("/Ellesse/Priamos-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  :global(body) {
-    margin: 0;
-    min-height: 100%;
-    background-color: rgb(249, 246, 239);
-  }
-
   .page-wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--color-cream, rgb(249, 246, 239));
   }
 
-  /* ===== HEADER ===== */
-  header {
-    background-color: rgb(38, 25, 17);
-    padding: 20px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 100;
-  }
-
-  .left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex: 1;
-  }
-
-  .left a {
-    display: flex;
-    align-items: center;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .logo {
-    height: 50px;
-    width: auto;
-    filter: brightness(0) invert(1);
-  }
-
-  .brand {
-    font-family: "LittleMicroSans", sans-serif;
-    text-transform: uppercase;
-    font-size: 28px;
-    font-weight: 300;
-    color: rgb(249, 246, 239);
-  }
-
-  nav {
-    display: flex;
-    gap: 50px;
-  }
-
-  nav a {
-    font-family: "Priamos", serif;
-    text-decoration: none;
-    color: rgb(200, 180, 160);
-    font-weight: 300;
-    font-size: 16px;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-  }
-
-  nav a:hover,
-  nav a:focus,
-  nav a.active {
-    color: rgb(249, 246, 239);
-  }
-
-  .burger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 22px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 110;
-  }
-
-  .burger span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: rgb(249, 246, 239);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-
-  .burger.open span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-  }
-
-  .burger.open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .burger.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-  }
-
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 90;
-  }
-
-  /* ===== MAIN ===== */
   main {
+    padding: 50px 20px;
     flex: 1;
-    padding: 40px 20px;
   }
 
   .booking-section {
-    max-width: 1100px;
+    max-width: 900px;
     margin: 0 auto;
   }
 
@@ -544,38 +310,39 @@
   }
 
   .subtitle {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 16px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     margin: 0 0 10px 0;
     letter-spacing: 2px;
   }
 
   .title {
-    font-family: "LittleMicroSans", sans-serif;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
     font-size: 48px;
-    font-weight: 100;
+    font-weight: 300;
     text-transform: uppercase;
-    color: rgb(38, 25, 17);
-    margin: 0 0 20px 0;
+    color: var(--color-dark, rgb(38, 25, 17));
+    margin: 0 0 15px 0;
     letter-spacing: 3px;
   }
 
   .description {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 16px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     margin: 0;
+    max-width: 500px;
+    margin: 0 auto;
     line-height: 1.6;
   }
 
   /* ===== SELECTED SERVICE ===== */
   .selected-service {
-    background: linear-gradient(135deg, rgb(38, 25, 17) 0%, rgb(60, 45, 35) 100%);
-    border-radius: 16px;
-    padding: 24px;
+    background: var(--color-dark, rgb(38, 25, 17));
+    border-radius: var(--radius-large, 16px);
+    padding: 25px 30px;
     margin-bottom: 30px;
-    color: rgb(249, 246, 239);
   }
 
   .selected-service-content {
@@ -596,9 +363,9 @@
   }
 
   .selected-service-icon svg {
-    width: 28px;
-    height: 28px;
-    color: rgb(200, 180, 160);
+    width: 26px;
+    height: 26px;
+    color: #4ade80;
   }
 
   .selected-service-info {
@@ -606,19 +373,19 @@
   }
 
   .selected-label {
-    font-family: "Priamos", serif;
-    font-size: 12px;
-    color: rgb(200, 180, 160);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-family: var(--font-body, "Priamos", serif);
+    font-size: 13px;
+    color: var(--color-tan, rgb(200, 180, 160));
+    letter-spacing: 0.5px;
   }
 
   .selected-service-info h3 {
-    font-family: "LittleMicroSans", sans-serif;
-    font-size: 20px;
-    font-weight: 300;
-    margin: 5px 0 10px 0;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
+    font-size: 18px;
+    font-weight: 400;
     text-transform: uppercase;
+    color: var(--color-cream, rgb(249, 246, 239));
+    margin: 5px 0 10px 0;
     letter-spacing: 1px;
   }
 
@@ -632,9 +399,9 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 14px;
-    color: rgb(200, 180, 160);
+    color: var(--color-tan, rgb(200, 180, 160));
   }
 
   .detail-item svg {
@@ -663,7 +430,7 @@
   .clear-selection svg {
     width: 18px;
     height: 18px;
-    color: rgb(200, 180, 160);
+    color: var(--color-tan, rgb(200, 180, 160));
   }
 
   .selected-hint-row {
@@ -678,29 +445,29 @@
   }
 
   .selected-hint {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 13px;
-    color: rgb(180, 160, 140);
+    color: var(--color-light-tan, rgb(180, 160, 140));
     margin: 0;
   }
 
   .change-service-link {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 13px;
-    color: rgb(200, 180, 160);
+    color: var(--color-tan, rgb(200, 180, 160));
     text-decoration: underline;
     transition: color 0.3s;
   }
 
   .change-service-link:hover {
-    color: rgb(249, 246, 239);
+    color: var(--color-cream, rgb(249, 246, 239));
   }
 
   /* ===== CALENDAR ===== */
   .calendar-container {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(38, 25, 17, 0.1);
+    border-radius: var(--radius-small, 8px);
+    box-shadow: var(--shadow-medium, 0 4px 20px rgba(38, 25, 17, 0.1));
     overflow: hidden;
     min-height: 600px;
     position: relative;
@@ -723,7 +490,7 @@
     width: 40px;
     height: 40px;
     border: 3px solid rgba(102, 74, 50, 0.2);
-    border-top-color: rgb(102, 74, 50);
+    border-top-color: var(--color-brown, rgb(102, 74, 50));
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 0 auto 15px;
@@ -736,8 +503,8 @@
   }
 
   .loading p {
-    font-family: "Priamos", serif;
-    color: rgb(102, 74, 50);
+    font-family: var(--font-body, "Priamos", serif);
+    color: var(--color-brown, rgb(102, 74, 50));
     margin: 0;
   }
 
@@ -759,99 +526,31 @@
   .info-item svg {
     width: 28px;
     height: 28px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     flex-shrink: 0;
     margin-top: 2px;
   }
 
   .info-item h3 {
-    font-family: "LittleMicroSans", sans-serif;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
-    color: rgb(38, 25, 17);
+    color: var(--color-dark, rgb(38, 25, 17));
     margin: 0 0 5px 0;
     letter-spacing: 1px;
   }
 
   .info-item p {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 14px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     margin: 0;
     line-height: 1.4;
   }
 
-  /* ===== FOOTER ===== */
-  footer {
-    background-color: rgb(38, 25, 17);
-    padding: 25px 30px;
-    margin-top: auto;
-  }
-
-  .footer-bottom {
-    text-align: center;
-  }
-
-  .footer-bottom p {
-    font-family: "Priamos", serif;
-    font-size: 13px;
-    color: rgb(200, 180, 160);
-    margin: 0;
-  }
-
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    header {
-      padding: 15px 20px;
-    }
-
-    .spacer {
-      display: none;
-    }
-
-    .burger {
-      display: flex;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 70%;
-      max-width: 300px;
-      height: 100vh;
-      background-color: rgb(38, 25, 17);
-      flex-direction: column;
-      padding: 80px 30px 30px;
-      gap: 0;
-      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.4);
-      transition: right 0.3s ease;
-      z-index: 105;
-    }
-
-    nav.open {
-      right: 0;
-    }
-
-    nav a {
-      padding: 15px 0;
-      font-size: 18px;
-      border-bottom: 1px solid rgba(200, 180, 160, 0.2);
-    }
-
-    nav a:last-child {
-      border-bottom: none;
-    }
-
-    .brand {
-      font-size: 22px;
-    }
-
-    .logo {
-      height: 40px;
-    }
-
     main {
       padding: 30px 15px;
     }

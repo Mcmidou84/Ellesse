@@ -1,0 +1,76 @@
+/* ===== FONTS ===== */
+@font-face {
+  font-family: "LittleMicroSans";
+  src: url("/Ellesse/LittleMicroSansTrial-Li.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Priamos";
+  src: url("/Ellesse/Priamos-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Couleurs principales */
+  --color-dark: rgb(38, 25, 17);
+  --color-cream: rgb(249, 246, 239);
+  --color-brown: rgb(102, 74, 50);
+  --color-tan: rgb(200, 180, 160);
+  --color-light-tan: rgb(180, 160, 140);
+  
+  /* Fonts */
+  --font-display: "LittleMicroSans", sans-serif;
+  --font-body: "Priamos", serif;
+  
+  /* Transitions */
+  --transition-fast: 0.3s ease;
+  --transition-medium: 0.5s ease;
+  
+  /* Shadows */
+  --shadow-soft: 0 4px 20px rgba(38, 25, 17, 0.08);
+  --shadow-medium: 0 4px 20px rgba(38, 25, 17, 0.1);
+  --shadow-nav: -5px 0 20px rgba(0, 0, 0, 0.4);
+  
+  /* Border radius */
+  --radius-small: 8px;
+  --radius-medium: 10px;
+  --radius-large: 16px;
+  --radius-xl: 20px;
+}
+
+/* ===== RESET & BASE ===== */
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: var(--color-cream);
+}
+
+/* ===== PAGE WRAPPER ===== */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

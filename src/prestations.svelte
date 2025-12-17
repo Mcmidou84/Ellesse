@@ -1,22 +1,13 @@
 <script>
-  import { onMount } from "svelte";
   import { link } from "svelte-spa-router";
+  import Header from "./lib/Header.svelte";
+  import Footer from "./lib/Footer.svelte";
 
-  let menuOpen = $state(false);
   let sliderEl;
-
-  function toggleMenu() {
-    menuOpen = !menuOpen;
-  }
-
-  function closeMenu() {
-    menuOpen = false;
-  }
 
   // Generate booking URL with service info
   function getBookingUrl(service) {
     const params = new URLSearchParams();
-    // Remove <br> tags and replace with space for cleaner URL
     const cleanName = service.name.replace(/<br>/g, ' - ');
     params.set('service', cleanName);
     if (service.duration) params.set('duration', service.duration);
@@ -24,7 +15,6 @@
     return `/rendez-vous?${params.toString()}`;
   }
 
-  // ICONES PNG LOCALES
   const prestations = [
     {
       id: "ongles-mains",
@@ -212,7 +202,6 @@
   ];
 </script>
 
-
 <svelte:head>
   <title>Nos Prestations | Ellessé - Maquillage permanent, Cils, Ongles à Toulouse</title>
   <meta name="description" content="Découvrez nos prestations : microblading, candy lips, extension de cils volume russe, manucure russe, pose de gel. Cabinet d'esthétique à Toulouse." />
@@ -250,38 +239,7 @@
 </svelte:head>
 
 <div class="page-wrapper">
-  <header>
-    <div class="left">
-      <a href="/" use:link aria-label="Accueil Ellessé">
-        <img src="./logo.png" alt="Logo Ellessé" class="logo" width="50" height="50" />
-      </a>
-      <span class="brand">Ellessé</span>
-    </div>
-
-    <nav class:open={menuOpen}>
-      <a href="/" use:link onclick={closeMenu}>Accueil</a>
-      <a href="/galerie" use:link onclick={closeMenu}>Galerie</a>
-      <a href="/prestations" use:link class="active" onclick={closeMenu}>Prestations</a>
-      <a href="/contact" use:link onclick={closeMenu}>Contact</a>
-    </nav>
-
-    <button
-      class="burger"
-      class:open={menuOpen}
-      onclick={toggleMenu}
-      aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-      aria-expanded={menuOpen}
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div class="spacer"></div>
-  </header>
-
-  {#if menuOpen}
-    <div class="overlay" onclick={closeMenu} role="presentation"></div>
-  {/if}
+  <Header activePage="prestations" />
 
   <main>
     <section class="prestations-section">
@@ -351,174 +309,25 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-bottom">
-      <p>© 2025 Ellessé — Cabinet d'esthétique</p>
-    </div>
-  </footer>
+  <Footer variant="dark" />
 </div>
 
-
-
 <style>
-
-    
-  .card-icon {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    filter: brightness(0) saturate(100%);
-  }
-
-
-
-
-  @font-face {
-    font-family: "LittleMicroSans";
-    src: url("/Ellesse/LittleMicroSansTrial-Li.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Priamos";
-    src: url("/Ellesse/Priamos-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  :global(body) {
-    margin: 0;
-    min-height: 100%;
-    background-color: rgb(249, 246, 239);
-  }
-
-  :global(iconify-icon) {
-    color: rgb(102, 74, 50);
-  }
-
   .page-wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--color-cream, rgb(249, 246, 239));
   }
 
-  /* ===== HEADER ===== */
-  header {
-    background-color: rgb(38, 25, 17);
-    padding: 20px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 100;
-  }
-
-  .left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex: 1;
-  }
-
-  .left a {
-    display: flex;
-    align-items: center;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .logo {
-    height: 50px;
-    width: auto;
-    filter: brightness(0) invert(1);
-  }
-
-  .brand {
-    font-family: "LittleMicroSans", sans-serif;
-    text-transform: uppercase;
-    font-size: 28px;
-    font-weight: 300;
-    color: rgb(249, 246, 239);
-  }
-
-  nav {
-    display: flex;
-    gap: 50px;
-  }
-
-  nav a {
-    font-family: "Priamos", serif;
-    text-decoration: none;
-    color: rgb(200, 180, 160);
-    font-weight: 300;
-    font-size: 16px;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-  }
-
-  nav a:hover,
-  nav a:focus,
-  nav a.active {
-    color: rgb(249, 246, 239);
-  }
-
-  .burger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 22px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 110;
-  }
-
-  .burger span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: rgb(249, 246, 239);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-
-  .burger.open span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-  }
-
-  .burger.open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .burger.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-  }
-
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 90;
-  }
-
-  /* ===== MAIN ===== */
   main {
+    padding: 50px 0;
     flex: 1;
-    padding: 40px 0;
   }
 
   .prestations-section {
-    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .prestations-header {
@@ -528,28 +337,30 @@
   }
 
   .subtitle {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 16px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     margin: 0 0 10px 0;
     letter-spacing: 2px;
   }
 
   .title {
-    font-family: "LittleMicroSans", sans-serif;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
     font-size: 48px;
-    font-weight: 100;
+    font-weight: 300;
     text-transform: uppercase;
-    color: rgb(38, 25, 17);
-    margin: 0 0 20px 0;
+    color: var(--color-dark, rgb(38, 25, 17));
+    margin: 0 0 15px 0;
     letter-spacing: 3px;
   }
 
   .description {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 16px;
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
     margin: 0;
+    max-width: 600px;
+    margin: 0 auto;
     line-height: 1.6;
   }
 
@@ -559,15 +370,26 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-family: "Priamos", serif;
-    font-size: 14px;
-    color: rgb(102, 74, 50);
-    margin-bottom: 15px;
-    padding: 0 20px;
+    padding: 0 30px 15px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .scroll-hint span {
+    font-family: var(--font-body, "Priamos", serif);
+    font-size: 13px;
+    color: var(--color-brown, rgb(102, 74, 50));
+    letter-spacing: 0.5px;
   }
 
   .scroll-hint svg {
-    color: rgb(102, 74, 50);
+    color: var(--color-brown, rgb(102, 74, 50));
+    animation: bounceRight 1.5s ease-in-out infinite;
+  }
+
+  @keyframes bounceRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
   }
 
   /* ===== SLIDER ===== */
@@ -579,45 +401,34 @@
   .slider {
     display: flex;
     gap: 25px;
-    padding: 10px 40px 30px 40px;
-    flex-wrap: nowrap;
+    padding: 15px 30px 30px 30px;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(102, 74, 50, 0.3) transparent;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .slider::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .slider::-webkit-scrollbar-track {
-    background: rgba(102, 74, 50, 0.1);
-    border-radius: 4px;
-  }
-
-  .slider::-webkit-scrollbar-thumb {
-    background: rgba(102, 74, 50, 0.3);
-    border-radius: 4px;
+    display: none;
   }
 
   /* ===== CARD ===== */
   .prestation-card {
-    flex-shrink: 0;
-    width: 320px;
+    flex: 0 0 auto;
+    width: 340px;
     background: white;
-    border-radius: 20px;
+    border-radius: var(--radius-large, 16px);
+    box-shadow: var(--shadow-soft, 0 4px 20px rgba(38, 25, 17, 0.08));
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(38, 25, 17, 0.08);
-    display: flex;
-    flex-direction: column;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .prestation-card:hover {
-    box-shadow: 0 8px 35px rgba(38, 25, 17, 0.14);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium, 0 8px 30px rgba(38, 25, 17, 0.12));
   }
 
-  /* Card Image */
   .card-image-wrapper {
     position: relative;
     height: 180px;
@@ -648,123 +459,127 @@
     pointer-events: none;
   }
 
-  /* Card Body */
   .card-body {
-    padding: 20px 22px 22px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    padding: 20px 22px 25px;
   }
 
   .card-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(102, 74, 50, 0.15);
+  }
+
+  .card-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%);
   }
 
   .card-header h2 {
-    font-family: "LittleMicroSans", sans-serif;
-    font-size: 17px;
-    font-weight: 300;
+    font-family: var(--font-display, "LittleMicroSans", sans-serif);
+    font-size: 16px;
+    font-weight: 400;
     text-transform: uppercase;
-    color: rgb(38, 25, 17);
+    color: var(--color-dark, rgb(38, 25, 17));
     margin: 0;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
   }
 
-  /* Services List */
+  /* ===== SERVICES LIST ===== */
   .services-list {
     list-style: none;
+    margin: 0 0 20px 0;
     padding: 0;
-    margin: 0 0 18px 0;
-    flex: 1;
+    max-height: 280px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(102, 74, 50, 0.3) transparent;
+  }
+
+  .services-list::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .services-list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .services-list::-webkit-scrollbar-thumb {
+    background: rgba(102, 74, 50, 0.3);
+    border-radius: 2px;
   }
 
   .services-list li {
-    font-family: "Priamos", serif;
-    font-size: 13px;
-    color: rgb(102, 74, 50);
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(102, 74, 50, 0.08);
-    padding-left: 14px;
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    padding: 10px 0 10px 15px;
+    font-family: var(--font-body, "Priamos", serif);
+    font-size: 13px;
+    color: var(--color-dark, rgb(38, 25, 17));
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
   }
 
-  .services-list li:last-child {
-    border-bottom: none;
-  }
-
-  .services-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 4px;
-    background: rgb(180, 160, 140);
-    border-radius: 50%;
+  .services-list li:hover {
+    background: rgba(249, 246, 239, 0.8);
+    border-left-color: var(--color-brown, rgb(102, 74, 50));
   }
 
   .service-info {
-    flex: 1;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
   }
 
   .service-name {
-    flex: 1;
     line-height: 1.3;
-    min-width: 0;
   }
 
   .service-details {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    gap: 10px;
     font-size: 12px;
-    white-space: nowrap;
   }
 
   .service-duration {
-    color: rgb(150, 130, 110);
-    font-size: 11px;
+    color: var(--color-brown, rgb(102, 74, 50));
+  }
+
+  .service-price {
+    color: var(--color-dark, rgb(38, 25, 17));
+    font-weight: 500;
   }
 
   .service-book-btn {
     width: 32px;
     height: 32px;
-    background: rgb(38, 25, 17);
-    border-radius: 8px;
+    background: var(--color-dark, rgb(38, 25, 17));
+    border: none;
+    border-radius: var(--radius-small, 8px);
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
     flex-shrink: 0;
-    transition: background 0.3s, transform 0.2s;
   }
 
   .service-book-btn:hover {
-    background: rgb(60, 45, 35);
+    background: var(--color-brown, rgb(102, 74, 50));
     transform: scale(1.05);
   }
 
   .service-book-btn svg {
     width: 16px;
     height: 16px;
-    color: rgb(249, 246, 239);
-  }
-
-  .service-price {
-    color: rgb(38, 25, 17);
-    font-weight: 500;
+    color: var(--color-cream, rgb(249, 246, 239));
   }
 
   /* ===== CTA SECTION ===== */
@@ -772,106 +587,40 @@
     text-align: center;
     margin: 50px 20px 0;
     padding: 50px 30px;
-    background: rgb(38, 25, 17);
-    border-radius: 20px;
+    background: var(--color-dark, rgb(38, 25, 17));
+    border-radius: var(--radius-xl, 20px);
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
   }
 
   .cta-section p {
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 18px;
-    color: rgb(200, 180, 160);
+    color: var(--color-tan, rgb(200, 180, 160));
     margin: 0 0 25px 0;
     letter-spacing: 1px;
   }
 
   .main-cta {
     display: inline-block;
-    font-family: "Priamos", serif;
+    font-family: var(--font-body, "Priamos", serif);
     font-size: 16px;
-    color: rgb(38, 25, 17);
-    background-color: rgb(249, 246, 239);
+    color: var(--color-dark, rgb(38, 25, 17));
+    background-color: var(--color-cream, rgb(249, 246, 239));
     text-decoration: none;
     padding: 16px 40px;
-    border-radius: 10px;
+    border-radius: var(--radius-medium, 10px);
     letter-spacing: 1px;
+    transition: all 0.3s ease;
   }
 
   .main-cta:hover {
     background-color: rgb(220, 210, 200);
   }
 
-  /* ===== FOOTER ===== */
-  footer {
-    background-color: rgb(38, 25, 17);
-    padding: 25px 30px;
-    margin-top: auto;
-  }
-
-  .footer-bottom {
-    text-align: center;
-  }
-
-  .footer-bottom p {
-    font-family: "Priamos", serif;
-    font-size: 13px;
-    color: rgb(200, 180, 160);
-    margin: 0;
-  }
-
+  /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    header {
-      padding: 15px 20px;
-    }
-
-    .spacer {
-      display: none;
-    }
-
-    .burger {
-      display: flex;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 70%;
-      max-width: 300px;
-      height: 100vh;
-      background-color: rgb(38, 25, 17);
-      flex-direction: column;
-      padding: 80px 30px 30px;
-      gap: 0;
-      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.4);
-      transition: right 0.3s ease;
-      z-index: 105;
-    }
-
-    nav.open {
-      right: 0;
-    }
-
-    nav a {
-      padding: 15px 0;
-      font-size: 18px;
-      border-bottom: 1px solid rgba(200, 180, 160, 0.2);
-    }
-
-    nav a:last-child {
-      border-bottom: none;
-    }
-
-    .brand {
-      font-size: 22px;
-    }
-
-    .logo {
-      height: 40px;
-    }
-
     main {
       padding: 30px 0;
     }
@@ -936,7 +685,7 @@
     .cta-section {
       margin: 40px 15px 0;
       padding: 40px 20px;
-      border-radius: 16px;
+      border-radius: var(--radius-large, 16px);
     }
   }
 

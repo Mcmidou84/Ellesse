@@ -151,8 +151,8 @@
     {
       id: "sourcils",
       title: "Microblading Sourcils",
-      before: "/Ellesse/before_after/sourcils_before.webp",
-      after: "/Ellesse/before_after/sourcils_after.webp",
+      before: "/Ellesse/before_after/sourcils_avant.jpg",
+      after: "/Ellesse/before_after/sourcils_apres.jpg",
     },
     {
       id: "levres",

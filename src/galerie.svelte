@@ -1047,7 +1047,7 @@
 
   .masonry-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     max-width: 1400px;
     margin: 0 auto;
@@ -1473,7 +1473,7 @@
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1200px) {
     .masonry-grid {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -1483,7 +1483,7 @@
       max-width: 500px;
     }
     .masonry-grid {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
     }
     .counters-section {
       gap: 30px;

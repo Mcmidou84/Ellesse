@@ -111,7 +111,7 @@
     {
       id: 9,
       category: "sourcils",
-      image: "/Ellesse/gallery/sourcils_03.webp",
+      image: "/Ellesse/gallery/sourcils_03.jpg",
       title: "Microshading",
       testimonial: "Effet ombré magnifique et durable.",
       client: "Anaïs V.",
@@ -120,7 +120,7 @@
     {
       id: 10,
       category: "cils",
-      image: "/Ellesse/gallery/cils_03.webp",
+      image: "/Ellesse/gallery/cils_03.jpg",
       title: "Lash Lift",
       testimonial: "Mes cils naturels n'ont jamais été aussi beaux.",
       client: "Manon F.",
@@ -129,7 +129,7 @@
     {
       id: 11,
       category: "ongles",
-      image: "/Ellesse/gallery/ongles_03.webp",
+      image: "/Ellesse/gallery/ongles_03.jpg",
       title: "Pose Gel",
       testimonial: "Tenue impeccable pendant 3 semaines.",
       client: "Chloé T.",
@@ -138,7 +138,7 @@
     {
       id: 12,
       category: "levres",
-      image: "/Ellesse/gallery/levres_03.webp",
+      image: "/Ellesse/gallery/levres_03.jpg",
       title: "Contour lèvres",
       testimonial: "Finies les retouches rouge à lèvres !",
       client: "Sarah N.",

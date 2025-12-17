@@ -40,7 +40,7 @@
       id: "pieds",
       title: "Beauté des pieds",
       icon: "nail.png",
-      image: "/Ellesse/ongles.webp",
+      image: "/Ellesse/gallery/pieds.jpg",
       services: [
         { name: "Vernis semi-permanent<br>+ Cuticules", duration: "30min", price: "29€" },
         { name: "Vernis semi-permanent", duration: "20min", price: "20€" },

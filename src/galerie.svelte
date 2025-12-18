@@ -157,14 +157,14 @@
     {
       id: "levres",
       title: "Candy Lips",
-      before: "/Ellesse/before_after/levres_before.webp",
-      after: "/Ellesse/before_after/levres_after.webp",
+      before: "/Ellesse/before_after/levres_avant.jpg",
+      after: "/Ellesse/before_after/levres_apres.jpg",
     },
     {
       id: "cils",
       title: "Volume Russe",
-      before: "/Ellesse/before_after/cils_before.webp",
-      after: "/Ellesse/before_after/cils_after.webp",
+      before: "/Ellesse/before_after/cils_avant.jpg",
+      after: "/Ellesse/before_after/cils_apres.jpg",
     },
     {
       id: "ongles",

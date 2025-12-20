@@ -169,8 +169,8 @@
     {
       id: "ongles",
       title: "Manucure Russe",
-      before: "/Ellesse/before_after/ongles_before.webp",
-      after: "/Ellesse/before_after/ongles_after.webp",
+      before: "/Ellesse/before_after/ongles_avant.jpg",
+      after: "/Ellesse/before_after/ongles_apres.jpg",
     },
   ];
 
@@ -446,10 +446,7 @@
 
       <div class="masonry-grid">
         {#each filteredGallery as item (item.id)}
-          <button
-            class="masonry-item"
-            onclick={() => openLightbox(item)}
-          >
+          <button class="masonry-item" onclick={() => openLightbox(item)}>
             <img src={item.image} alt={item.title} loading="lazy" />
             <div class="item-overlay">
               <span class="item-category">{item.category}</span>
@@ -617,7 +614,7 @@
           src="https://cdn.lightwidget.com/widgets/lightwidget.js"
         ></script>
         <iframe
-          src="//lightwidget.com/widgets/a07cac652e325c25ba995af84a3b0b7c.html"
+          src="https://cdn.lightwidget.com/widgets/a07cac652e325c25ba995af84a3b0b7c.html"
           scrolling="no"
           allowtransparency="true"
           class="lightwidget-widget"

@@ -8,10 +8,10 @@
   // Generate booking URL with service info
   function getBookingUrl(service) {
     const params = new URLSearchParams();
-    const cleanName = service.name.replace(/<br>/g, ' - ');
-    params.set('service', cleanName);
-    if (service.duration) params.set('duration', service.duration);
-    if (service.price) params.set('price', service.price);
+    const cleanName = service.name.replace(/<br>/g, " - ");
+    params.set("service", cleanName);
+    if (service.duration) params.set("duration", service.duration);
+    if (service.price) params.set("price", service.price);
     return `/rendez-vous?${params.toString()}`;
   }
 
@@ -25,16 +25,40 @@
         { name: "Manucure russe seule", duration: "30min", price: "15€" },
         { name: "Manucure russe<br>+ Soins", duration: "1h", price: "35€" },
         { name: "Pose vernis semi-permanent", duration: "30min", price: "25€" },
-        { name: "Vernis semi-permanent<br>+ Manucure russe", duration: "1h20", price: "40€" },
-        { name: "Forfait pose et dépose<br>Semi-permanent", duration: "45min", price: "40€" },
+        {
+          name: "Vernis semi-permanent<br>+ Manucure russe",
+          duration: "1h20",
+          price: "40€",
+        },
+        {
+          name: "Forfait pose et dépose<br>Semi-permanent",
+          duration: "45min",
+          price: "40€",
+        },
         { name: "Dépose semi-permanent", duration: "15min", price: "15€" },
-        { name: "Renforcement gel<br>+ Manucure russe", duration: "1h30", price: "50€" },
-        { name: "Remplissage gel<br>+ Manucure russe", duration: "1h30", price: "45€" },
-        { name: "Remplissage gel<br>D'un autre institut", duration: "1h30", price: "50€" },
-        { name: "Rallongement extension<br>+ Manucure russe", duration: "2h", price: "65€" },
+        {
+          name: "Renforcement gel<br>+ Manucure russe",
+          duration: "1h30",
+          price: "50€",
+        },
+        {
+          name: "Remplissage gel<br>+ Manucure russe",
+          duration: "1h30",
+          price: "45€",
+        },
+        {
+          name: "Remplissage gel<br>D'un autre institut",
+          duration: "1h30",
+          price: "50€",
+        },
+        {
+          name: "Rallongement extension<br>+ Manucure russe",
+          duration: "2h",
+          price: "65€",
+        },
         { name: "Supplément french", duration: "30min", price: "10€" },
         { name: "Dépose gel ou résine", duration: "30min", price: "20€" },
-      ]
+      ],
     },
     {
       id: "pieds",
@@ -42,29 +66,69 @@
       icon: "nail.png",
       image: "/Ellesse/gallery/pieds.jpg",
       services: [
-        { name: "Vernis semi-permanent<br>+ Cuticules", duration: "30min", price: "29€" },
+        {
+          name: "Vernis semi-permanent<br>+ Cuticules",
+          duration: "30min",
+          price: "29€",
+        },
         { name: "Vernis semi-permanent", duration: "20min", price: "20€" },
-        { name: "Technique russe<br>+ Dépose & pose VSP", duration: "1h", price: "47€" },
-        { name: "Technique russe<br>+ Pose VSP", duration: "45min", price: "38€" },
+        {
+          name: "Technique russe<br>+ Dépose & pose VSP",
+          duration: "1h",
+          price: "47€",
+        },
+        {
+          name: "Technique russe<br>+ Pose VSP",
+          duration: "45min",
+          price: "38€",
+        },
         { name: "Supplément french", duration: "15min", price: "5€" },
-      ]
+      ],
     },
     {
       id: "cils",
       title: "Extensions de cils",
       icon: "eyelashes.png",
-      image: "/Ellesse/cils.webp",
+      image: "/Ellesse/gallery/extension_cils.jpg",
       services: [
-        { name: "Cil à cil naturel<br>Pose complète", duration: "1h", price: "60€" },
-        { name: "Cil à cil naturel<br>Remplissage", duration: "45min", price: "40€" },
-        { name: "Cil à cil volumineux<br>Pose complète", duration: "1h30", price: "70€" },
-        { name: "Cil à cil volumineux<br>Remplissage", duration: "1h", price: "45€" },
-        { name: "Extensions mixte<br>Pose complète", duration: "1h30", price: "90€" },
-        { name: "Extensions mixte<br>Remplissage", duration: "1h15", price: "55€" },
-        { name: "Volume russe<br>Pose complète", duration: "2h", price: "100€" },
+        {
+          name: "Cil à cil naturel<br>Pose complète",
+          duration: "1h",
+          price: "60€",
+        },
+        {
+          name: "Cil à cil naturel<br>Remplissage",
+          duration: "45min",
+          price: "40€",
+        },
+        {
+          name: "Cil à cil volumineux<br>Pose complète",
+          duration: "1h30",
+          price: "70€",
+        },
+        {
+          name: "Cil à cil volumineux<br>Remplissage",
+          duration: "1h",
+          price: "45€",
+        },
+        {
+          name: "Extensions mixte<br>Pose complète",
+          duration: "1h30",
+          price: "90€",
+        },
+        {
+          name: "Extensions mixte<br>Remplissage",
+          duration: "1h15",
+          price: "55€",
+        },
+        {
+          name: "Volume russe<br>Pose complète",
+          duration: "2h",
+          price: "100€",
+        },
         { name: "Volume russe<br>Remplissage", duration: "1h30", price: "80€" },
         { name: "Dépose extensions", duration: "20min", price: "10€" },
-      ]
+      ],
     },
     {
       id: "rehaussement",
@@ -73,10 +137,18 @@
       image: "/Ellesse/cils.webp",
       services: [
         { name: "Rehaussement<br>+ Teinture", duration: "1h", price: "55€" },
-        { name: "Rehaussement<br>Sans teinture", duration: "45min", price: "50€" },
+        {
+          name: "Rehaussement<br>Sans teinture",
+          duration: "45min",
+          price: "50€",
+        },
         { name: "Teinture cils haut", duration: "15min", price: "10€" },
-        { name: "Teinture cils<br>Haut + bas", duration: "15min", price: "15€" },
-      ]
+        {
+          name: "Teinture cils<br>Haut + bas",
+          duration: "15min",
+          price: "15€",
+        },
+      ],
     },
     {
       id: "levres",
@@ -84,136 +156,249 @@
       icon: "lips.png",
       image: "/Ellesse/levres.webp",
       services: [
-        { name: "Candy lips<br>Remplissage complet", duration: "3h", price: "200€" },
-        { name: "Contour des lèvres<br>Retouche incluse", duration: "1h", price: "150€" },
+        {
+          name: "Candy lips<br>Remplissage complet",
+          duration: "3h",
+          price: "200€",
+        },
+        {
+          name: "Contour des lèvres<br>Retouche incluse",
+          duration: "1h",
+          price: "150€",
+        },
         { name: "Retouche fixatrice", duration: "3h", price: "50€" },
-        { name: "Candy lips<br>Retouche annuelle", duration: "2h", price: "110€" },
-        { name: "Contour des lèvres<br>Retouche annuelle", duration: "1h", price: "80€" },
-      ]
+        {
+          name: "Candy lips<br>Retouche annuelle",
+          duration: "2h",
+          price: "110€",
+        },
+        {
+          name: "Contour des lèvres<br>Retouche annuelle",
+          duration: "1h",
+          price: "80€",
+        },
+      ],
     },
     {
       id: "sourcils",
       title: "Semi-permanent sourcils",
       icon: "eyebrows.png",
-      image: "/Ellesse/sourcils.webp",
+      image: "/Ellesse/gallery/microblading.jpg",
       services: [
-        { name: "Microblading<br>Pose complète", duration: "2h", price: "190€" },
-        { name: "Microblading<br>Retouche fixatrice", duration: "1h", price: "50€" },
-        { name: "Microshading / Mixt<br>Pose complète", duration: "3h", price: "200€" },
-        { name: "Microshading<br>Retouche fixatrice", duration: "2h", price: "50€" },
+        {
+          name: "Microblading<br>Pose complète",
+          duration: "2h",
+          price: "190€",
+        },
+        {
+          name: "Microblading<br>Retouche fixatrice",
+          duration: "1h",
+          price: "50€",
+        },
+        {
+          name: "Microshading / Mixt<br>Pose complète",
+          duration: "3h",
+          price: "200€",
+        },
+        {
+          name: "Microshading<br>Retouche fixatrice",
+          duration: "2h",
+          price: "50€",
+        },
         { name: "Entretien 3-6 mois", duration: "45min", price: "70€" },
         { name: "Retouche annuelle", duration: "1h30", price: "100€" },
         { name: "Retouche nouveau client", duration: "1h", price: "140€" },
-      ]
+      ],
     },
     {
       id: "yeux",
       title: "Semi-permanent yeux",
       icon: "eyelashes.png",
-      image: "/Ellesse/cils.webp",
+      image: "/Ellesse/gallery/ras_de_cils.jpg",
       services: [
-        { name: "Ras de cils simple<br>Retouche incluse", duration: "1h", price: "180€" },
-        { name: "Ras de cils simple<br>Retouche annuelle", duration: "30min", price: "80€" },
-        { name: "Ras de cils double<br>Retouche incluse", duration: "1h30", price: "210€" },
-        { name: "Ras de cils double<br>Retouche annuelle", duration: "1h", price: "130€" },
+        {
+          name: "Ras de cils simple<br>Retouche incluse",
+          duration: "1h",
+          price: "180€",
+        },
+        {
+          name: "Ras de cils simple<br>Retouche annuelle",
+          duration: "30min",
+          price: "80€",
+        },
+        {
+          name: "Ras de cils double<br>Retouche incluse",
+          duration: "1h30",
+          price: "210€",
+        },
+        {
+          name: "Ras de cils double<br>Retouche annuelle",
+          duration: "1h",
+          price: "130€",
+        },
         { name: "Eye liner", duration: "30min", price: "230€" },
-      ]
+      ],
     },
     {
       id: "entretien-sourcils",
       title: "Entretien sourcils",
       icon: "eyebrows.png",
-      image: "/Ellesse/sourcils.webp",
+      image: "/Ellesse/gallery/entretien_sourcils.jpg",
       services: [
         { name: "Épilation simple sourcils", duration: "15min", price: "10€" },
         { name: "Teinture sourcils", duration: "30min", price: "25€" },
         { name: "Restructuration sourcils", duration: "30min", price: "25€" },
-        { name: "Restructuration<br>+ Teinture", duration: "45min", price: "45€" },
+        {
+          name: "Restructuration<br>+ Teinture",
+          duration: "45min",
+          price: "45€",
+        },
         { name: "Airbrush sourcils", duration: "45min", price: "40€" },
         { name: "Browlift", duration: "30min", price: "40€" },
         { name: "Browlift<br>+ Teinture", duration: "45min", price: "45€" },
-        { name: "Browlift + teinture<br>+ Restructuration", duration: "45min", price: "60€" },
-      ]
+        {
+          name: "Browlift + teinture<br>+ Restructuration",
+          duration: "45min",
+          price: "60€",
+        },
+      ],
     },
     {
       id: "visage",
       title: "Soins visage",
       icon: "nail.png",
-      image: "/Ellesse/sourcils.webp",
+      image: "/Ellesse/gallery/soins_visage.jpg",
       services: [
         { name: "Soin visage hydratant", duration: "1h", price: "50€" },
         { name: "Gommage<br>Et dermaplaning", duration: "30min", price: "65€" },
         { name: "Microneedling", duration: "1h", price: "80€" },
-        { name: "Microneedling<br>Forfait 4 séances", duration: "45min", price: "290€" },
+        {
+          name: "Microneedling<br>Forfait 4 séances",
+          duration: "45min",
+          price: "290€",
+        },
         { name: "BB glow", duration: "30min", price: "80€" },
-        { name: "BB glow<br>Forfait 4 séances", duration: "30min", price: "290€" },
+        {
+          name: "BB glow<br>Forfait 4 séances",
+          duration: "30min",
+          price: "290€",
+        },
         { name: "Microglow", duration: "1h", price: "110€" },
         { name: "Hydrafacial", duration: "1h", price: "90€" },
         { name: "Hydraneedling", duration: "1h20", price: "150€" },
         { name: "Hydraglow", duration: "1h20", price: "150€" },
-      ]
+      ],
     },
     {
       id: "radiofrequence",
       title: "Radiofréquence visage",
       icon: "nail.png",
-      image: "/Ellesse/sourcils.webp",
+      image: "/Ellesse/gallery/radiofrequence.jpg",
       services: [
-        { name: "Radiofréquence visage<br>1 séance", duration: "30min", price: "60€" },
-        { name: "Radiofréquence visage<br>Forfait 6 séances", duration: "30min", price: "250€" },
-        { name: "Radiofréquence visage<br>Forfait 10 séances", duration: "30min", price: "450€" },
-      ]
+        {
+          name: "Radiofréquence visage<br>1 séance",
+          duration: "30min",
+          price: "60€",
+        },
+        {
+          name: "Radiofréquence visage<br>Forfait 6 séances",
+          duration: "30min",
+          price: "250€",
+        },
+        {
+          name: "Radiofréquence visage<br>Forfait 10 séances",
+          duration: "30min",
+          price: "450€",
+        },
+      ],
     },
     {
       id: "corps",
       title: "Soins corps",
       icon: "nail.png",
-      image: "/Ellesse/ongles.webp",
+      image: "/Ellesse/gallery/soins_corps.jpg",
       services: [
-        { name: "Lipocavitation<br>Ventre et taille", duration: "1h30", price: "120€" },
+        {
+          name: "Lipocavitation<br>Ventre et taille",
+          duration: "1h30",
+          price: "120€",
+        },
         { name: "Lipocavitation<br>Cuisses", duration: "1h", price: "99€" },
-        { name: "Drainage lymphatique<br>Corps entier", duration: "1h30", price: "100€" },
-        { name: "Drainage lymphatique<br>Cure 3 séances", duration: "1h30", price: "240€" },
-      ]
+        {
+          name: "Drainage lymphatique<br>Corps entier",
+          duration: "1h30",
+          price: "100€",
+        },
+        {
+          name: "Drainage lymphatique<br>Cure 3 séances",
+          duration: "1h30",
+          price: "240€",
+        },
+      ],
     },
     {
       id: "bronzage",
       title: "Bronzage sans UV",
       icon: "nail.png",
-      image: "/Ellesse/ongles.webp",
+      image: "/Ellesse/gallery/bronzage.jpg",
       services: [
         { name: "Visage et décolleté", duration: "10min", price: "15€" },
         { name: "Visage + buste<br>+ Bras", duration: "15min", price: "25€" },
         { name: "Jambes", duration: "15min", price: "25€" },
-        { name: "Corps entier<br>Visage inclus", duration: "30min", price: "40€" },
-      ]
+        {
+          name: "Corps entier<br>Visage inclus",
+          duration: "30min",
+          price: "40€",
+        },
+      ],
     },
     {
       id: "autres",
       title: "Autres prestations",
       icon: "nail.png",
-      image: "/Ellesse/sourcils.webp",
+      image: "/Ellesse/gallery/dents.jpg",
       services: [
         { name: "Blanchiment dentaire", duration: "1h", price: "180€" },
-        { name: "Grain de beauté<br>Retouche incluse", duration: "15min", price: "50€" },
+        {
+          name: "Grain de beauté<br>Retouche incluse",
+          duration: "15min",
+          price: "50€",
+        },
         { name: "Taches de rousseur", duration: "1h", price: "120€" },
-      ]
-    }
+      ],
+    },
   ];
 </script>
 
 <svelte:head>
-  <title>Nos Prestations | Ellessé - Maquillage permanent, Cils, Ongles à Toulouse</title>
-  <meta name="description" content="Découvrez nos prestations : microblading, candy lips, extension de cils volume russe, manucure russe, pose de gel. Cabinet d'esthétique à Toulouse." />
-  <meta name="keywords" content="microblading Toulouse, candy lips, extension cils volume russe, manucure russe Toulouse, pose gel, maquillage semi permanent" />
+  <title
+    >Nos Prestations | Ellessé - Maquillage permanent, Cils, Ongles à Toulouse</title
+  >
+  <meta
+    name="description"
+    content="Découvrez nos prestations : microblading, candy lips, extension de cils volume russe, manucure russe, pose de gel. Cabinet d'esthétique à Toulouse."
+  />
+  <meta
+    name="keywords"
+    content="microblading Toulouse, candy lips, extension cils volume russe, manucure russe Toulouse, pose gel, maquillage semi permanent"
+  />
   <link rel="canonical" href="https://ellesse-beaute.fr/prestations" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ellesse-beaute.fr/prestations" />
-  <meta property="og:title" content="Nos Prestations | Ellessé - Maquillage permanent, Cils, Ongles à Toulouse" />
-  <meta property="og:description" content="Découvrez nos prestations : microblading, candy lips, extension de cils, manucure russe." />
-  <meta property="og:image" content="https://ellesse-beaute.fr/Ellesse/sourcils.webp" />
+  <meta
+    property="og:title"
+    content="Nos Prestations | Ellessé - Maquillage permanent, Cils, Ongles à Toulouse"
+  />
+  <meta
+    property="og:description"
+    content="Découvrez nos prestations : microblading, candy lips, extension de cils, manucure russe."
+  />
+  <meta
+    property="og:image"
+    content="https://ellesse-beaute.fr/Ellesse/sourcils.webp"
+  />
 
   <!-- Schema.org -->
   {@html `<script type="application/ld+json">
@@ -247,33 +432,50 @@
         <p class="subtitle">Nos soins</p>
         <h1 class="title">Prestations</h1>
         <p class="description">
-          Découvrez notre gamme complète de soins esthétiques inspirés des traditions russes
+          Découvrez notre gamme complète de soins esthétiques inspirés des
+          traditions russes
         </p>
       </div>
 
       <div class="scroll-hint">
         <span>Glissez pour découvrir</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>
         </svg>
       </div>
-      
+
       <div class="slider-container">
         <div class="slider" bind:this={sliderEl}>
           {#each prestations as prestation}
             <article class="prestation-card">
               <div class="card-image-wrapper">
-                <img src={prestation.image} alt={prestation.title} class="card-image" loading="lazy" />
+                <img
+                  src={prestation.image}
+                  alt={prestation.title}
+                  class="card-image"
+                  loading="lazy"
+                />
                 <div class="card-gradient"></div>
               </div>
-              
+
               <div class="card-body">
                 <div class="card-header">
-                  <img src={prestation.icon} alt={prestation.title} class="card-icon" />
+                  <img
+                    src={prestation.icon}
+                    alt={prestation.title}
+                    class="card-icon"
+                  />
                   <h2>{prestation.title}</h2>
                 </div>
-                
+
                 <ul class="services-list">
                   {#each prestation.services as service}
                     <li>
@@ -281,15 +483,29 @@
                         <span class="service-name">{@html service.name}</span>
                         {#if service.price}
                           <span class="service-details">
-                            {#if service.duration}<span class="service-duration">{service.duration}</span>{/if}
+                            {#if service.duration}<span class="service-duration"
+                                >{service.duration}</span
+                              >{/if}
                             <span class="service-price">{service.price}</span>
                           </span>
                         {/if}
                       </div>
                       {#if service.price}
-                        <a href={getBookingUrl(service)} use:link class="service-book-btn" aria-label="Réserver {service.name}">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        <a
+                          href={getBookingUrl(service)}
+                          use:link
+                          class="service-book-btn"
+                          aria-label="Réserver {service.name}"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <path
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            />
                           </svg>
                         </a>
                       {/if}
@@ -388,8 +604,13 @@
   }
 
   @keyframes bounceRight {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(5px);
+    }
   }
 
   /* ===== SLIDER ===== */
@@ -421,7 +642,9 @@
     box-shadow: var(--shadow-soft, 0 4px 20px rgba(38, 25, 17, 0.08));
     overflow: hidden;
     scroll-snap-align: start;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .prestation-card:hover {

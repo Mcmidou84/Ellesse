@@ -131,7 +131,7 @@
   <meta name="keywords" content="rendez-vous esthétique Toulouse, réservation soin beauté, prendre rdv institut beauté, cabinet esthétique 31200, booking beauté russe" />
   <link rel="canonical" href="https://ellesse-beaute.fr/rendez-vous" />
   
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ellesse-beaute.fr/rendez-vous" />
   <meta property="og:title" content="Prendre rendez-vous | Ellessé - Cabinet d'esthétique à Toulouse" />

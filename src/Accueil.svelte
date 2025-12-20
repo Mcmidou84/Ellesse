@@ -43,7 +43,7 @@
   />
   <link rel="canonical" href="https://ellesse-beaute.fr/" />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ellesse-beaute.fr/" />
   <meta property="og:title" content="Ellessé | Cabinet d'esthétique à la russe à Toulouse" />

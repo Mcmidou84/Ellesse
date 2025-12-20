@@ -348,6 +348,7 @@
   />
   <link rel="canonical" href="https://ellesse-beaute.fr/galerie" />
 
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ellesse-beaute.fr/galerie" />
   <meta property="og:title" content="Galerie | Ellessé - Nos réalisations" />
@@ -816,14 +817,35 @@
   .categories-section {
     padding: 60px 20px 40px;
     background: var(--color-cream, rgb(249, 246, 239));
+    overflow: visible;
   }
 
   .categories-wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 30px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 10px 20px 25px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(102, 74, 50, 0.3) transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .categories-wrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .categories-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 0 20px;
+  }
+
+  .categories-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(102, 74, 50, 0.3);
+    border-radius: 3px;
   }
 
   .category-bubble {
@@ -835,6 +857,7 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    flex-shrink: 0;
   }
 
   .bubble-ring {
@@ -850,6 +873,7 @@
     transition:
       transform 0.3s,
       box-shadow 0.3s;
+    flex-shrink: 0;
   }
 
   .category-bubble.active .bubble-ring {
@@ -887,6 +911,7 @@
     font-family: var(--font-body, "Priamos", serif);
     font-size: 13px;
     color: var(--color-dark, rgb(38, 25, 17));
+    white-space: nowrap;
   }
 
   /* ===== SECTION HEADERS ===== */
@@ -949,16 +974,17 @@
 
   .before-after-card h3 {
     font-family: var(--font-display, "LittleMicroSans", sans-serif);
-    font-size: 14px;
+    font-size: 16px;
     text-transform: uppercase;
     color: var(--color-dark, rgb(38, 25, 17));
-    text-align: center;
     margin: 0 0 15px 0;
+    text-align: center;
     letter-spacing: 1px;
   }
 
   .slider-compare {
     position: relative;
+    width: 100%;
     height: 300px;
     border-radius: var(--radius-medium, 10px);
     overflow: hidden;
@@ -981,38 +1007,39 @@
 
   .compare-label {
     position: absolute;
-    bottom: 10px;
-    padding: 5px 12px;
+    bottom: 15px;
+    padding: 6px 12px;
     font-family: var(--font-body, "Priamos", serif);
     font-size: 12px;
-    color: white;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 20px;
+    background: rgba(38, 25, 17, 0.8);
+    color: var(--color-cream, rgb(249, 246, 239));
+    border-radius: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   .compare-before .compare-label {
-    left: 10px;
+    left: 15px;
   }
+
   .compare-after .compare-label {
-    right: 10px;
+    right: 15px;
   }
 
   .compare-handle {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 4px;
+    width: 2px;
+    background: white;
     transform: translateX(-50%);
   }
 
   .handle-line {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 2px;
+    inset: 0;
     background: white;
-    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
 
   .handle-circle {
@@ -1020,19 +1047,19 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     background: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
   .handle-circle svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     color: var(--color-dark, rgb(38, 25, 17));
   }
 
@@ -1044,47 +1071,49 @@
 
   .masonry-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
   .masonry-item {
     position: relative;
-    border-radius: var(--radius-medium, 10px);
+    aspect-ratio: 1;
+    border-radius: var(--radius-large, 16px);
     overflow: hidden;
     cursor: pointer;
     border: none;
     padding: 0;
     background: none;
-    width: 100%;
-    aspect-ratio: 3 / 4;
+    transition: transform 0.3s;
+  }
+
+  .masonry-item:hover {
+    transform: scale(1.02);
   }
 
   .masonry-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    transition: transform 0.5s;
-  }
-
-  .masonry-item:hover img {
-    transform: scale(1.05);
   }
 
   .item-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(38, 25, 17, 0.9), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s;
+    background: linear-gradient(
+      to top,
+      rgba(38, 25, 17, 0.9) 0%,
+      rgba(38, 25, 17, 0.3) 50%,
+      transparent 100%
+    );
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     padding: 20px;
-    text-align: left;
+    opacity: 0;
+    transition: opacity 0.3s;
   }
 
   .masonry-item:hover .item-overlay {
@@ -1094,17 +1123,18 @@
   .item-category {
     font-family: var(--font-body, "Priamos", serif);
     font-size: 11px;
-    color: var(--color-tan, rgb(200, 180, 160));
     text-transform: uppercase;
+    color: var(--color-tan, rgb(200, 180, 160));
     letter-spacing: 1px;
+    margin-bottom: 5px;
   }
 
   .item-title {
     font-family: var(--font-display, "LittleMicroSans", sans-serif);
     font-size: 16px;
     color: var(--color-cream, rgb(249, 246, 239));
-    margin: 5px 0;
     text-transform: uppercase;
+    margin: 0 0 8px 0;
     letter-spacing: 1px;
   }
 
@@ -1113,7 +1143,8 @@
     font-size: 13px;
     color: var(--color-tan, rgb(200, 180, 160));
     font-style: italic;
-    margin: 5px 0;
+    margin: 0 0 5px 0;
+    line-height: 1.4;
   }
 
   .item-client {
@@ -1124,7 +1155,7 @@
 
   /* ===== TESTIMONIALS ===== */
   .testimonials-section {
-    padding: 80px 20px;
+    padding: 100px 20px;
     background: var(--color-dark, rgb(38, 25, 17));
   }
 
@@ -1132,9 +1163,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
     max-width: 900px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
   }
 
   .carousel-nav {
@@ -1156,8 +1187,8 @@
   }
 
   .carousel-nav svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     color: var(--color-cream, rgb(249, 246, 239));
   }
 
@@ -1167,29 +1198,34 @@
     padding: 50px 40px;
     text-align: center;
     max-width: 600px;
+    position: relative;
   }
 
   .quote-mark {
-    font-family: serif;
-    font-size: 80px;
-    color: var(--color-brown, rgb(102, 74, 50));
-    line-height: 0.5;
-    margin-bottom: 20px;
+    font-family: Georgia, serif;
+    font-size: 120px;
+    color: rgba(249, 246, 239, 0.1);
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    line-height: 1;
   }
 
   .testimonial-quote {
     font-family: var(--font-body, "Priamos", serif);
-    font-size: 20px;
+    font-size: 19px;
     color: var(--color-cream, rgb(249, 246, 239));
-    line-height: 1.6;
-    font-style: italic;
+    line-height: 1.7;
     margin: 0 0 25px 0;
+    position: relative;
+    z-index: 1;
   }
 
   .testimonial-rating {
     color: #ffc107;
     font-size: 20px;
     margin-bottom: 25px;
+    letter-spacing: 3px;
   }
 
   .testimonial-author {
@@ -1197,7 +1233,7 @@
     align-items: center;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 
   .author-avatar {
@@ -1216,7 +1252,8 @@
   .author-info {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    text-align: left;
+    gap: 3px;
   }
 
   .author-name {
@@ -1236,29 +1273,29 @@
   .testimonial-date {
     font-family: var(--font-body, "Priamos", serif);
     font-size: 12px;
-    color: var(--color-light-tan, rgb(180, 160, 140));
+    color: rgba(200, 180, 160, 0.7);
   }
 
   .carousel-dots {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 30px;
   }
 
   .dot {
     width: 10px;
     height: 10px;
-    border-radius: 50%;
     background: rgba(249, 246, 239, 0.3);
     border: none;
+    border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s;
     padding: 0;
   }
 
   .dot.active {
     background: var(--color-cream, rgb(249, 246, 239));
+    transform: scale(1.2);
   }
 
   /* ===== INSTAGRAM ===== */
@@ -1518,15 +1555,21 @@
       width: 60px;
       height: 1px;
     }
+    .categories-section {
+      padding: 40px 15px 30px;
+      overflow: visible;
+    }
     .categories-wrapper {
       justify-content: flex-start;
-      padding: 0 10px;
-      overflow-x: auto;
-      flex-wrap: nowrap;
+      padding: 10px 15px 30px;
+      gap: 20px;
     }
     .bubble-ring {
       width: 70px;
       height: 70px;
+    }
+    .bubble-label {
+      font-size: 12px;
     }
     .section-title {
       font-size: 32px;
@@ -1567,12 +1610,19 @@
     .counter-number {
       font-size: 36px;
     }
+    .categories-section {
+      padding: 30px 10px 25px;
+    }
+    .categories-wrapper {
+      padding: 8px 10px 28px;
+      gap: 15px;
+    }
     .bubble-ring {
       width: 60px;
       height: 60px;
     }
     .bubble-label {
-      font-size: 12px;
+      font-size: 11px;
     }
     .section-title {
       font-size: 26px;

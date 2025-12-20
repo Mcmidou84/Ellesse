@@ -40,7 +40,7 @@
   <title>Contact | Ellessé - Cabinet d'esthétique à Toulouse</title>
   <meta
     name="description"
-    content="Contactez Ellessé, votre cabinet d'esthétique à Toulouse. Retrouvez-nous au 73 Bd Silvio Trentin, 31200 Toulouse. Suivez-nous sur Instagram et Facebook."
+    content="Contactez Ellessé, votre cabinet d'esthétique à Toulouse. Retrouvez-nous au 73 Bd Silvio Trentin, 31200 Toulouse. Suivez-nous sur Instagram."
   />
   <meta
     name="keywords"
@@ -106,13 +106,6 @@
             <div class="social-info">
               <span class="social-name">Instagram</span>
               <span class="social-handle">@ellesse.institut</span>
-            </div>
-          </a>
-          <a href="https://www.facebook.com/ellesse.institut" target="_blank" rel="noopener noreferrer" class="social-card facebook">
-            <img src="facebook.png" alt="Facebook" class="social-icon" />
-            <div class="social-info">
-              <span class="social-name">Facebook</span>
-              <span class="social-handle">Ellessé Institut</span>
             </div>
           </a>
         </div>
@@ -608,15 +601,6 @@
 
     .social-card {
       justify-content: center;
-    }
-
-    .info-card {
-      padding: 20px;
-    }
-
-    .info-icon {
-      width: 28px;
-      height: 28px;
     }
   }
 </style>

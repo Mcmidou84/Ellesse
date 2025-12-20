@@ -118,8 +118,7 @@
       ]
     },
     "sameAs": [
-      "https://www.instagram.com/ellesse.institut",
-      "https://www.facebook.com/ellesse.institut"
+      "https://www.instagram.com/ellesse.institut"
     ]
   }
   </script>`}

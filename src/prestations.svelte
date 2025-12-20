@@ -716,7 +716,7 @@
   .services-list {
     list-style: none;
     margin: 0 0 20px 0;
-    padding: 0;
+    padding: 0 12px 0 0;
     max-height: 280px;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -881,6 +881,10 @@
       font-size: 15px;
     }
 
+    .services-list {
+      padding-right: 15px;
+    }
+
     .services-list li {
       font-size: 12px;
       padding: 8px 0 8px 12px;
@@ -950,6 +954,7 @@
 
     .services-list {
       margin-bottom: 16px;
+      padding-right: 18px;
     }
 
     .services-list li {

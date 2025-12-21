@@ -63,7 +63,7 @@
     {
       id: "pieds",
       title: "Beauté des pieds",
-      icon: "nail.png",
+      icon: "pieds.png",
       image: "/Ellesse/gallery/pieds.jpg",
       services: [
         {
@@ -213,7 +213,7 @@
     {
       id: "yeux",
       title: "Semi-permanent yeux",
-      icon: "eyelashes.png",
+      icon: "yeux.png",
       image: "/Ellesse/gallery/ras_de_cils.jpg",
       services: [
         {
@@ -266,7 +266,7 @@
     {
       id: "visage",
       title: "Soins visage",
-      icon: "nail.png",
+      icon: "visage.png",
       image: "/Ellesse/gallery/soins_visage.jpg",
       services: [
         { name: "Soin visage hydratant", duration: "1h", price: "50€" },
@@ -292,7 +292,7 @@
     {
       id: "radiofrequence",
       title: "Radiofréquence visage",
-      icon: "nail.png",
+      icon: "faciale.png",
       image: "/Ellesse/gallery/radiofrequence.jpg",
       services: [
         {
@@ -315,7 +315,7 @@
     {
       id: "corps",
       title: "Soins corps",
-      icon: "nail.png",
+      icon: "corps.png",
       image: "/Ellesse/gallery/soins_corps.jpg",
       services: [
         {
@@ -339,7 +339,7 @@
     {
       id: "bronzage",
       title: "Bronzage sans UV",
-      icon: "nail.png",
+      icon: "bronzage.png",
       image: "/Ellesse/gallery/bronzage.jpg",
       services: [
         { name: "Visage et décolleté", duration: "10min", price: "15€" },
@@ -355,7 +355,7 @@
     {
       id: "autres",
       title: "Autres prestations",
-      icon: "nail.png",
+      icon: "dent.png",
       image: "/Ellesse/gallery/dents.jpg",
       services: [
         { name: "Blanchiment dentaire", duration: "1h", price: "180€" },
@@ -432,7 +432,7 @@
         <p class="subtitle">Nos soins</p>
         <h1 class="title">Prestations</h1>
         <p class="description">
-          Découvrez notre gamme complète de soins esthétiques inspirés des
+          Découvrez notre gamme complète de soins esthétiques<br /> inspirés des
           traditions russes
         </p>
       </div>

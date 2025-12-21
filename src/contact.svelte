@@ -93,7 +93,7 @@
         <p class="subtitle">Restons en contact</p>
         <h1 class="title">Contact</h1>
         <p class="description">
-          Retrouvez-nous sur les réseaux sociaux ou venez nous rendre visite
+          Retrouvez-nous sur les réseaux sociaux<br /> ou venez nous rendre visite
         </p>
       </div>
 

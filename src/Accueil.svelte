@@ -5,8 +5,9 @@
   import Footer from "./lib/Footer.svelte";
 
   let currentImage = $state(0);
+  let isMobile = $state(false);
 
-  const images = [
+  const desktopImages = [
     {
       src: "/Ellesse/accueil_01.webp",
       alt: "Soin esthétique visage au cabinet Ellessé à Toulouse",
@@ -21,12 +22,39 @@
     },
   ];
 
+  const mobileImages = [
+    {
+      src: "/Ellesse/accueil_01_mobile.webp",
+      alt: "Soin esthétique visage au cabinet Ellessé à Toulouse",
+    },
+    {
+      src: "/Ellesse/accueil_02_mobile.webp",
+      alt: "Ambiance luxueuse du salon de beauté Ellessé",
+    },
+    {
+      src: "/Ellesse/accueil_03_mobile.webp",
+      alt: "Soins de beauté inspirés des traditions russes",
+    },
+  ];
+
+  let images = $derived(isMobile ? mobileImages : desktopImages);
+
+  function checkMobile() {
+    isMobile = window.innerWidth <= 768;
+  }
+
   onMount(() => {
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     const interval = setInterval(() => {
       currentImage = (currentImage + 1) % images.length;
     }, 5000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("resize", checkMobile);
+    };
   });
 </script>
 

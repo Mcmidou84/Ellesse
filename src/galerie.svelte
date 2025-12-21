@@ -388,7 +388,7 @@
         <p class="hero-subtitle">Nos réalisations</p>
         <h1 class="hero-title">L'excellence<br />en images</h1>
         <p class="hero-description">
-          Découvrez le savoir-faire Ellessé à travers les transformations de nos
+          Découvrez le savoir-faire Ellessé à travers<br /> les transformations de nos
           clientes
         </p>
       </div>
